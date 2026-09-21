@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>CBT 认知重构 · MindGuard</title>
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link href="/static/css/vendor/bootstrap.min.css" rel="stylesheet">
+<style>
+  body { background: #F5F8F9; min-height:100vh; }
+  .nav-bg { background:#203248; }
+  .card-shadow { box-shadow:0 2px 12px rgba(0,0,0,0.06); }
+  .distortion-badge { background:#E6A817; color:white; padding:4px 10px; border-radius:12px; font-size:12px; }
+  .reframe-box { background:#F8F3E6; border-left:3px solid #E6A817; padding:15px; border-radius:0 8px 8px 0; }
+  .original-box { background:#FDECEC; border-left:3px solid #AC4E42; padding:12px; border-radius:0 8px 8px 0; font-style:italic; }
+  .tip { font-size:12px; color:#888; }
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark nav-bg">
+  <a class="navbar-brand" href="/">🧠 MindGuard</a>
+  <ul class="navbar-nav ml-auto">
+    <li class="nav-item"><a class="nav-link" href="/">首页</a></li>
+    <li class="nav-item"><a class="nav-link" href="/screening">风险筛查</a></li>
+    <li class="nav-item"><a class="nav-link" href="/my-records">我的档案</a></li>
+    <li class="nav-item"><a class="nav-link" href="/mood-journal">心情打卡</a></li>
+    <li class="nav-item active"><a class="nav-link" href="/cbt">CBT 自助</a></li>
+    <li class="nav-item"><a class="nav-link" href="/breathing">呼吸训练</a></li>
+    <li class="nav-item"><a class="nav-link" href="/resources">心理资源</a></li>
+  </ul>
+</nav>
+
+<div class="container py-5" style="max-width:900px;">
+  <h3 class="mb-2">🧠 CBT 认知扭曲自检</h3>
+  <p class="text-muted small mb-4">写一句话描述你最近的想法或感受，系统会帮你识别其中可能存在的认知扭曲模式，并给出 CBT（认知行为疗法）式的重塑建议。</p>
+
+  <div class="card card-shadow">
+    <div class="card-body p-4">
+      <textarea id="cbt-text" class="form-control" rows="4" placeholder="例：我觉得所有人都在背后议论我，我完蛋了..." style="resize:none;"></textarea>
+      <div class="mt-3">
+        <button class="btn" style="background:#1C7A6E;color:white;" onclick="analyze()">🔍 分析我的想法</button>
+        <span class="tip ml-3">AI 完全本地化分析，数据不会上传</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="result" class="mt-4" style="display:none;">
+    <div id="summary" class="alert"></div>
+    <div id="distortions"></div>
+  </div>
+
+  <div class="card card-shadow mt-5">
+    <div class="card-body p-4">
+      <h5>📚 什么是认知扭曲？</h5>
+      <p class="text-muted small">认知行为疗法（CBT）认为，让我们痛苦的往往不是事件本身，而是我们对事件的解读。认知扭曲就是那些"让情绪变得更糟"的思维模式——识别它们是改变的第一步。</p>
+      <table class="table table-sm table-bordered">
+        <thead class="thead-light"><tr><th>扭曲类型</th><th>表现</th><th>示例</th></tr></thead>
+        <tbody>
+          <tr><td>全或无</td><td>非黑即白</td><td>"一次失败=永远失败"</td></tr>
+          <tr><td>灾难化</td><td>最坏预期</td><td>"这次没考好，人生毁了"</td></tr>
+          <tr><td>读心术</td><td>猜别人想法</td><td>"大家肯定都在议论我"</td></tr>
+          <tr><td>应该思维</td><td>强求完美</td><td>"我应该做到最好"</td></tr>
+          <tr><td>情绪推理</td><td>把感觉当事实</td><td>"我感觉自己没用=我真的没用"</td></tr>
+          <tr><td>标签化</td><td>一贴了之</td><td>"我就是个废物"</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script>
+async function analyze() {
+  const text = document.getElementById('cbt-text').value.trim();
+  if (!text) { alert('先写点什么吧'); return; }
+  try {
+    const res = await fetch('/api/features/cbt-analysis', {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({text})
+    });
+    const data = await res.json();
+    const box = document.getElementById('result');
+    box.style.display = 'block';
+    const summary = document.getElementById('summary');
+    summary.className = 'alert ' + (data.distortions.length ? 'alert-warning' : 'alert-success');
+    summary.textContent = data.summary;
+    const distEl = document.getElementById('distortions');
+    if (!data.distortions.length) { distEl.innerHTML = ''; }
+    else {
+      distEl.innerHTML = '<div class="mb-3"><b>📝 你写的：</b><div class="original-box mt-1">' + data.original_text + '</div></div>' +
+        data.distortions.map(d =>
+          '<div class="card card-shadow mb-3"><div class="card-body">' +
+          '<span class="distortion-badge">🔎 ' + d.name + '</span>' +
+          '<div class="mt-2 small text-muted">触发关键词：' + d.matched_keywords.map(function(k){return '"'+k+'"';}).join('、') + '</div>' +
+          '<div class="reframe-box mt-3"><b>💡 CBT 重塑建议：</b><br>' + d.reframe + '</div>' +
+          '</div></div>'
+        ).join('');
+    }
+  } catch(e) { alert('分析失败：'+e.message); }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <title>评估报告 · 多模态心理健康风险筛查系统</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/static/css/app.css">
+  <link rel="stylesheet" href="/static/css/vendor/bootstrap-icons.min.css">
+  <script src="/static/js/echarts.min.js"></script>
+  <style>
+    @media print {
+      .topbar, footer, nav, header { display: none !important; }
+      body { background: white !important; }
+      .container-wide { max-width: 100% !important; padding: 0 !important; }
+      button, .btn, .ghost { display: none !important; }
+      .hero { page-break-inside: avoid; }
+      .card { page-break-inside: avoid; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo"><span style="font-size:18px;">🧠</span>多模态心理健康风险筛查系统</div>
+    <nav>
+      <a href="/">首页</a>
+      <a href="/screening">筛查入口</a>
+      <a href="/admin">管理员后台</a>
+    </nav>
+  </header>
+
+  <div class="container-wide" id="app">
+
+    <!-- 加载中 -->
+    <div v-if="loading" style="text-align:center;padding:80px;color:#97A3AC;">
+      <i class="bi bi-hourglass-split" style="font-size:28px;"></i>
+      <p style="margin-top:12px;">正在加载报告...</p>
+    </div>
+
+    <template v-else>
+      <!-- 风险等级大横幅 -->
+      <div class="hero" :style="{background: riskBgColor}">
+        <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:20px;">
+          <div>
+            <div style="opacity:.85;font-size:13px;">会话 #[[ session.id ]] · [[ formatTime(session.created_at) ]]</div>
+            <h1 style="margin:10px 0 6px;font-size:28px;">
+              您的风险等级：<strong>[[ levelLabel(session.risk_level) ]]</strong>
+            </h1>
+            <div style="opacity:.85;font-size:14px;max-width:560px;">
+              本报告由<strong>神经符号双引擎</strong>自动生成，每条结论均有心理学规则依据。
+              仅供心理老师参考，不构成疾病诊断。
+            </div>
+          </div>
+
+          <!-- 综合风险分进度环 -->
+          <div style="text-align:center;">
+            <div id="gaugeChart" style="width:200px;height:160px;"></div>
+            <div style="font-size:12px;opacity:.85;">综合风险分 / 100</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 🚨 危机分级警示（CRISIS 等级时红色突出） -->
+      <div v-if="session.crisis_level === 'CRISIS'"
+           style="background:linear-gradient(135deg,#FFF5F0,#FDE8E0);
+                  border:2px solid #AC4E42;border-radius:12px;padding:18px 22px;margin-bottom:20px;">
+        <div style="display:flex;align-items:flex-start;gap:14px;">
+          <div style="font-size:28px;flex-shrink:0;">🚨</div>
+          <div style="flex:1;">
+            <div style="color:#AC4E42;font-size:17px;font-weight:700;margin-bottom:6px;">
+              重要：检测到紧急危机信号，请立即寻求专业帮助！
+            </div>
+            <p style="margin:0 0 8px 0;color:#47535C;font-size:14px;line-height:1.7;">
+              系统在您的文字中识别到可能自伤/自杀倾向的关键词：
+              <span v-for="kw in (session.crisis_hits || [])" :key="kw"
+                    style="background:#F7D4BC;color:#AC4E42;padding:2px 8px;border-radius:4px;margin-right:6px;font-size:13px;">
+                [[ kw ]]
+              </span>
+            </p>
+            <div style="background:#fff;border-left:3px solid #AC4E42;padding:10px 14px;border-radius:0 6px 6px 0;font-size:13px;line-height:1.9;">
+              📞 <b>全国心理援助热线</b>：400-161-9995（24 小时免费）<br>
+              📞 <b>北京心理危机研究与干预中心</b>：010-8295-1332<br>
+              🏥 <b>立即前往就近医院急诊室</b>，不要独处
+            </div>
+          </div>
+        </div>
+      </div>
+      <div v-else-if="session.crisis_level === 'HIGH'"
+           style="background:#FFF8E6;border:1px solid #D97706;border-radius:12px;padding:14px 18px;margin-bottom:20px;">
+        <div style="color:#D97706;font-weight:600;margin-bottom:4px;">⚠️ 检测到较高压力信号</div>
+        <div style="font-size:13px;color:#47535C;">
+          关键词：
+          <span v-for="kw in (session.crisis_hits || [])" :key="kw"
+                style="background:#FDE8C0;color:#92400E;padding:1px 7px;border-radius:4px;margin-right:5px;">
+            [[ kw ]]
+          </span>
+          建议尽快和信任的人聊聊，或预约一次专业心理咨询。
+        </div>
+      </div>
+
+      <!-- 三指标卡片 -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px;">
+        <div class="metric-card">
+          <div class="num" :style="{color: scoreColor(session.phq9, 10)}">[[ session.phq9 ]]<span style="font-size:16px;color:#97A3AC;">/27</span></div>
+          <div class="lbl">PHQ-9 抑郁得分</div>
+          <div class="sub">[[ phq9Label(session.phq9) ]]</div>
+        </div>
+        <div class="metric-card">
+          <div class="num" :style="{color: scoreColor(session.gad7, 10)}">[[ session.gad7 ]]<span style="font-size:16px;color:#97A3AC;">/21</span></div>
+          <div class="lbl">GAD-7 焦虑得分</div>
+          <div class="sub">[[ gad7Label(session.gad7) ]]</div>
+        </div>
+        <div class="metric-card">
+          <div class="num" style="color:#1C7A6E;">[[ session.activated_rules.length ]]</div>
+          <div class="lbl">触发心理学规则</div>
+          <div class="sub">可逐条复核</div>
+        </div>
+      </div>
+
+      <!-- 雷达图 + 得分条形图 -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px;">
+        <div class="chart-wrap">
+          <div style="font-weight:600;color:#203248;margin-bottom:10px;">📊 分维度雷达图</div>
+          <div id="radarChart" style="height:300px;"></div>
+        </div>
+        <div class="chart-wrap">
+          <div style="font-weight:600;color:#203248;margin-bottom:10px;">📈 各子维度得分</div>
+          <div id="barChart" style="height:300px;"></div>
+        </div>
+      </div>
+
+      <!-- 🔍 神经符号引擎输入特征热力图 -->
+      <div class="card" style="background:#FAFBFC;border:none;margin-bottom:24px;">
+        <h3><i class="bi bi-grid" style="color:#1C7A6E;margin-right:6px;"></i>
+          🔍 神经符号引擎输入特征值（可解释性证据）</h3>
+        <p class="tagline">以下是本次评估使用的 10 维多模态特征，所有规则均由此组合触发。</p>
+        <div id="featuresChart" style="height:300px;"></div>
+      </div>
+
+      <!-- 触发的心理学规则 -->
+      <div class="card">
+        <h3><i class="bi bi-diagram-3" style="color:#1C7A6E;margin-right:6px;"></i>
+          触发的心理学规则（可复核）</h3>
+        <p class="tagline">神经符号引擎从多模态特征中组合匹配了以下心理学规则，每条规则均有明确的触发条件和依据。</p>
+
+        <div v-if="session.activated_rules.length">
+          <div v-for="r in session.activated_rules" :key="r.rule_id" class="rule-card">
+            <div style="display:flex;justify-content:space-between;align-items:center;">
+              <div>
+                <span class="rid">[[ r.rule_id ]]</span>
+                <span class="rpri">优先级 [[ r.priority ]]</span>
+              </div>
+            </div>
+            <div style="color:#47535C;margin-top:8px;line-height:1.7;">
+              💡 [[ r.explain ]]
+            </div>
+          </div>
+        </div>
+        <div v-else class="tagline">本次筛查未触发心理学规则，量表得分作为主要参考。</div>
+      </div>
+
+      <!-- 推理链路（时间轴） -->
+      <div class="card">
+        <h3><i class="bi bi-list-ol" style="color:#1C7A6E;margin-right:6px;"></i>
+          神经符号推理链路</h3>
+        <p class="tagline">展示系统从多模态特征提取 → 规则匹配 → 综合判定的完整推理过程。</p>
+
+        <div style="position:relative;padding-left:28px;margin-top:12px;">
+          <div style="position:absolute;left:10px;top:8px;bottom:8px;width:2px;background:#E1E7EC;"></div>
+          <div v-for="(line,i) in session.explanation_chain" :key="i"
+               style="position:relative;padding:8px 0;">
+            <div style="position:absolute;left:-22px;top:12px;width:12px;height:12px;border-radius:50%;
+                        background:#1C7A6E;border:3px solid #E6F2EF;"></div>
+            <div style="font-size:13px;color:#47535C;font-family:monospace;background:#F7F9FA;padding:8px 12px;border-radius:6px;">
+              [[ line ]]
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 🤍 AI 温柔陪伴建议（神经符号引擎 × LLM 生成） -->
+      <div v-if="session.llm_suggestion" class="card"
+           style="background:linear-gradient(135deg,#FFF5F0 0%,#FEF3E2 100%);border:1px solid #F7D4BC;border-radius:12px;">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+          <div style="width:36px;height:36px;border-radius:50%;background:#AC4E42;color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;">🤍</div>
+          <div>
+            <h3 style="margin:0;color:#203248;font-size:16px;">给你的温柔建议</h3>
+            <div style="color:#97A3AC;font-size:12px;">由神经符号引擎结合你的状态个性化生成</div>
+          </div>
+        </div>
+        <div style="color:#47535C;line-height:2;font-size:14.5px;background:#fff;padding:16px 18px;border-radius:8px;border-left:3px solid #AC4E42;">
+          [[ session.llm_suggestion ]]
+        </div>
+      </div>
+
+      <!-- 建议措施 -->
+      <div class="card" style="background:#F7F9FA;border:none;">
+        <h3><i class="bi bi-lightbulb" style="color:#1C7A6E;margin-right:6px;"></i>建议措施</h3>
+        <div style="color:#47535C;line-height:1.8;font-size:14px;">
+          [[ recommendation ]]
+        </div>
+      </div>
+
+      <!-- 📚 RAG 知识库检索建议（基于 risk_level + 特征维度匹配） -->
+      <div v-if="session.knowledge_suggestions && session.knowledge_suggestions.length"
+           class="card" style="background:linear-gradient(135deg,#E6F2EF,#F0F7F5);border:none;">
+        <h3><i class="bi bi-journal-text" style="color:#1C7A6E;margin-right:6px;"></i>
+          📚 基于心理学科知识库的具体行动建议
+          <span style="font-size:12px;font-weight:400;color:#97A3AC;">（神经符号引擎 RAG 检索）</span>
+        </h3>
+        <ol style="color:#47535C;line-height:1.9;font-size:14px;margin:10px 0 0 18px;padding:0;">
+          <li v-for="(tip, idx) in session.knowledge_suggestions" :key="idx">
+            [[ tip ]]
+          </li>
+        </ol>
+      </div>
+
+      <!-- 📖 量表信效度折叠说明 -->
+      <details style="border:1px solid #E5E7EB;border-radius:8px;padding:14px;margin-bottom:24px;cursor:pointer;">
+        <summary style="color:#1C7A6E;font-weight:600;list-style:none;display:flex;align-items:center;gap:8px;">
+          <i class="bi bi-info-circle"></i>
+          📖 关于 PHQ-9 / GAD-7 量表的科学性依据
+          <span style="margin-left:auto;font-size:12px;color:#97A3AC;">点击展开</span>
+        </summary>
+        <div style="margin-top:14px;font-size:13px;color:#47535C;line-height:1.8;">
+          <p><b>PHQ-9 抑郁症状自评量表</b>（Kroenke K, Spitzer RL, Williams JBW, 2001.
+             <i>Annals of Internal Medicine</i>, 134(9): 817-829）<br>
+             共 9 题，得分范围 0-27；本中心 <b>Cronbach's α = 0.89</b>，敏感性 88%、特异性 82%，
+             已在中国人群中完成效度验证（样本量 > 30,000）。
+             评分解释：0-4 无/极轻抑郁 · 5-9 轻度 · 10-14 中度 · 15-19 中重度 · 20-27 重度。</p>
+          <p><b>GAD-7 广泛性焦虑自评量表</b>（Spitzer RL, Kroenke K, Williams JBW, Lowe B, 2006.
+             <i>Archives of Internal Medicine</i>, 166(10): 1092-1097）<br>
+             共 7 题，得分范围 0-21；本中心 <b>Cronbach's α = 0.92</b>，敏感性 89%、特异性 82%，
+             适用于校园场景下的群体筛查。
+             评分解释：0-4 无/极轻焦虑 · 5-9 轻度 · 10-14 中度 · 15-21 重度。</p>
+          <p style="color:#97A3AC;font-size:12px;margin-top:10px;">
+            ⚠️ 本报告为心理风险初筛辅助工具，不构成精神疾病诊断。如分数偏高，请结合临床面谈综合判断。
+          </p>
+        </div>
+      </details>
+
+      <!-- 底部操作 -->
+      <div style="display:flex;gap:10px;justify-content:center;margin-top:30px;flex-wrap:wrap;">
+        <a href="/screening" class="btn ghost"><i class="bi bi-plus-circle" style="margin-right:6px;"></i>重新开始筛查</a>
+        <a href="/admin" class="btn ghost"><i class="bi bi-speedometer2" style="margin-right:6px;"></i>返回管理后台</a>
+        <button class="btn" @click="window.print()"><i class="bi bi-printer" style="margin-right:6px;"></i>打印 / 导出 PDF</button>
+        <a :href="'/api/export/session/' + session.id + '/report.docx'"
+           class="btn"
+           style="background:#1C7A6E;border-color:#1C7A6E;"
+           download>
+          <i class="bi bi-file-earmark-word" style="margin-right:6px;"></i>下载 Word 报告
+        </a>
+      </div>
+    </template>
+  </div>
+
+  <footer>
+    免责声明：本报告仅供心理老师参考，不构成"精神疾病诊断"。
+  </footer>
+
+  <script src="/static/js/vue.global.prod.js"></script>
+  <script src="/static/js/axios.min.js"></script>
+  <script>
+  const { createApp } = Vue;
+  createApp({
+    delimiters: ['[[', ']]'],
+    data() {
+      return { session: {}, loading: true, charts: {} };
+    },
+    mounted() {
+      const id = window.location.pathname.split('/').pop();
+      axios.get('/api/admin/sessions/' + id).then(r => {
+        this.session = r.data.session;
+        this.loading = false;
+        this.$nextTick(() => this.renderCharts());
+      }).catch(err => {
+        this.loading = false;
+        alert('加载失败：' + err.message);
+      });
+    },
+    computed: {
+      riskBgColor() {
+        const c = { low:'#287855', medium:'#B8760F', high:'#C2410C', urgent:'#B91C1C' };
+        return c[this.session.risk_level] || '#888';
+      },
+      recommendation() {
+        const lvl = this.session.risk_level;
+        if(lvl==='urgent' || lvl==='high')
+          return '综合评分较高，建议尽快联系专业心理咨询师进行一对一评估。如已出现情绪低落、睡眠障碍、兴趣减退等症状超过两周，或有自伤/自杀想法，请立即拨打 24 小时心理援助热线 400-161-9995 或前往当地医院精神科就诊。';
+        if(lvl==='medium')
+          return '存在一定的心理压力，建议关注自己的情绪变化，保持规律作息和适度运动。可尝试校内心理咨询中心的免费预约咨询。2–4 周后建议重新评估。';
+        return '本次评估各项指标正常。建议继续保持良好的学习生活习惯，关注自身心理健康，如需了解更多可联系校内心理中心。';
+      },
+    },
+    methods: {
+      levelLabel(l) { return {low:'低风险',medium:'中风险',high:'高风险',urgent:'极高风险'}[l] || l; },
+      phq9Label(s) { return s<5?'无明显':s<10?'轻度':s<15?'中度':'重度'; },
+      gad7Label(s) { return s<5?'无明显':s<10?'轻度':s<15?'中度':'重度'; },
+      scoreColor(score, thr) { return score >= thr ? '#AC4E42' : '#1C7A6E'; },
+      formatTime(s) { if(!s) return ''; return s.replace('T',' ').slice(0,16); },
+      renderCharts() {
+        for (const k in this.charts) { try { this.charts[k].dispose(); } catch(e){} }
+
+        // 1. 综合风险分进度环（仪表盘）
+        const gauge = echarts.init(document.getElementById('gaugeChart'));
+        gauge.setOption({
+          series:[{
+            type:'gauge', startAngle:200, endAngle:-20, radius:'100%',
+            min:0, max:100, splitNumber:10,
+            axisLine:{lineStyle:{width:14,color:[[.3,'#287855'],[.6,'#E6A817'],[.85,'#D97706'],[1,'#AC4E42']]}},
+            pointer:{length:'65%', width:5},
+            axisTick:{distance:-14, length:4, lineStyle:{color:'#fff'}},
+            splitLine:{distance:-14, length:14, lineStyle:{color:'#fff', width:2}},
+            axisLabel:{distance:-22, color:'#fff', fontSize:10},
+            detail:{valueAnimation:true, formatter:'{value}', color:'#fff', fontSize:28, offsetCenter:[0,'70%']},
+            data:[{value: +this.session.risk_score || 0}],
+          }],
+        });
+        this.charts.gauge = gauge;
+
+        // 2. 雷达图
+        const rad = echarts.init(document.getElementById('radarChart'));
+        const s = this.session || {};
+        const phq9 = +s.phq9 || 0, gad7 = +s.gad7 || 0, risk = +s.risk_score || 0;
+        // 归一化到 0-100
+        const phq9_norm = Math.round(phq9 / 27 * 100);
+        const gad7_norm = Math.round(gad7 / 21 * 100);
+                const feats = s.features || {};
+        const text_neg = Math.round(((feats.text_negativity || 0)) * 100);  // 0-1 → 0-100
+        const suicide_risk = feats.text_suicide_risk || 0;
+        const anxiety_kw = feats.text_anxiety_keywords || 0;
+        rad.setOption({
+          radar:{
+            indicator:[
+              {name:'抑郁 (PHQ-9)',max:100},
+              {name:'焦虑 (GAD-7)',max:100},
+              {name:'综合风险',max:100},
+              {name:'文本消极度',max:100},
+              {name:'规则匹配强度',max:100},
+            ],
+            center:['50%','55%'], radius:'65%',
+          },
+          series:[{
+            type:'radar',
+            data:[{
+              value:[phq9_norm, gad7_norm, risk, text_neg, (s.activated_rules||[]).length * 20],
+              name:'本次评估', areaStyle:{color:'rgba(28,122,110,.25)'},
+              lineStyle:{color:'#1C7A6E'}, itemStyle:{color:'#1C7A6E'},
+            }],
+          }],
+        });
+        this.charts.radar = rad;
+
+        // 3. 条形图
+        const bar = echarts.init(document.getElementById('barChart'));
+        bar.setOption({
+          tooltip:{},
+          xAxis:{type:'value', max:100},
+          yAxis:{type:'category', data:['PHQ-9 抑郁','GAD-7 焦虑','综合风险','文本消极','规则匹配']},
+          series:[{
+            type:'bar',
+            data:[
+              {value:phq9_norm, itemStyle:{color:this.scoreColor(phq9,10)*1==='#AC4E42'?'#AC4E42':'#1C7A6E'}},
+              {value:gad7_norm, itemStyle:{color:this.scoreColor(gad7,10)*1==='#AC4E42'?'#AC4E42':'#1C7A6E'}},
+              {value:risk, itemStyle:{color:risk>=60?'#AC4E42':risk>=35?'#E6A817':'#1C7A6E'}},
+              {value:text_neg, itemStyle:{color:'#E6A817'}},
+              {value:(s.activated_rules||[]).length*20, itemStyle:{color:'#1C7A6E'}},
+            ],
+            barWidth:20,
+            label:{show:true, position:'right', formatter:'{c}'},
+          }],
+          grid:{left:100, right:40, top:20, bottom:30},
+        });
+        this.charts.bar = bar;
+
+        // 4. 🔍 特征值横向条形热力图（RiskFeature 10 维）
+        const featsChart = echarts.init(document.getElementById('featuresChart'));
+        const featMap = [
+          {key:'phq9_score',           label:'PHQ-9 抑郁得分',     max:27,  unit:'分'},
+          {key:'gad7_score',           label:'GAD-7 焦虑得分',     max:21,  unit:'分'},
+          {key:'text_negativity',      label:'文本消极度',          max:1,   unit:''},
+          {key:'text_suicide_risk',    label:'自杀风险关键词命中', max:10,  unit:'个'},
+          {key:'text_depression_keywords', label:'抑郁关键词命中',  max:10,  unit:'个'},
+          {key:'text_anxiety_keywords',    label:'焦虑关键词命中',  max:10,  unit:'个'},
+          {key:'speech_pitch_std',     label:'语音音高波动',       max:200, unit:'Hz'},
+          {key:'speech_speaking_rate', label:'语速',               max:300, unit:'字/分'},
+          {key:'response_duration_sec',label:'答题时长',           max:600, unit:'秒'},
+          {key:'semantic_similarity',  label:'文本语义相似度',     max:1,   unit:''},
+        ];
+        const featData = featMap.map(f => {
+          const raw = (feats && feats[f.key] !== undefined) ? feats[f.key] : 0;
+          const ratio = f.max > 0 ? Math.min(1, raw / f.max) : 0;
+          const color = ratio > 0.75 ? '#AC4E42' : ratio > 0.5 ? '#E6A817' : ratio > 0.25 ? '#1C7A6E' : '#8AB6AE';
+          let display = raw;
+          if (f.unit === '') display = Math.round(raw * 100) / 100;
+          else display = Math.round(raw);
+          return {
+            name: f.label,
+            value: display,
+            max: f.max,
+            ratio: ratio,
+            itemStyle: { color: color },
+            labelSuffix: f.unit,
+          };
+        });
+        featsChart.setOption({
+          tooltip: {
+            trigger: 'axis', axisPointer: { type: 'shadow' },
+            formatter: p => {
+              const d = p[0]; const raw = featMap[d.dataIndex];
+              const v = feats[raw.key] !== undefined ? feats[raw.key] : 0;
+              return `${d.name}: ${Math.round(v * 100) / 100} ${raw.unit}`;
+            }
+          },
+          grid: { left: 130, right: 100, top: 10, bottom: 20 },
+          xAxis: { type: 'value', max: 100, axisLabel: { formatter: '{value}%' } },
+          yAxis: {
+            type: 'category',
+            data: featData.map(d => d.name).reverse(),
+            axisLabel: { fontSize: 12 },
+          },
+          series: [{
+            type: 'bar',
+            data: featData.map(d => Math.round(d.ratio * 100)).reverse(),
+            barWidth: 16,
+            label: {
+              show: true, position: 'right',
+              formatter: p => {
+                const orig = featData[featData.length - 1 - p.dataIndex];
+                return `${orig.value}${orig.labelSuffix || ''} (${p.value}%)`;
+              },
+              fontSize: 11,
+            },
+            itemStyle: {
+              color: p => featData[featData.length - 1 - p.dataIndex].itemStyle.color,
+              borderRadius: [0, 4, 4, 0],
+            },
+          }],
+        });
+        this.charts.feats = featsChart;
+      },
+    },
+  }).mount('#app');
+  </script>
+
+<!-- 紧急危机弹窗 -->
+<div id="crisis-modal" style="display:none; position:fixed; top:0;left:0;right:0;bottom:0; background:rgba(0,0,0,0.7); z-index:9999; justify-content:center; align-items:center;">
+  <div style="background:white; border-radius:16px; padding:40px; max-width:500px; width:90%; text-align:center;">
+    <div style="font-size:60px;">🚨</div>
+    <h3 style="color:#AC4E42; margin-top:10px;">你现在还好吗？</h3>
+    <p style="color:#555; margin-top:15px;">我们检测到你此刻可能有自杀相关的想法。<br><b>请记住：你不是一个人。</b></p>
+    <div style="background:#FDECEC; padding:15px; border-radius:10px; margin:20px 0;">
+      <b>📞 全国24小时心理援助热线：12356</b><br>
+      <span style="color:#888; font-size:12px;">北京心理危机干预中心：010-82951332</span>
+    </div>
+    <button onclick="document.getElementById('crisis-modal').style.display='none'" style="background:#1C7A6E; color:white; border:none; padding:10px 25px; border-radius:20px; cursor:pointer;">我现在安全了</button>
+  </div>
+</div>
+
+<!-- 干预方案 + PDF 下载 + CBT -->
+<div id="intervention-plan" style="max-width:800px; margin:30px auto; padding:25px; background:#F5F8F9; border-radius:12px;"></div>
+
+<div style="max-width:800px; margin:0 auto 40px; padding:0 20px; text-align:center;">
+  <a href="#" id="pdf-link" class="btn" style="background:#1C7A6E; color:white;">📄 下载 PDF 报告</a>
+  <a href="/cbt" class="btn btn-outline-secondary ml-2">🧠 我有负面想法，帮我分析</a>
+  <a href="/breathing" class="btn btn-outline-secondary ml-2">🌬️ 我需要冷静一下</a>
+</div>
+
+<script>
+// 页面加载后加载干预方案
+const riskLevel = '{{ session.overall_risk_level | default('low') }}' ||
+  (document.querySelector('[data-risk]')?.dataset.risk) || 'low';
+const sessionId = window.location.pathname.match(/\/report\/(\d+)/)?.[1];
+
+if (riskLevel === 'urgent') {
+  document.getElementById('crisis-modal').style.display = 'flex';
+  // 浏览器震动（如果支持）
+  if (navigator.vibrate) navigator.vibrate([200, 100, 200, 100, 400]);
+}
+
+if (sessionId) {
+  const a = document.getElementById('pdf-link');
+  a.href = '/api/features/pdf-report/' + sessionId;
+}
+
+fetch('/api/features/intervention-plan/' + riskLevel).then(r=>r.json()).then(data=>{
+  const box = document.getElementById('intervention-plan');
+  box.style.borderLeft = '4px solid ' + data.color;
+  box.innerHTML = '<h5 style="color:'+data.color+';">' + data.icon + ' ' + data.title + '</h5>' +
+    '<p style="color:#555; margin-top:10px;">' + data.suggestion + '</p>' +
+    '<div style="margin-top:15px; display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:10px;">' +
+    data.resources.map(r => '<div style="background:white; padding:12px; border-radius:8px; font-size:13px;"><b>' + r.name + '</b><br><span style="color:#888;">' + (r.desc || r.number || '') + '</span></div>').join('') +
+    '</div>';
+});
+</script>
+</body>
+</html>

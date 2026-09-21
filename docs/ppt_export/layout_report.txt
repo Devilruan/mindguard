@@ -1,0 +1,1537 @@
+﻿Slide dimensions: 959.75 x 540
+
+=== Slide 1 ===
+  [Rectangle 1] pos=(0,0) size=[417.6 x 540] -> right=417.6 bottom=540
+  [Rectangle 2] pos=(417.6,0) size=[5 x 540] -> right=422.6 bottom=540
+  [Rectangle 3] pos=(828,0) size=[131.8 x 60] -> right=959.8 bottom=60 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 4] pos=(43.2,36) size=[360 x 20] -> right=403.2 bottom=56
+    TEXT: AIC 第八届 · 算法创新赛
+  [TextBox 5] pos=(43.2,50.4) size=[360 x 20] -> right=403.2 bottom=70.4
+    TEXT: 赛题 5 · AI + 学科交叉
+  [TextBox 6] pos=(43.2,158.4) size=[360 x 30] -> right=403.2 bottom=188.4
+    TEXT: 神经符号双引擎
+  [TextBox 7] pos=(43.2,198) size=[360 x 30] -> right=403.2 bottom=228
+    TEXT: 驱动的校园心理风险
+  [TextBox 8] pos=(43.2,237.6) size=[360 x 30] -> right=403.2 bottom=267.6
+    TEXT: 智能筛查与干预系统
+  [Rectangle 9] pos=(43.2,302.4) size=[331.2 x 144] -> right=374.4 bottom=446.4
+  [TextBox 10] pos=(57.6,309.6) size=[100.8 x 28] -> right=158.4 bottom=337.6
+    TEXT: 16.3%
+  [TextBox 11] pos=(57.6,331.2) size=[100.8 x 28] -> right=158.4 bottom=359.2
+    TEXT: 检出率净提升
+  [TextBox 12] pos=(165.6,309.6) size=[100.8 x 28] -> right=266.4 bottom=337.6
+    TEXT: 12 例
+  [TextBox 13] pos=(165.6,331.2) size=[100.8 x 28] -> right=266.4 bottom=359.2
+    TEXT: 隐性危机全检出
+  [TextBox 14] pos=(273.6,309.6) size=[100.8 x 28] -> right=374.4 bottom=337.6
+    TEXT: 72.7%
+  [TextBox 15] pos=(273.6,331.2) size=[100.8 x 28] -> right=374.4 bottom=359.2
+    TEXT: 假阳性减少
+  [TextBox 16] pos=(439.2,129.6) size=[489.6 x 180] -> right=928.8 bottom=309.6
+    TEXT: MindGuard 可解释 AI × 精神医学 × 校园心理中心  PHQ-9 / GAD-7 临床量表 + 开放文本 规则知识库 6 条 + RIPPER 归纳 + RAG 底座 4 级危机分级 ·...
+  [TextBox 17] pos=(439.2,331.2) size=[489.6 x 158.4] -> right=928.8 bottom=489.6
+    TEXT: 团队：阮家炜（负责人） · 张修瑜 纯 Python · 零 GPU · PyInstaller 一键打包 响应教育部《教育强国建设纲要》AI+心理监测方向  答辩 PPT · 2026 年 9 月
+  MAX_BOTTOM=540 / SLIDE_H=540  MAX_RIGHT=959.8 / SLIDE_W=959.75
+
+=== Slide 2 ===
+  [Rectangle 1] pos=(0,0) size=[959.8 x 4] -> right=959.8 bottom=4 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 2] pos=(43.2,30.2) size=[864 x 22] -> right=907.2 bottom=52.2
+    TEXT: CONTENTS
+  [TextBox 3] pos=(43.2,56.2) size=[864 x 32] -> right=907.2 bottom=88.2
+    TEXT: 汇报结构
+  [Rectangle 4] pos=(43.2,111.6) size=[115.2 x 3] -> right=158.4 bottom=114.6
+  [TextBox 5] pos=(43.2,507.6) size=[432 x 16] -> right=475.2 bottom=523.6
+    TEXT: MindGuard · 神经符号双引擎心理风险筛查
+  [TextBox 6] pos=(756,507.6) size=[187.2 x 16] -> right=943.2 bottom=523.6
+    TEXT: 2 / 20
+  [Rectangle 7] pos=(43.2,136.8) size=[44 x 44] -> right=87.2 bottom=180.8
+  [TextBox 8] pos=(43.2,136.8) size=[44 x 44] -> right=87.2 bottom=180.8
+    TEXT: 01
+  [TextBox 9] pos=(86.4,138.8) size=[288 x 22] -> right=374.4 bottom=160.8
+    TEXT: 项目背景与痛点
+  [TextBox 10] pos=(381.6,140.8) size=[540 x 20] -> right=921.6 bottom=160.8
+    TEXT: 为什么做
+  [Rectangle 11] pos=(43.2,185.8) size=[44 x 44] -> right=87.2 bottom=229.8
+  [TextBox 12] pos=(43.2,185.8) size=[44 x 44] -> right=87.2 bottom=229.8
+    TEXT: 02
+  [TextBox 13] pos=(86.4,187.8) size=[288 x 22] -> right=374.4 bottom=209.8
+    TEXT: 需求分析与学科定位
+  [TextBox 14] pos=(381.6,189.8) size=[540 x 20] -> right=921.6 bottom=209.8
+    TEXT: 赛题 5 交叉切入点
+  [Rectangle 15] pos=(43.2,234.7) size=[44 x 44] -> right=87.2 bottom=278.7
+  [TextBox 16] pos=(43.2,234.7) size=[44 x 44] -> right=87.2 bottom=278.7
+    TEXT: 03
+  [TextBox 17] pos=(86.4,236.7) size=[288 x 22] -> right=374.4 bottom=258.7
+    TEXT: 系统整体架构
+  [TextBox 18] pos=(381.6,238.7) size=[540 x 20] -> right=921.6 bottom=258.7
+    TEXT: 四层设计 + 数据流
+  [Rectangle 19] pos=(43.2,283.7) size=[44 x 44] -> right=87.2 bottom=327.7
+  [TextBox 20] pos=(43.2,283.7) size=[44 x 44] -> right=87.2 bottom=327.7
+    TEXT: 04
+  [TextBox 21] pos=(86.4,285.7) size=[288 x 22] -> right=374.4 bottom=307.7
+    TEXT: 核心技术详解
+  [TextBox 22] pos=(381.6,287.7) size=[540 x 20] -> right=921.6 bottom=307.7
+    TEXT: 双引擎 · 规则库 · 危机分级 · RAG
+  [Rectangle 23] pos=(43.2,332.6) size=[44 x 44] -> right=87.2 bottom=376.6
+  [TextBox 24] pos=(43.2,332.6) size=[44 x 44] -> right=87.2 bottom=376.6
+    TEXT: 05
+  [TextBox 25] pos=(86.4,334.6) size=[288 x 22] -> right=374.4 bottom=356.6
+    TEXT: 系统演示
+  [TextBox 26] pos=(381.6,336.6) size=[540 x 20] -> right=921.6 bottom=356.6
+    TEXT: 真实界面截图
+  [Rectangle 27] pos=(43.2,381.6) size=[44 x 44] -> right=87.2 bottom=425.6
+  [TextBox 28] pos=(43.2,381.6) size=[44 x 44] -> right=87.2 bottom=425.6
+    TEXT: 06
+  [TextBox 29] pos=(86.4,383.6) size=[288 x 22] -> right=374.4 bottom=405.6
+    TEXT: 效果验证
+  [TextBox 30] pos=(381.6,385.6) size=[540 x 20] -> right=921.6 bottom=405.6
+    TEXT: 对比实验 · 典型案例
+  [Rectangle 31] pos=(43.2,430.6) size=[44 x 44] -> right=87.2 bottom=474.6
+  [TextBox 32] pos=(43.2,430.6) size=[44 x 44] -> right=87.2 bottom=474.6
+    TEXT: 07
+  [TextBox 33] pos=(86.4,432.6) size=[288 x 22] -> right=374.4 bottom=454.6
+    TEXT: 总结与展望
+  [TextBox 34] pos=(381.6,434.6) size=[540 x 20] -> right=921.6 bottom=454.6
+    TEXT: 结论 + V2.0 方向
+  MAX_BOTTOM=523.6 / SLIDE_H=540  MAX_RIGHT=959.8 / SLIDE_W=959.75
+
+=== Slide 3 ===
+  [Rectangle 1] pos=(0,0) size=[959.8 x 4] -> right=959.8 bottom=4 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 2] pos=(43.2,30.2) size=[864 x 22] -> right=907.2 bottom=52.2
+    TEXT: 01 · 背景
+  [TextBox 3] pos=(43.2,56.2) size=[864 x 32] -> right=907.2 bottom=88.2
+    TEXT: 国家政策与校园心理现状
+  [Rectangle 4] pos=(43.2,111.6) size=[115.2 x 3] -> right=158.4 bottom=114.6
+  [TextBox 5] pos=(43.2,507.6) size=[432 x 16] -> right=475.2 bottom=523.6
+    TEXT: MindGuard · 神经符号双引擎心理风险筛查
+  [TextBox 6] pos=(756,507.6) size=[187.2 x 16] -> right=943.2 bottom=523.6
+    TEXT: 3 / 20
+  [TextBox 7] pos=(43.2,136.8) size=[432 x 158.4] -> right=475.2 bottom=295.2
+    TEXT: 📋 教育部《教育强国建设纲要（2024-2035）》    "建立全国学生心理健康监测预警系统"  🏫 某高校心理中心真实数据    · 年筛查 6000+，3 人专职团队    · 干预工单积压...
+  [Chart 8] pos=(489.6,136.8) size=[424.8 x 158.4] -> right=914.4 bottom=295.2
+  [Rectangle 9] pos=(43.2,309.6) size=[871.2 x 68.4] -> right=914.4 bottom=378
+  [Rectangle 10] pos=(43.2,309.6) size=[6 x 68.4] -> right=49.2 bottom=378
+  [TextBox 11] pos=(57.6,313.6) size=[86.4 x 20] -> right=144 bottom=333.6
+    TEXT: 痛点 1
+  [TextBox 12] pos=(57.6,331.6) size=[864 x 22] -> right=921.6 bottom=353.6
+    TEXT: 单一量表漏检率高
+  [TextBox 13] pos=(57.6,355.6) size=[828 x 20] -> right=885.6 bottom=375.6
+    TEXT: 纯 PHQ-9 单维度筛查，70% 后续案例在 PHQ-9 上 < 10 分，传统方法完全无法识别
+  [Rectangle 14] pos=(43.2,385.2) size=[871.2 x 68.4] -> right=914.4 bottom=453.6
+  [Rectangle 15] pos=(43.2,385.2) size=[6 x 68.4] -> right=49.2 bottom=453.6
+  [TextBox 16] pos=(57.6,389.2) size=[86.4 x 20] -> right=144 bottom=409.2
+    TEXT: 痛点 2
+  [TextBox 17] pos=(57.6,407.2) size=[864 x 22] -> right=921.6 bottom=429.2
+    TEXT: 缺乏可解释性
+  [TextBox 18] pos=(57.6,431.2) size=[828 x 20] -> right=885.6 bottom=451.2
+    TEXT: 老师只看到一个分数，不知道"为什么判高危"，系统成为"黑箱"——心理学科伦理风险
+  [Rectangle 19] pos=(43.2,460.8) size=[871.2 x 68.4] -> right=914.4 bottom=529.2
+  [Rectangle 20] pos=(43.2,460.8) size=[6 x 68.4] -> right=49.2 bottom=529.2
+  [TextBox 21] pos=(57.6,464.8) size=[86.4 x 20] -> right=144 bottom=484.8
+    TEXT: 痛点 3
+  [TextBox 22] pos=(57.6,482.8) size=[864 x 22] -> right=921.6 bottom=504.8
+    TEXT: 干预建议同质化
+  [TextBox 23] pos=(57.6,506.8) size=[828 x 20] -> right=885.6 bottom=526.8
+    TEXT: 过去 100 份干预记录中，"建议寻求专业帮助"占比 68%，缺乏针对性
+  MAX_BOTTOM=529.2 / SLIDE_H=540  MAX_RIGHT=959.8 / SLIDE_W=959.75
+
+=== Slide 4 ===
+  [Rectangle 1] pos=(0,0) size=[959.8 x 4] -> right=959.8 bottom=4 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 2] pos=(43.2,30.2) size=[864 x 22] -> right=907.2 bottom=52.2
+    TEXT: 02 · 需求
+  [TextBox 3] pos=(43.2,56.2) size=[864 x 32] -> right=907.2 bottom=88.2
+    TEXT: AI+精神医学的学科交叉定位
+  [Rectangle 4] pos=(43.2,111.6) size=[115.2 x 3] -> right=158.4 bottom=114.6
+  [TextBox 5] pos=(43.2,507.6) size=[432 x 16] -> right=475.2 bottom=523.6
+    TEXT: MindGuard · 神经符号双引擎心理风险筛查
+  [TextBox 6] pos=(756,507.6) size=[187.2 x 16] -> right=943.2 bottom=523.6
+    TEXT: 4 / 20
+  [Rectangle 7] pos=(43.2,136.8) size=[288 x 345.6] -> right=331.2 bottom=482.4
+  [Rectangle 8] pos=(43.2,136.8) size=[288 x 4] -> right=331.2 bottom=140.8
+  [TextBox 9] pos=(53.2,147.6) size=[273.6 x 26] -> right=326.8 bottom=173.6
+    TEXT: 精神医学 / 临床心理学
+  [Rectangle 10] pos=(55.2,176.4) size=[4 x 4] -> right=59.2 bottom=180.4
+  [TextBox 11] pos=(65.2,174.4) size=[259.2 x 22] -> right=324.4 bottom=196.4
+    TEXT: 临床量表标准：PHQ-9、GAD-7
+  [Rectangle 12] pos=(55.2,208.4) size=[4 x 4] -> right=59.2 bottom=212.4
+  [TextBox 13] pos=(65.2,206.4) size=[259.2 x 22] -> right=324.4 bottom=228.4
+    TEXT: DSM-5 诊断阈值与分级
+  [Rectangle 14] pos=(55.2,240.4) size=[4 x 4] -> right=59.2 bottom=244.4
+  [TextBox 15] pos=(65.2,238.4) size=[259.2 x 22] -> right=324.4 bottom=260.4
+    TEXT: 干预伦理：可解释性要求
+  [Rectangle 16] pos=(55.2,272.4) size=[4 x 4] -> right=59.2 bottom=276.4
+  [TextBox 17] pos=(65.2,270.4) size=[259.2 x 22] -> right=324.4 bottom=292.4
+    TEXT: 心理危机干预分级体系
+  [Rectangle 18] pos=(349.2,136.8) size=[288 x 345.6] -> right=637.2 bottom=482.4
+  [Rectangle 19] pos=(349.2,136.8) size=[288 x 4] -> right=637.2 bottom=140.8
+  [TextBox 20] pos=(359.2,147.6) size=[273.6 x 26] -> right=632.8 bottom=173.6
+    TEXT: AI + 学科交叉切入点
+  [Rectangle 21] pos=(361.2,176.4) size=[4 x 4] -> right=365.2 bottom=180.4
+  [TextBox 22] pos=(371.2,174.4) size=[259.2 x 22] -> right=630.4 bottom=196.4
+    TEXT: 多模态 RiskFeature 特征向量
+  [Rectangle 23] pos=(361.2,208.4) size=[4 x 4] -> right=365.2 bottom=212.4
+  [TextBox 24] pos=(371.2,206.4) size=[259.2 x 22] -> right=630.4 bottom=228.4
+    TEXT: 神经符号双引擎推理
+  [Rectangle 25] pos=(361.2,240.4) size=[4 x 4] -> right=365.2 bottom=244.4
+  [TextBox 26] pos=(371.2,238.4) size=[259.2 x 22] -> right=630.4 bottom=260.4
+    TEXT: 4 级危机分级拦截机制
+  [Rectangle 27] pos=(361.2,272.4) size=[4 x 4] -> right=365.2 bottom=276.4
+  [TextBox 28] pos=(371.2,270.4) size=[259.2 x 22] -> right=630.4 bottom=292.4
+    TEXT: 可解释推理链 + RAG 知识底座
+  [Rectangle 29] pos=(655.2,136.8) size=[288 x 345.6] -> right=943.2 bottom=482.4
+  [Rectangle 30] pos=(655.2,136.8) size=[288 x 4] -> right=943.2 bottom=140.8
+  [TextBox 31] pos=(665.2,147.6) size=[273.6 x 26] -> right=938.8 bottom=173.6
+    TEXT: 人工智能（工科）
+  [Rectangle 32] pos=(667.2,176.4) size=[4 x 4] -> right=671.2 bottom=180.4
+  [TextBox 33] pos=(677.2,174.4) size=[259.2 x 22] -> right=936.4 bottom=196.4
+    TEXT: 规则引擎（可解释）
+  [Rectangle 34] pos=(667.2,208.4) size=[4 x 4] -> right=671.2 bottom=212.4
+  [TextBox 35] pos=(677.2,206.4) size=[259.2 x 22] -> right=936.4 bottom=228.4
+    TEXT: RIPPER 规则归纳（自适应）
+  [Rectangle 36] pos=(667.2,240.4) size=[4 x 4] -> right=671.2 bottom=244.4
+  [TextBox 37] pos=(677.2,238.4) size=[259.2 x 22] -> right=936.4 bottom=260.4
+    TEXT: FastAPI + Vue3 工程化
+  [Rectangle 38] pos=(667.2,272.4) size=[4 x 4] -> right=671.2 bottom=276.4
+  [TextBox 39] pos=(677.2,270.4) size=[259.2 x 22] -> right=936.4 bottom=292.4
+    TEXT: PyInstaller 一键打包部署
+  [TextBox 40] pos=(288,496.8) size=[381.6 x 16] -> right=669.6 bottom=512.8
+    TEXT: 痛点：筛查漏检 / 黑箱 / 同质化
+  [TextBox 41] pos=(288,510.8) size=[381.6 x 16] -> right=669.6 bottom=526.8
+    TEXT: ↓ 学科交叉
+  [TextBox 42] pos=(288,524.8) size=[381.6 x 16] -> right=669.6 bottom=540.8 [OVERFLOW-BOTTOM: 0.8pt]
+    TEXT: 切入点：规则+RIPPER+RAG+4级危机
+  [TextBox 43] pos=(288,538.8) size=[381.6 x 16] -> right=669.6 bottom=554.8 [OVERFLOW-BOTTOM: 14.8pt]
+    TEXT: ↓ AI 赋能
+  [TextBox 44] pos=(288,552.8) size=[381.6 x 16] -> right=669.6 bottom=568.8 [OVERFLOW-BOTTOM: 28.8pt]
+    TEXT: 方案：神经符号双引擎系统
+  MAX_BOTTOM=568.8 / SLIDE_H=540  MAX_RIGHT=959.8 / SLIDE_W=959.75
+
+=== Slide 5 ===
+  [Rectangle 1] pos=(0,0) size=[959.8 x 4] -> right=959.8 bottom=4 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 2] pos=(43.2,30.2) size=[864 x 22] -> right=907.2 bottom=52.2
+    TEXT: 02 · 需求
+  [TextBox 3] pos=(43.2,56.2) size=[864 x 32] -> right=907.2 bottom=88.2
+    TEXT: 三项核心创新点
+  [Rectangle 4] pos=(43.2,111.6) size=[115.2 x 3] -> right=158.4 bottom=114.6
+  [TextBox 5] pos=(43.2,507.6) size=[432 x 16] -> right=475.2 bottom=523.6
+    TEXT: MindGuard · 神经符号双引擎心理风险筛查
+  [TextBox 6] pos=(756,507.6) size=[187.2 x 16] -> right=943.2 bottom=523.6
+    TEXT: 5 / 20
+  [Rectangle 7] pos=(43.2,136.8) size=[871.2 x 115.2] -> right=914.4 bottom=252
+  [Oval 8] pos=(54,165.6) size=[57.6 x 57.6] -> right=111.6 bottom=223.2
+  [TextBox 9] pos=(54,165.6) size=[57.6 x 57.6] -> right=111.6 bottom=223.2
+    TEXT: 01
+  [TextBox 10] pos=(129.6,144.8) size=[720 x 28] -> right=849.6 bottom=172.8
+    TEXT: 可解释神经符号双引擎
+  [TextBox 11] pos=(129.6,172.8) size=[770.4 x 80] -> right=900 bottom=252.8
+    TEXT: 规则知识库（6 条 DSM-5 阈值规则 + RIPPER 规则归纳器）+ 10 维多模态 RiskFeature | 每条风险结论附带完整规则激活链，解决 AI 心理健康领域"黑箱"伦理问题
+  [Rectangle 12] pos=(43.2,262.8) size=[871.2 x 115.2] -> right=914.4 bottom=378
+  [Oval 13] pos=(54,291.6) size=[57.6 x 57.6] -> right=111.6 bottom=349.2
+  [TextBox 14] pos=(54,291.6) size=[57.6 x 57.6] -> right=111.6 bottom=349.2
+    TEXT: 02
+  [TextBox 15] pos=(129.6,270.8) size=[720 x 28] -> right=849.6 bottom=298.8
+    TEXT: 4 级危机分级拦截机制
+  [TextBox 16] pos=(129.6,298.8) size=[770.4 x 80] -> right=900 bottom=378.8
+    TEXT: 30+ 个关键词按 CRISIS/HIGH/MEDIUM/LOW 分级 + 特征层兜底双重机制 | 118 例样本对比：PHQ-9/GAD-7 正常时仍能检出隐性信号，12 例全部被纯量表漏掉
+  [Rectangle 17] pos=(43.2,388.8) size=[871.2 x 115.2] -> right=914.4 bottom=504
+  [Oval 18] pos=(54,417.6) size=[57.6 x 57.6] -> right=111.6 bottom=475.2
+  [TextBox 19] pos=(54,417.6) size=[57.6 x 57.6] -> right=111.6 bottom=475.2
+    TEXT: 03
+  [TextBox 20] pos=(129.6,396.8) size=[720 x 28] -> right=849.6 bottom=424.8
+    TEXT: 轻量 RAG 心理知识底座
+  [TextBox 21] pos=(129.6,424.8) size=[770.4 x 80] -> right=900 bottom=504.8
+    TEXT: risk_level × 特征维度结构化检索，建议不再是"去寻求帮助" | 而是"五感接地法：说出此刻看到的 5 件事"这样的具体行动步骤
+  MAX_BOTTOM=523.6 / SLIDE_H=540  MAX_RIGHT=959.8 / SLIDE_W=959.75
+
+=== Slide 6 ===
+  [Rectangle 1] pos=(0,0) size=[959.8 x 4] -> right=959.8 bottom=4 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 2] pos=(43.2,30.2) size=[864 x 22] -> right=907.2 bottom=52.2
+    TEXT: 03 · 架构
+  [TextBox 3] pos=(43.2,56.2) size=[864 x 32] -> right=907.2 bottom=88.2
+    TEXT: 四层设计 · 展示 → 应用 → 算法 → 数据
+  [Rectangle 4] pos=(43.2,111.6) size=[115.2 x 3] -> right=158.4 bottom=114.6
+  [TextBox 5] pos=(43.2,507.6) size=[432 x 16] -> right=475.2 bottom=523.6
+    TEXT: MindGuard · 神经符号双引擎心理风险筛查
+  [TextBox 6] pos=(756,507.6) size=[187.2 x 16] -> right=943.2 bottom=523.6
+    TEXT: 6 / 20
+  [Rectangle 7] pos=(43.2,136.8) size=[871.2 x 75.6] -> right=914.4 bottom=212.4
+  [Rectangle 8] pos=(43.2,136.8) size=[6 x 75.6] -> right=49.2 bottom=212.4
+  [Rectangle 9] pos=(54,140.8) size=[86.4 x 28] -> right=140.4 bottom=168.8
+  [TextBox 10] pos=(54,140.8) size=[86.4 x 28] -> right=140.4 bottom=168.8
+    TEXT: ① 展示层
+  [Rectangle 11] pos=(147.6,140.8) size=[158.4 x 28] -> right=306 bottom=168.8
+  [TextBox 12] pos=(147.6,140.8) size=[158.4 x 28] -> right=306 bottom=168.8
+    TEXT: Vue3 · ECharts
+  [TextBox 13] pos=(316.8,140.8) size=[590.4 x 80] -> right=907.2 bottom=220.8
+    TEXT: 筛查入口 / 评估报告（雷达+热力图+规则链）/ 管理后台 / Word 导出
+  [TextBox 14] pos=(446.4,208.8) size=[72 x 18] -> right=518.4 bottom=226.8
+    TEXT: ▼
+  [Rectangle 15] pos=(43.2,223.2) size=[871.2 x 75.6] -> right=914.4 bottom=298.8
+  [Rectangle 16] pos=(43.2,223.2) size=[6 x 75.6] -> right=49.2 bottom=298.8
+  [Rectangle 17] pos=(54,227.2) size=[86.4 x 28] -> right=140.4 bottom=255.2
+  [TextBox 18] pos=(54,227.2) size=[86.4 x 28] -> right=140.4 bottom=255.2
+    TEXT: ② 应用层
+  [Rectangle 19] pos=(147.6,227.2) size=[158.4 x 28] -> right=306 bottom=255.2
+  [TextBox 20] pos=(147.6,227.2) size=[158.4 x 28] -> right=306 bottom=255.2
+    TEXT: FastAPI · Pydantic
+  [TextBox 21] pos=(316.8,227.2) size=[590.4 x 80] -> right=907.2 bottom=307.2
+    TEXT: screening_api / admin_api / rules_api / export_api
+  [TextBox 22] pos=(446.4,295.2) size=[72 x 18] -> right=518.4 bottom=313.2
+    TEXT: ▼
+  [Rectangle 23] pos=(43.2,309.6) size=[871.2 x 75.6] -> right=914.4 bottom=385.2
+  [Rectangle 24] pos=(43.2,309.6) size=[6 x 75.6] -> right=49.2 bottom=385.2
+  [Rectangle 25] pos=(54,313.6) size=[86.4 x 28] -> right=140.4 bottom=341.6
+  [TextBox 26] pos=(54,313.6) size=[86.4 x 28] -> right=140.4 bottom=341.6
+    TEXT: ③ 算法层
+  [Rectangle 27] pos=(147.6,313.6) size=[158.4 x 28] -> right=306 bottom=341.6
+  [TextBox 28] pos=(147.6,313.6) size=[158.4 x 28] -> right=306 bottom=341.6
+    TEXT: 神经符号双引擎（核心）
+  [TextBox 29] pos=(316.8,313.6) size=[590.4 x 80] -> right=907.2 bottom=393.6
+    TEXT: RiskFeature 10 维 | RuleBase 规则知识库 | RIPPER 规则归纳 | classify_crisis() 4 级危机 | retrieve_knowledge() RAG...
+  [TextBox 30] pos=(446.4,381.6) size=[72 x 18] -> right=518.4 bottom=399.6
+    TEXT: ▼
+  [Rectangle 31] pos=(43.2,396) size=[871.2 x 75.6] -> right=914.4 bottom=471.6
+  [Rectangle 32] pos=(43.2,396) size=[6 x 75.6] -> right=49.2 bottom=471.6
+  [Rectangle 33] pos=(54,400) size=[86.4 x 28] -> right=140.4 bottom=428
+  [TextBox 34] pos=(54,400) size=[86.4 x 28] -> right=140.4 bottom=428
+    TEXT: ④ 数据层
+  [Rectangle 35] pos=(147.6,400) size=[158.4 x 28] -> right=306 bottom=428
+  [TextBox 36] pos=(147.6,400) size=[158.4 x 28] -> right=306 bottom=428
+    TEXT: SQLite · 零配置
+  [TextBox 37] pos=(316.8,400) size=[590.4 x 80] -> right=907.2 bottom=480
+    TEXT: User / ScreeningSession / Intervention / AdminUser
+  [Rectangle 38] pos=(43.2,500.4) size=[871.2 x 25.2] -> right=914.4 bottom=525.6
+  [TextBox 39] pos=(57.6,501.8) size=[864 x 28] -> right=921.6 bottom=529.8
+    TEXT: 数据流：PHQ-9 + GAD-7 + 开放文本 → RiskFeature(10维) → 规则评估 → 危机分级 → RAG 检索 → LLM 建议 → 报告+导出+工单
+  MAX_BOTTOM=529.8 / SLIDE_H=540  MAX_RIGHT=959.8 / SLIDE_W=959.75
+
+=== Slide 7 ===
+  [Rectangle 1] pos=(0,0) size=[959.8 x 4] -> right=959.8 bottom=4 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 2] pos=(43.2,30.2) size=[864 x 22] -> right=907.2 bottom=52.2
+    TEXT: 04 · 核心技术
+  [TextBox 3] pos=(43.2,56.2) size=[864 x 32] -> right=907.2 bottom=88.2
+    TEXT: RiskFeature · 10 维多模态特征向量
+  [Rectangle 4] pos=(43.2,111.6) size=[115.2 x 3] -> right=158.4 bottom=114.6
+  [TextBox 5] pos=(43.2,507.6) size=[432 x 16] -> right=475.2 bottom=523.6
+    TEXT: MindGuard · 神经符号双引擎心理风险筛查
+  [TextBox 6] pos=(756,507.6) size=[187.2 x 16] -> right=943.2 bottom=523.6
+    TEXT: 7 / 20
+  [Chart 7] pos=(43.2,136.8) size=[446.4 x 331.2] -> right=489.6 bottom=468
+  [Rectangle 8] pos=(504,136.8) size=[417.6 x 331.2] -> right=921.6 bottom=468
+  [TextBox 9] pos=(518.4,144) size=[403.2 x 22] -> right=921.6 bottom=166
+    TEXT: 10 维特征明细
+  [Rectangle 10] pos=(514.8,165.6) size=[396 x 28] -> right=910.8 bottom=193.6
+  [TextBox 11] pos=(518.4,168.6) size=[158.4 x 22] -> right=676.8 bottom=190.6
+    TEXT: phq9_score
+  [TextBox 12] pos=(676.8,168.6) size=[165.6 x 22] -> right=842.4 bottom=190.6
+    TEXT: PHQ-9 抑郁总分
+  [TextBox 13] pos=(806.4,168.6) size=[100.8 x 22] -> right=907.2 bottom=190.6
+    TEXT: 已落地
+  [Rectangle 14] pos=(514.8,193.6) size=[396 x 28] -> right=910.8 bottom=221.6
+  [TextBox 15] pos=(518.4,196.6) size=[158.4 x 22] -> right=676.8 bottom=218.6
+    TEXT: gad7_score
+  [TextBox 16] pos=(676.8,196.6) size=[165.6 x 22] -> right=842.4 bottom=218.6
+    TEXT: GAD-7 焦虑总分
+  [TextBox 17] pos=(806.4,196.6) size=[100.8 x 22] -> right=907.2 bottom=218.6
+    TEXT: 已落地
+  [Rectangle 18] pos=(514.8,221.6) size=[396 x 28] -> right=910.8 bottom=249.6
+  [TextBox 19] pos=(518.4,224.6) size=[158.4 x 22] -> right=676.8 bottom=246.6
+    TEXT: text_negativity
+  [TextBox 20] pos=(676.8,224.6) size=[165.6 x 22] -> right=842.4 bottom=246.6
+    TEXT: 开放文本消极度
+  [TextBox 21] pos=(806.4,224.6) size=[100.8 x 22] -> right=907.2 bottom=246.6
+    TEXT: 已落地
+  [Rectangle 22] pos=(514.8,249.6) size=[396 x 28] -> right=910.8 bottom=277.6
+  [TextBox 23] pos=(518.4,252.6) size=[158.4 x 22] -> right=676.8 bottom=274.6
+    TEXT: text_anxiety_kw
+  [TextBox 24] pos=(676.8,252.6) size=[165.6 x 22] -> right=842.4 bottom=274.6
+    TEXT: 焦虑关键词命中
+  [TextBox 25] pos=(806.4,252.6) size=[100.8 x 22] -> right=907.2 bottom=274.6
+    TEXT: 已落地
+  [Rectangle 26] pos=(514.8,277.6) size=[396 x 28] -> right=910.8 bottom=305.6
+  [TextBox 27] pos=(518.4,280.6) size=[158.4 x 22] -> right=676.8 bottom=302.6
+    TEXT: text_dep_kw
+  [TextBox 28] pos=(676.8,280.6) size=[165.6 x 22] -> right=842.4 bottom=302.6
+    TEXT: 抑郁关键词命中
+  [TextBox 29] pos=(806.4,280.6) size=[100.8 x 22] -> right=907.2 bottom=302.6
+    TEXT: 已落地
+  [Rectangle 30] pos=(514.8,305.6) size=[396 x 28] -> right=910.8 bottom=333.6
+  [TextBox 31] pos=(518.4,308.6) size=[158.4 x 22] -> right=676.8 bottom=330.6
+    TEXT: text_suicide_risk
+  [TextBox 32] pos=(676.8,308.6) size=[165.6 x 22] -> right=842.4 bottom=330.6
+    TEXT: 自杀风险关键词命中
+  [TextBox 33] pos=(806.4,308.6) size=[100.8 x 22] -> right=907.2 bottom=330.6
+    TEXT: 已落地
+  [Rectangle 34] pos=(514.8,333.6) size=[396 x 28] -> right=910.8 bottom=361.6
+  [TextBox 35] pos=(518.4,336.6) size=[158.4 x 22] -> right=676.8 bottom=358.6
+    TEXT: duration_sec
+  [TextBox 36] pos=(676.8,336.6) size=[165.6 x 22] -> right=842.4 bottom=358.6
+    TEXT: 答题时长
+  [TextBox 37] pos=(806.4,336.6) size=[100.8 x 22] -> right=907.2 bottom=358.6
+    TEXT: 已落地
+  [Rectangle 38] pos=(514.8,361.6) size=[396 x 28] -> right=910.8 bottom=389.6
+  [TextBox 39] pos=(518.4,364.6) size=[158.4 x 22] -> right=676.8 bottom=386.6
+    TEXT: text_similarity
+  [TextBox 40] pos=(676.8,364.6) size=[165.6 x 22] -> right=842.4 bottom=386.6
+    TEXT: 文本语义相似度
+  [TextBox 41] pos=(806.4,364.6) size=[100.8 x 22] -> right=907.2 bottom=386.6
+    TEXT: 已落地
+  [Rectangle 42] pos=(514.8,389.6) size=[396 x 28] -> right=910.8 bottom=417.6
+  [TextBox 43] pos=(518.4,392.6) size=[158.4 x 22] -> right=676.8 bottom=414.6
+    TEXT: speech_pitch_std
+  [TextBox 44] pos=(676.8,392.6) size=[165.6 x 22] -> right=842.4 bottom=414.6
+    TEXT: 语音音高波动
+  [TextBox 45] pos=(806.4,392.6) size=[100.8 x 22] -> right=907.2 bottom=414.6
+    TEXT: 预留 V2
+  [Rectangle 46] pos=(514.8,417.6) size=[396 x 28] -> right=910.8 bottom=445.6
+  [TextBox 47] pos=(518.4,420.6) size=[158.4 x 22] -> right=676.8 bottom=442.6
+    TEXT: speech_rate
+  [TextBox 48] pos=(676.8,420.6) size=[165.6 x 22] -> right=842.4 bottom=442.6
+    TEXT: 语速特征
+  [TextBox 49] pos=(806.4,420.6) size=[100.8 x 22] -> right=907.2 bottom=442.6
+    TEXT: 预留 V2
+  [TextBox 50] pos=(43.2,475.2) size=[871.2 x 22] -> right=914.4 bottom=497.2
+    TEXT: 前 8 维已在当前版本实现并投入推理；后 2 维（语音）为 V2.0 扩展预留，接入 librosa + Whisper 后启用
+  MAX_BOTTOM=523.6 / SLIDE_H=540  MAX_RIGHT=959.8 / SLIDE_W=959.75
+
+=== Slide 8 ===
+  [Rectangle 1] pos=(0,0) size=[959.8 x 4] -> right=959.8 bottom=4 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 2] pos=(43.2,30.2) size=[864 x 22] -> right=907.2 bottom=52.2
+    TEXT: 04 · 核心技术
+  [TextBox 3] pos=(43.2,56.2) size=[864 x 32] -> right=907.2 bottom=88.2
+    TEXT: 规则知识库 · 6 条默认规则 + RIPPER 归纳
+  [Rectangle 4] pos=(43.2,111.6) size=[115.2 x 3] -> right=158.4 bottom=114.6
+  [TextBox 5] pos=(43.2,507.6) size=[432 x 16] -> right=475.2 bottom=523.6
+    TEXT: MindGuard · 神经符号双引擎心理风险筛查
+  [TextBox 6] pos=(756,507.6) size=[187.2 x 16] -> right=943.2 bottom=523.6
+    TEXT: 8 / 20
+  [Rectangle 7] pos=(43.2,136.8) size=[79.2 x 30] -> right=122.4 bottom=166.8
+  [TextBox 8] pos=(43.2,140.8) size=[79.2 x 24] -> right=122.4 bottom=164.8
+    TEXT: ID
+  [Rectangle 9] pos=(43.2,136.8) size=[345.6 x 30] -> right=388.8 bottom=166.8
+  [TextBox 10] pos=(43.2,140.8) size=[345.6 x 24] -> right=388.8 bottom=164.8
+    TEXT: 触发条件
+  [Rectangle 11] pos=(43.2,136.8) size=[273.6 x 30] -> right=316.8 bottom=166.8
+  [TextBox 12] pos=(43.2,140.8) size=[273.6 x 24] -> right=316.8 bottom=164.8
+    TEXT: 临床依据
+  [Rectangle 13] pos=(43.2,136.8) size=[79.2 x 30] -> right=122.4 bottom=166.8
+  [TextBox 14] pos=(43.2,140.8) size=[79.2 x 24] -> right=122.4 bottom=164.8
+    TEXT: 优先级
+  [Rectangle 15] pos=(43.2,136.8) size=[93.6 x 30] -> right=136.8 bottom=166.8
+  [TextBox 16] pos=(43.2,140.8) size=[93.6 x 24] -> right=136.8 bottom=164.8
+    TEXT: 状态
+  [Rectangle 17] pos=(43.2,166.8) size=[79.2 x 32] -> right=122.4 bottom=198.8
+  [TextBox 18] pos=(49.2,170.8) size=[67.2 x 24] -> right=116.4 bottom=194.8
+    TEXT: R001
+  [Rectangle 19] pos=(122.4,166.8) size=[345.6 x 32] -> right=468 bottom=198.8
+  [TextBox 20] pos=(128.4,170.8) size=[333.6 x 24] -> right=462 bottom=194.8
+    TEXT: PHQ-9 ≥ 20
+  [Rectangle 21] pos=(468,166.8) size=[273.6 x 32] -> right=741.6 bottom=198.8
+  [TextBox 22] pos=(474,170.8) size=[261.6 x 24] -> right=735.6 bottom=194.8
+    TEXT: 重度抑郁临床阈值
+  [Rectangle 23] pos=(741.6,166.8) size=[79.2 x 32] -> right=820.8 bottom=198.8
+  [TextBox 24] pos=(747.6,170.8) size=[67.2 x 24] -> right=814.8 bottom=194.8
+    TEXT: 10
+  [Rectangle 25] pos=(820.8,166.8) size=[93.6 x 32] -> right=914.4 bottom=198.8
+  [TextBox 26] pos=(826.8,170.8) size=[81.6 x 24] -> right=908.4 bottom=194.8
+    TEXT: 默认启用
+  [Rectangle 27] pos=(43.2,202.8) size=[79.2 x 32] -> right=122.4 bottom=234.8
+  [TextBox 28] pos=(49.2,206.8) size=[67.2 x 24] -> right=116.4 bottom=230.8
+    TEXT: R002
+  [Rectangle 29] pos=(122.4,202.8) size=[345.6 x 32] -> right=468 bottom=234.8
+  [TextBox 30] pos=(128.4,206.8) size=[333.6 x 24] -> right=462 bottom=230.8
+    TEXT: GAD-7 ≥ 15
+  [Rectangle 31] pos=(468,202.8) size=[273.6 x 32] -> right=741.6 bottom=234.8
+  [TextBox 32] pos=(474,206.8) size=[261.6 x 24] -> right=735.6 bottom=230.8
+    TEXT: 重度焦虑临床阈值
+  [Rectangle 33] pos=(741.6,202.8) size=[79.2 x 32] -> right=820.8 bottom=234.8
+  [TextBox 34] pos=(747.6,206.8) size=[67.2 x 24] -> right=814.8 bottom=230.8
+    TEXT: 10
+  [Rectangle 35] pos=(820.8,202.8) size=[93.6 x 32] -> right=914.4 bottom=234.8
+  [TextBox 36] pos=(826.8,206.8) size=[81.6 x 24] -> right=908.4 bottom=230.8
+    TEXT: 默认启用
+  [Rectangle 37] pos=(43.2,238.8) size=[79.2 x 32] -> right=122.4 bottom=270.8
+  [TextBox 38] pos=(49.2,242.8) size=[67.2 x 24] -> right=116.4 bottom=266.8
+    TEXT: R003
+  [Rectangle 39] pos=(122.4,238.8) size=[345.6 x 32] -> right=468 bottom=270.8
+  [TextBox 40] pos=(128.4,242.8) size=[333.6 x 24] -> right=462 bottom=266.8
+    TEXT: 抑郁关键词 ≥ 3 + 文本消极 ≥ 0.5
+  [Rectangle 41] pos=(468,238.8) size=[273.6 x 32] -> right=741.6 bottom=270.8
+  [TextBox 42] pos=(474,242.8) size=[261.6 x 24] -> right=735.6 bottom=266.8
+    TEXT: 文本信号交叉验证
+  [Rectangle 43] pos=(741.6,238.8) size=[79.2 x 32] -> right=820.8 bottom=270.8
+  [TextBox 44] pos=(747.6,242.8) size=[67.2 x 24] -> right=814.8 bottom=266.8
+    TEXT: 6
+  [Rectangle 45] pos=(820.8,238.8) size=[93.6 x 32] -> right=914.4 bottom=270.8
+  [TextBox 46] pos=(826.8,242.8) size=[81.6 x 24] -> right=908.4 bottom=266.8
+    TEXT: 默认启用
+  [Rectangle 47] pos=(43.2,274.8) size=[79.2 x 32] -> right=122.4 bottom=306.8
+  [TextBox 48] pos=(49.2,278.8) size=[67.2 x 24] -> right=116.4 bottom=302.8
+    TEXT: R004
+  [Rectangle 49] pos=(122.4,274.8) size=[345.6 x 32] -> right=468 bottom=306.8
+  [TextBox 50] pos=(128.4,278.8) size=[333.6 x 24] -> right=462 bottom=302.8
+    TEXT: 自杀风险关键词 ≥ 2
+  [Rectangle 51] pos=(468,274.8) size=[273.6 x 32] -> right=741.6 bottom=306.8
+  [TextBox 52] pos=(474,278.8) size=[261.6 x 24] -> right=735.6 bottom=302.8
+    TEXT: 自伤倾向信号
+  [Rectangle 53] pos=(741.6,274.8) size=[79.2 x 32] -> right=820.8 bottom=306.8
+  [TextBox 54] pos=(747.6,278.8) size=[67.2 x 24] -> right=814.8 bottom=302.8
+    TEXT: 9
+  [Rectangle 55] pos=(820.8,274.8) size=[93.6 x 32] -> right=914.4 bottom=306.8
+  [TextBox 56] pos=(826.8,278.8) size=[81.6 x 24] -> right=908.4 bottom=302.8
+    TEXT: 默认启用
+  [Rectangle 57] pos=(43.2,310.8) size=[79.2 x 32] -> right=122.4 bottom=342.8
+  [TextBox 58] pos=(49.2,314.8) size=[67.2 x 24] -> right=116.4 bottom=338.8
+    TEXT: R005
+  [Rectangle 59] pos=(122.4,310.8) size=[345.6 x 32] -> right=468 bottom=342.8
+  [TextBox 60] pos=(128.4,314.8) size=[333.6 x 24] -> right=462 bottom=338.8
+    TEXT: 答题时长 ≥ 300s + PHQ-9 ≥ 10
+  [Rectangle 61] pos=(468,310.8) size=[273.6 x 32] -> right=741.6 bottom=342.8
+  [TextBox 62] pos=(474,314.8) size=[261.6 x 24] -> right=735.6 bottom=338.8
+    TEXT: 长时间思考 + 高分
+  [Rectangle 63] pos=(741.6,310.8) size=[79.2 x 32] -> right=820.8 bottom=342.8
+  [TextBox 64] pos=(747.6,314.8) size=[67.2 x 24] -> right=814.8 bottom=338.8
+    TEXT: 5
+  [Rectangle 65] pos=(820.8,310.8) size=[93.6 x 32] -> right=914.4 bottom=342.8
+  [TextBox 66] pos=(826.8,314.8) size=[81.6 x 24] -> right=908.4 bottom=338.8
+    TEXT: 默认启用
+  [Rectangle 67] pos=(43.2,346.8) size=[79.2 x 32] -> right=122.4 bottom=378.8
+  [TextBox 68] pos=(49.2,350.8) size=[67.2 x 24] -> right=116.4 bottom=374.8
+    TEXT: R006
+  [Rectangle 69] pos=(122.4,346.8) size=[345.6 x 32] -> right=468 bottom=378.8
+  [TextBox 70] pos=(128.4,350.8) size=[333.6 x 24] -> right=462 bottom=374.8
+    TEXT: GAD-7 ≥ 10 + 文本消极 ≥ 0.5
+  [Rectangle 71] pos=(468,346.8) size=[273.6 x 32] -> right=741.6 bottom=378.8
+  [TextBox 72] pos=(474,350.8) size=[261.6 x 24] -> right=735.6 bottom=374.8
+    TEXT: 焦虑与文本交叉
+  [Rectangle 73] pos=(741.6,346.8) size=[79.2 x 32] -> right=820.8 bottom=378.8
+  [TextBox 74] pos=(747.6,350.8) size=[67.2 x 24] -> right=814.8 bottom=374.8
+    TEXT: 6
+  [Rectangle 75] pos=(820.8,346.8) size=[93.6 x 32] -> right=914.4 bottom=378.8
+  [TextBox 76] pos=(826.8,350.8) size=[81.6 x 24] -> right=908.4 bottom=374.8
+    TEXT: 默认启用
+  [Rectangle 77] pos=(43.2,381.6) size=[871.2 x 100.8] -> right=914.4 bottom=482.4
+  [TextBox 78] pos=(57.6,385.2) size=[842.4 x 93.6] -> right=900 bottom=478.8
+    TEXT: 🔄 RIPPER 规则归纳器（wittgenstein 库） 基于已标注筛查数据自动学习新规则 → 知识库自适应扩展 · 调用：POST /api/rules/learn 临床依据来源：Kroenk...
+  MAX_BOTTOM=523.6 / SLIDE_H=540  MAX_RIGHT=959.8 / SLIDE_W=959.75
+
+=== Slide 9 ===
+  [Rectangle 1] pos=(0,0) size=[959.8 x 4] -> right=959.8 bottom=4 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 2] pos=(43.2,30.2) size=[864 x 22] -> right=907.2 bottom=52.2
+    TEXT: 04 · 核心技术
+  [TextBox 3] pos=(43.2,56.2) size=[864 x 32] -> right=907.2 bottom=88.2
+    TEXT: 4 级危机分级拦截机制 · 双重触发
+  [Rectangle 4] pos=(43.2,111.6) size=[115.2 x 3] -> right=158.4 bottom=114.6
+  [TextBox 5] pos=(43.2,507.6) size=[432 x 16] -> right=475.2 bottom=523.6
+    TEXT: MindGuard · 神经符号双引擎心理风险筛查
+  [TextBox 6] pos=(756,507.6) size=[187.2 x 16] -> right=943.2 bottom=523.6
+    TEXT: 9 / 20
+  [Rectangle 7] pos=(43.2,136.8) size=[871.2 x 158.4] -> right=914.4 bottom=295.2
+  [TextBox 8] pos=(57.6,147.6) size=[842.4 x 22] -> right=900 bottom=169.6
+    TEXT: 双重触发机制
+  [Rectangle 9] pos=(57.6,172.8) size=[158.4 x 100.8] -> right=216 bottom=273.6
+  [TextBox 10] pos=(57.6,172.8) size=[158.4 x 100.8] -> right=216 bottom=273.6
+    TEXT: 输入 | 开放文本 | + 特征向量
+  [TextBox 11] pos=(223.2,201.6) size=[43.2 x 20] -> right=266.4 bottom=221.6
+    TEXT: ▼
+  [Rectangle 12] pos=(273.6,158.4) size=[252 x 129.6] -> right=525.6 bottom=288
+  [TextBox 13] pos=(280.8,162) size=[237.6 x 22] -> right=518.4 bottom=184
+    TEXT: 路径 A：文本关键词匹配
+  [TextBox 14] pos=(280.8,180) size=[237.6 x 80] -> right=518.4 bottom=260
+    TEXT: 30+ 关键词按紧急程度分级： | LEVEL_1_IMMEDIATE（12 词：自杀/跳楼/割腕/结束一切…） | LEVEL_2_PLANNING（8 词：撑不住/没希望…） | LEVEL_3_...
+  [Rectangle 15] pos=(540,158.4) size=[180 x 129.6] -> right=720 bottom=288
+  [TextBox 16] pos=(547.2,162) size=[165.6 x 22] -> right=712.8 bottom=184
+    TEXT: 路径 B：特征层兜底
+  [TextBox 17] pos=(547.2,180) size=[165.6 x 80] -> right=712.8 bottom=260
+    TEXT: 即使无关键词命中： | · suicide_risk ≥ 3 → CRISIS | · text_dep_kw ≥ 3 → HIGH | · PHQ-9 ≥ 20 → CRISIS
+  [TextBox 18] pos=(734.4,201.6) size=[43.2 x 20] -> right=777.6 bottom=221.6
+    TEXT: ▼
+  [Rectangle 19] pos=(784.8,158.4) size=[115.2 x 129.6] -> right=900 bottom=288
+  [TextBox 20] pos=(784.8,158.4) size=[115.2 x 129.6] -> right=900 bottom=288
+    TEXT: 取最高 | 等级
+  [Rectangle 21] pos=(43.2,316.8) size=[871.2 x 82.8] -> right=914.4 bottom=399.6
+  [Rectangle 22] pos=(43.2,316.8) size=[8 x 82.8] -> right=51.2 bottom=399.6
+  [Oval 23] pos=(61.2,322.8) size=[36 x 36] -> right=97.2 bottom=358.8
+  [TextBox 24] pos=(61.2,322.8) size=[36 x 36] -> right=97.2 bottom=358.8
+    TEXT: CRISIS
+  [TextBox 25] pos=(97.2,322.8) size=[108 x 22] -> right=205.2 bottom=344.8
+    TEXT: 立即干预
+  [TextBox 26] pos=(208.8,322.8) size=[691.2 x 40] -> right=900 bottom=362.8
+    TEXT: 红色警示 + 全国心理援助热线 | + 自动创建高危干预工单
+  [Rectangle 27] pos=(43.2,409) size=[871.2 x 82.8] -> right=914.4 bottom=491.8
+  [Rectangle 28] pos=(43.2,409) size=[8 x 82.8] -> right=51.2 bottom=491.8
+  [Oval 29] pos=(61.2,415) size=[36 x 36] -> right=97.2 bottom=451
+  [TextBox 30] pos=(61.2,415) size=[36 x 36] -> right=97.2 bottom=451
+    TEXT: HIGH
+  [TextBox 31] pos=(97.2,415) size=[108 x 22] -> right=205.2 bottom=437
+    TEXT: 高风险
+  [TextBox 32] pos=(208.8,415) size=[691.2 x 40] -> right=900 bottom=455
+    TEXT: 橙色提示 + 预约咨询建议
+  [Rectangle 33] pos=(43.2,501.1) size=[871.2 x 82.8] -> right=914.4 bottom=583.9 [OVERFLOW-BOTTOM: 43.9pt]
+  [Rectangle 34] pos=(43.2,501.1) size=[8 x 82.8] -> right=51.2 bottom=583.9 [OVERFLOW-BOTTOM: 43.9pt]
+  [Oval 35] pos=(61.2,507.1) size=[36 x 36] -> right=97.2 bottom=543.1 [OVERFLOW-BOTTOM: 3.1pt]
+  [TextBox 36] pos=(61.2,507.1) size=[36 x 36] -> right=97.2 bottom=543.1 [OVERFLOW-BOTTOM: 3.1pt]
+    TEXT: MEDIUM
+  [TextBox 37] pos=(97.2,507.1) size=[108 x 22] -> right=205.2 bottom=529.1
+    TEXT: 中度关注
+  [TextBox 38] pos=(208.8,507.1) size=[691.2 x 40] -> right=900 bottom=547.1 [OVERFLOW-BOTTOM: 7.1pt]
+    TEXT: 黄色提醒 + 自我调节建议
+  [Rectangle 39] pos=(43.2,593.3) size=[871.2 x 82.8] -> right=914.4 bottom=676.1 [OVERFLOW-BOTTOM: 136.1pt]
+  [Rectangle 40] pos=(43.2,593.3) size=[8 x 82.8] -> right=51.2 bottom=676.1 [OVERFLOW-BOTTOM: 136.1pt]
+  [Oval 41] pos=(61.2,599.3) size=[36 x 36] -> right=97.2 bottom=635.3 [OVERFLOW-BOTTOM: 95.3pt]
+  [TextBox 42] pos=(61.2,599.3) size=[36 x 36] -> right=97.2 bottom=635.3 [OVERFLOW-BOTTOM: 95.3pt]
+    TEXT: LOW
+  [TextBox 43] pos=(97.2,599.3) size=[108 x 22] -> right=205.2 bottom=621.3 [OVERFLOW-BOTTOM: 81.3pt]
+    TEXT: 正常
+  [TextBox 44] pos=(208.8,599.3) size=[691.2 x 40] -> right=900 bottom=639.3 [OVERFLOW-BOTTOM: 99.3pt]
+    TEXT: 绿色正常标记
+  MAX_BOTTOM=676.1 / SLIDE_H=540  MAX_RIGHT=959.8 / SLIDE_W=959.75
+
+=== Slide 10 ===
+  [Rectangle 1] pos=(0,0) size=[959.8 x 4] -> right=959.8 bottom=4 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 2] pos=(43.2,30.2) size=[864 x 22] -> right=907.2 bottom=52.2
+    TEXT: 04 · 核心技术
+  [TextBox 3] pos=(43.2,56.2) size=[864 x 32] -> right=907.2 bottom=88.2
+    TEXT: 轻量 RAG 心理知识底座 + LLM 温柔建议
+  [Rectangle 4] pos=(43.2,111.6) size=[115.2 x 3] -> right=158.4 bottom=114.6
+  [TextBox 5] pos=(43.2,507.6) size=[432 x 16] -> right=475.2 bottom=523.6
+    TEXT: MindGuard · 神经符号双引擎心理风险筛查
+  [TextBox 6] pos=(756,507.6) size=[187.2 x 16] -> right=943.2 bottom=523.6
+    TEXT: 10 / 20
+  [Rectangle 7] pos=(43.2,136.8) size=[432 x 345.6] -> right=475.2 bottom=482.4
+  [Rectangle 8] pos=(43.2,136.8) size=[432 x 4] -> right=475.2 bottom=140.8
+  [TextBox 9] pos=(57.6,147.6) size=[403.2 x 22] -> right=460.8 bottom=169.6
+    TEXT: 📚 RAG 知识检索流程
+  [Rectangle 10] pos=(57.6,176.4) size=[403.2 x 39.6] -> right=460.8 bottom=216
+  [Rectangle 11] pos=(57.6,176.4) size=[86.4 x 39.6] -> right=144 bottom=216
+  [TextBox 12] pos=(57.6,176.4) size=[86.4 x 39.6] -> right=144 bottom=216
+    TEXT: ① 输入
+  [TextBox 13] pos=(151.2,180.4) size=[302.4 x 22] -> right=453.6 bottom=202.4
+    TEXT: risk_level + 特征维度标签
+  [TextBox 14] pos=(252,216) size=[43.2 x 14] -> right=295.2 bottom=230
+    TEXT: ▼
+  [Rectangle 15] pos=(57.6,228.2) size=[403.2 x 39.6] -> right=460.8 bottom=267.8
+  [Rectangle 16] pos=(57.6,228.2) size=[86.4 x 39.6] -> right=144 bottom=267.8
+  [TextBox 17] pos=(57.6,228.2) size=[86.4 x 39.6] -> right=144 bottom=267.8
+    TEXT: ② 匹配
+  [TextBox 18] pos=(151.2,232.2) size=[302.4 x 22] -> right=453.6 bottom=254.2
+    TEXT: MENTAL_HEALTH_KB 按维度检索
+  [TextBox 19] pos=(252,267.8) size=[43.2 x 14] -> right=295.2 bottom=281.8
+    TEXT: ▼
+  [Rectangle 20] pos=(57.6,280.1) size=[403.2 x 39.6] -> right=460.8 bottom=319.7
+  [Rectangle 21] pos=(57.6,280.1) size=[86.4 x 39.6] -> right=144 bottom=319.7
+  [TextBox 22] pos=(57.6,280.1) size=[86.4 x 39.6] -> right=144 bottom=319.7
+    TEXT: ③ 融合
+  [TextBox 23] pos=(151.2,284.1) size=[302.4 x 22] -> right=453.6 bottom=306.1
+    TEXT: 合并同 level 下所有维度
+  [TextBox 24] pos=(252,319.7) size=[43.2 x 14] -> right=295.2 bottom=333.7
+    TEXT: ▼
+  [Rectangle 25] pos=(57.6,331.9) size=[403.2 x 39.6] -> right=460.8 bottom=371.5
+  [Rectangle 26] pos=(57.6,331.9) size=[86.4 x 39.6] -> right=144 bottom=371.5
+  [TextBox 27] pos=(57.6,331.9) size=[86.4 x 39.6] -> right=144 bottom=371.5
+    TEXT: ④ 截断
+  [TextBox 28] pos=(151.2,335.9) size=[302.4 x 22] -> right=453.6 bottom=357.9
+    TEXT: 最多 5 条（避免过载）
+  [Chart 29] pos=(50.7,383.7) size=[416.9 x 106.7] -> right=467.6 bottom=490.4
+  [Rectangle 30] pos=(489.6,136.8) size=[424.8 x 345.6] -> right=914.4 bottom=482.4
+  [Rectangle 31] pos=(489.6,136.8) size=[424.8 x 4] -> right=914.4 bottom=140.8
+  [TextBox 32] pos=(504,147.6) size=[396 x 22] -> right=900 bottom=169.6
+    TEXT: 🤍 LLM 温柔建议（可选增强）
+  [TextBox 33] pos=(504,172.8) size=[396 x 108] -> right=900 bottom=280.8
+    TEXT: 功能 · LLM API 生成 150-250 字温柔话术 · API 不可用时自动降级固定模板 · 不阻塞主推理流程，纯增强项
+  [Rectangle 34] pos=(504,284.4) size=[396 x 187.2] -> right=900 bottom=471.6
+  [TextBox 35] pos=(511.2,288) size=[381.6 x 22] -> right=892.8 bottom=310
+    TEXT: 💡 融合策略
+  [TextBox 36] pos=(511.2,306) size=[381.6 x 158.4] -> right=892.8 bottom=464.4
+    TEXT: 有 LLM：   LLM 温柔话术 + RAG 行动步骤 无 LLM：   RAG 建议 + 模板温柔话术（降级）
+  MAX_BOTTOM=523.6 / SLIDE_H=540  MAX_RIGHT=959.8 / SLIDE_W=959.75
+
+=== Slide 11 ===
+  [Rectangle 1] pos=(0,0) size=[959.8 x 4] -> right=959.8 bottom=4 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 2] pos=(43.2,30.2) size=[864 x 22] -> right=907.2 bottom=52.2
+    TEXT: 04 · 核心技术
+  [TextBox 3] pos=(43.2,56.2) size=[864 x 32] -> right=907.2 bottom=88.2
+    TEXT: 可解释推理链 · 让每一条风险结论都可追溯
+  [Rectangle 4] pos=(43.2,111.6) size=[115.2 x 3] -> right=158.4 bottom=114.6
+  [TextBox 5] pos=(43.2,507.6) size=[432 x 16] -> right=475.2 bottom=523.6
+    TEXT: MindGuard · 神经符号双引擎心理风险筛查
+  [TextBox 6] pos=(756,507.6) size=[187.2 x 16] -> right=943.2 bottom=523.6
+    TEXT: 11 / 20
+  [Rectangle 7] pos=(43.2,136.8) size=[100.8 x 20] -> right=144 bottom=156.8
+  [TextBox 8] pos=(43.2,136.8) size=[100.8 x 20] -> right=144 bottom=156.8
+    TEXT: 开始
+  [TextBox 9] pos=(151.2,136.8) size=[748.8 x 22] -> right=900 bottom=158.8
+    TEXT: 神经符号推理启动，输入 RiskFeature 特征数：10
+  [Rectangle 10] pos=(43.2,162.8) size=[100.8 x 20] -> right=144 bottom=182.8
+  [TextBox 11] pos=(43.2,162.8) size=[100.8 x 20] -> right=144 bottom=182.8
+    TEXT: R001
+  [TextBox 12] pos=(151.2,162.8) size=[748.8 x 22] -> right=900 bottom=184.8
+    TEXT: PHQ-9 = 17，未达阈值 ≥ 20 → 不激活
+  [Rectangle 13] pos=(43.2,188.8) size=[100.8 x 20] -> right=144 bottom=208.8
+  [TextBox 14] pos=(43.2,188.8) size=[100.8 x 20] -> right=144 bottom=208.8
+    TEXT: R002
+  [TextBox 15] pos=(151.2,188.8) size=[748.8 x 22] -> right=900 bottom=210.8
+    TEXT: GAD-7 = 11，未达阈值 ≥ 15 → 不激活
+  [Rectangle 16] pos=(43.2,214.8) size=[100.8 x 20] -> right=144 bottom=234.8
+  [TextBox 17] pos=(43.2,214.8) size=[100.8 x 20] -> right=144 bottom=234.8
+    TEXT: R003 ✓
+  [TextBox 18] pos=(151.2,214.8) size=[748.8 x 22] -> right=900 bottom=236.8
+    TEXT: 抑郁关键词命中 5 个 + 文本消极度 1.0 ≥ 0.5 → 激活，优先级 6
+  [Rectangle 19] pos=(43.2,240.8) size=[100.8 x 20] -> right=144 bottom=260.8
+  [TextBox 20] pos=(43.2,240.8) size=[100.8 x 20] -> right=144 bottom=260.8
+    TEXT: R004 ✓
+  [TextBox 21] pos=(151.2,240.8) size=[748.8 x 22] -> right=900 bottom=262.8
+    TEXT: 自杀关键词命中 3 个（≥ 2）→ 激活，自杀风险权重 +0.30
+  [Rectangle 22] pos=(43.2,266.8) size=[100.8 x 20] -> right=144 bottom=286.8
+  [TextBox 23] pos=(43.2,266.8) size=[100.8 x 20] -> right=144 bottom=286.8
+    TEXT: R005
+  [TextBox 24] pos=(151.2,266.8) size=[748.8 x 22] -> right=900 bottom=288.8
+    TEXT: 答题时长 120s < 300s → 不激活
+  [Rectangle 25] pos=(43.2,292.8) size=[100.8 x 20] -> right=144 bottom=312.8
+  [TextBox 26] pos=(43.2,292.8) size=[100.8 x 20] -> right=144 bottom=312.8
+    TEXT: R006 ✓
+  [TextBox 27] pos=(151.2,292.8) size=[748.8 x 22] -> right=900 bottom=314.8
+    TEXT: GAD-7 = 11 ≥ 10 + 文本消极度 1.0 ≥ 0.5 → 激活，焦虑交叉验证 +0.20
+  [Rectangle 28] pos=(43.2,316.8) size=[871.2 x 30] -> right=914.4 bottom=346.8
+  [Rectangle 29] pos=(43.2,318.8) size=[100.8 x 20] -> right=144 bottom=338.8
+  [TextBox 30] pos=(43.2,318.8) size=[100.8 x 20] -> right=144 bottom=338.8
+    TEXT: 汇总
+  [TextBox 31] pos=(151.2,318.8) size=[748.8 x 22] -> right=900 bottom=340.8
+    TEXT: 激活规则：R003 + R004 + R006（共 3 / 6 条）
+  [Rectangle 32] pos=(43.2,342.8) size=[871.2 x 30] -> right=914.4 bottom=372.8
+  [Rectangle 33] pos=(43.2,344.8) size=[100.8 x 20] -> right=144 bottom=364.8
+  [TextBox 34] pos=(43.2,344.8) size=[100.8 x 20] -> right=144 bottom=364.8
+    TEXT: → 最终
+  [TextBox 35] pos=(151.2,344.8) size=[748.8 x 22] -> right=900 bottom=366.8
+    TEXT: 综合风险分 72.96 → HIGH · 自杀风险 CRISIS 级
+  [Rectangle 36] pos=(43.2,475.2) size=[871.2 x 43.2] -> right=914.4 bottom=518.4
+  [TextBox 37] pos=(57.6,478.8) size=[842.4 x 20] -> right=900 bottom=498.8
+    TEXT: 💡 心理老师和学生都能看到"为什么判这个等级"——不是黑箱打分，而是完整的规则激活链追溯。这是伦理刚需。
+  MAX_BOTTOM=523.6 / SLIDE_H=540  MAX_RIGHT=959.8 / SLIDE_W=959.75
+
+=== Slide 12 ===
+  [Rectangle 1] pos=(0,0) size=[959.8 x 4] -> right=959.8 bottom=4 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 2] pos=(43.2,30.2) size=[864 x 22] -> right=907.2 bottom=52.2
+    TEXT: 04 · 核心技术
+  [TextBox 3] pos=(43.2,56.2) size=[864 x 32] -> right=907.2 bottom=88.2
+    TEXT: 技术选型依据 · 对比传统 BERT/LLM 黑箱
+  [Rectangle 4] pos=(43.2,111.6) size=[115.2 x 3] -> right=158.4 bottom=114.6
+  [TextBox 5] pos=(43.2,507.6) size=[432 x 16] -> right=475.2 bottom=523.6
+    TEXT: MindGuard · 神经符号双引擎心理风险筛查
+  [TextBox 6] pos=(756,507.6) size=[187.2 x 16] -> right=943.2 bottom=523.6
+    TEXT: 12 / 20
+  [Rectangle 7] pos=(43.2,136.8) size=[108 x 30] -> right=151.2 bottom=166.8
+  [TextBox 8] pos=(43.2,140.8) size=[108 x 26] -> right=151.2 bottom=166.8
+    TEXT: 模块
+  [Rectangle 9] pos=(43.2,136.8) size=[180 x 30] -> right=223.2 bottom=166.8
+  [TextBox 10] pos=(43.2,140.8) size=[180 x 26] -> right=223.2 bottom=166.8
+    TEXT: 选型
+  [Rectangle 11] pos=(43.2,136.8) size=[309.6 x 30] -> right=352.8 bottom=166.8
+  [TextBox 12] pos=(43.2,140.8) size=[309.6 x 26] -> right=352.8 bottom=166.8
+    TEXT: 适配理由
+  [Rectangle 13] pos=(43.2,136.8) size=[273.6 x 30] -> right=316.8 bottom=166.8
+  [TextBox 14] pos=(43.2,140.8) size=[273.6 x 26] -> right=316.8 bottom=166.8
+    TEXT: 对比传统方案
+  [Rectangle 15] pos=(43.2,166.8) size=[108 x 38] -> right=151.2 bottom=204.8
+  [TextBox 16] pos=(49.2,172.8) size=[96 x 24] -> right=145.2 bottom=196.8
+    TEXT: 后端
+  [Rectangle 17] pos=(151.2,166.8) size=[180 x 38] -> right=331.2 bottom=204.8
+  [TextBox 18] pos=(157.2,172.8) size=[168 x 24] -> right=325.2 bottom=196.8
+    TEXT: FastAPI
+  [Rectangle 19] pos=(331.2,166.8) size=[309.6 x 38] -> right=640.8 bottom=204.8
+  [TextBox 20] pos=(337.2,172.8) size=[297.6 x 24] -> right=634.8 bottom=196.8
+    TEXT: 异步 + OpenAPI 文档
+  [Rectangle 21] pos=(640.8,166.8) size=[273.6 x 38] -> right=914.4 bottom=204.8
+  [TextBox 22] pos=(646.8,172.8) size=[261.6 x 24] -> right=908.4 bottom=196.8
+    TEXT: Flask / Django
+  [Rectangle 23] pos=(43.2,208.8) size=[108 x 38] -> right=151.2 bottom=246.8
+  [TextBox 24] pos=(49.2,214.8) size=[96 x 24] -> right=145.2 bottom=238.8
+    TEXT: 数据库
+  [Rectangle 25] pos=(151.2,208.8) size=[180 x 38] -> right=331.2 bottom=246.8
+  [TextBox 26] pos=(157.2,214.8) size=[168 x 24] -> right=325.2 bottom=238.8
+    TEXT: SQLite
+  [Rectangle 27] pos=(331.2,208.8) size=[309.6 x 38] -> right=640.8 bottom=246.8
+  [TextBox 28] pos=(337.2,214.8) size=[297.6 x 24] -> right=634.8 bottom=238.8
+    TEXT: 零配置嵌入式
+  [Rectangle 29] pos=(640.8,208.8) size=[273.6 x 38] -> right=914.4 bottom=246.8
+  [TextBox 30] pos=(646.8,214.8) size=[261.6 x 24] -> right=908.4 bottom=238.8
+    TEXT: MySQL / PostgreSQL
+  [Rectangle 31] pos=(43.2,250.8) size=[108 x 38] -> right=151.2 bottom=288.8
+  [TextBox 32] pos=(49.2,256.8) size=[96 x 24] -> right=145.2 bottom=280.8
+    TEXT: 引擎
+  [Rectangle 33] pos=(151.2,250.8) size=[180 x 38] -> right=331.2 bottom=288.8
+  [TextBox 34] pos=(157.2,256.8) size=[168 x 24] -> right=325.2 bottom=280.8
+    TEXT: 自研（纯 Python）
+  [Rectangle 35] pos=(331.2,250.8) size=[309.6 x 38] -> right=640.8 bottom=288.8
+  [TextBox 36] pos=(337.2,256.8) size=[297.6 x 24] -> right=634.8 bottom=280.8
+    TEXT: 规则可解释 + RIPPER 自适应 + RAG
+  [Rectangle 37] pos=(640.8,250.8) size=[273.6 x 38] -> right=914.4 bottom=288.8
+  [TextBox 38] pos=(646.8,256.8) size=[261.6 x 24] -> right=908.4 bottom=280.8
+    TEXT: BERT 黑箱 / LLM 黑箱
+  [Rectangle 39] pos=(43.2,292.8) size=[108 x 38] -> right=151.2 bottom=330.8
+  [TextBox 40] pos=(49.2,298.8) size=[96 x 24] -> right=145.2 bottom=322.8
+    TEXT: 前端
+  [Rectangle 41] pos=(151.2,292.8) size=[180 x 38] -> right=331.2 bottom=330.8
+  [TextBox 42] pos=(157.2,298.8) size=[168 x 24] -> right=325.2 bottom=322.8
+    TEXT: Vue3 + ECharts
+  [Rectangle 43] pos=(331.2,292.8) size=[309.6 x 38] -> right=640.8 bottom=330.8
+  [TextBox 44] pos=(337.2,298.8) size=[297.6 x 24] -> right=634.8 bottom=322.8
+    TEXT: 雷达图/热力图展示多维度
+  [Rectangle 45] pos=(640.8,292.8) size=[273.6 x 38] -> right=914.4 bottom=330.8
+  [TextBox 46] pos=(646.8,298.8) size=[261.6 x 24] -> right=908.4 bottom=322.8
+    TEXT: React / 纯 HTML
+  [Rectangle 47] pos=(43.2,334.8) size=[108 x 38] -> right=151.2 bottom=372.8
+  [TextBox 48] pos=(49.2,340.8) size=[96 x 24] -> right=145.2 bottom=364.8
+    TEXT: 打包
+  [Rectangle 49] pos=(151.2,334.8) size=[180 x 38] -> right=331.2 bottom=372.8
+  [TextBox 50] pos=(157.2,340.8) size=[168 x 24] -> right=325.2 bottom=364.8
+    TEXT: PyInstaller
+  [Rectangle 51] pos=(331.2,334.8) size=[309.6 x 38] -> right=640.8 bottom=372.8
+  [TextBox 52] pos=(337.2,340.8) size=[297.6 x 24] -> right=634.8 bottom=364.8
+    TEXT: 解压即用，5 分钟部署
+  [Rectangle 53] pos=(640.8,334.8) size=[273.6 x 38] -> right=914.4 bottom=372.8
+  [TextBox 54] pos=(646.8,340.8) size=[261.6 x 24] -> right=908.4 bottom=364.8
+    TEXT: Docker / 手动 pip
+  [Rectangle 55] pos=(43.2,381.6) size=[871.2 x 100.8] -> right=914.4 bottom=482.4
+  [TextBox 56] pos=(57.6,385.2) size=[842.4 x 93.6] -> right=900 bottom=478.8
+    TEXT: 不同于传统 BERT / LLM 黑箱方案 本引擎采用"规则优先 + 统计辅助 + 知识增强"的神经符号路线：规则引擎保证可解释性和临床一致性，RIPPER 规则归纳器支持自适应扩展，RAG 知识底座...
+  MAX_BOTTOM=523.6 / SLIDE_H=540  MAX_RIGHT=959.8 / SLIDE_W=959.75
+
+=== Slide 13 ===
+  [Rectangle 1] pos=(0,0) size=[959.8 x 4] -> right=959.8 bottom=4 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 2] pos=(43.2,30.2) size=[864 x 22] -> right=907.2 bottom=52.2
+    TEXT: 05 · 系统演示
+  [TextBox 3] pos=(43.2,56.2) size=[864 x 32] -> right=907.2 bottom=88.2
+    TEXT: 首页 & 筛查入口 · localhost:8000
+  [Rectangle 4] pos=(43.2,111.6) size=[115.2 x 3] -> right=158.4 bottom=114.6
+  [TextBox 5] pos=(43.2,507.6) size=[432 x 16] -> right=475.2 bottom=523.6
+    TEXT: MindGuard · 神经符号双引擎心理风险筛查
+  [TextBox 6] pos=(756,507.6) size=[187.2 x 16] -> right=943.2 bottom=523.6
+    TEXT: 13 / 20
+  [Rectangle 7] pos=(43.2,136.8) size=[871.2 x 334.8] -> right=914.4 bottom=471.6
+  [Rectangle 8] pos=(43.2,136.8) size=[871.2 x 25.2] -> right=914.4 bottom=162
+  [Oval 9] pos=(57.6,145.4) size=[10 x 10] -> right=67.6 bottom=155.4
+  [Oval 10] pos=(73.4,145.4) size=[10 x 10] -> right=83.4 bottom=155.4
+  [Oval 11] pos=(89.3,145.4) size=[10 x 10] -> right=99.3 bottom=155.4
+  [TextBox 12] pos=(108,140.4) size=[432 x 20] -> right=540 bottom=160.4
+    TEXT: localhost:8000/
+  [Rectangle 13] pos=(57.6,172.8) size=[417.6 x 144] -> right=475.2 bottom=316.8
+  [TextBox 14] pos=(72,183.6) size=[388.8 x 24] -> right=460.8 bottom=207.6
+    TEXT: MindGuard
+  [TextBox 15] pos=(72,212.4) size=[388.8 x 20] -> right=460.8 bottom=232.4
+    TEXT: 神经符号双引擎 · 校园心理风险筛查
+  [Rectangle 16] pos=(72,244.8) size=[129.6 x 27.4] -> right=201.6 bottom=272.2
+  [TextBox 17] pos=(72,244.8) size=[129.6 x 27.4] -> right=201.6 bottom=272.2
+    TEXT: 开始筛查 →
+  [Rectangle 18] pos=(208.8,244.8) size=[93.6 x 27.4] -> right=302.4 bottom=272.2
+  [TextBox 19] pos=(208.8,244.8) size=[93.6 x 27.4] -> right=302.4 bottom=272.2
+    TEXT: 架构
+  [TextBox 20] pos=(72,284.4) size=[388.8 x 16] -> right=460.8 bottom=300.4
+    TEXT: 响应教育部 AI+心理监测方向 · 纯 Python · 零 GPU
+  [Rectangle 21] pos=(489.6,172.8) size=[133.2 x 144] -> right=622.8 bottom=316.8
+  [Rectangle 22] pos=(489.6,172.8) size=[133.2 x 3] -> right=622.8 bottom=175.8
+  [TextBox 23] pos=(489.6,183.6) size=[133.2 x 30] -> right=622.8 bottom=213.6
+    TEXT: ⚡
+  [TextBox 24] pos=(489.6,219.6) size=[133.2 x 20] -> right=622.8 bottom=239.6
+    TEXT: 双引擎
+  [TextBox 25] pos=(489.6,241.2) size=[133.2 x 20] -> right=622.8 bottom=261.2
+    TEXT: 规则 + RIPPER + RAG
+  [Rectangle 26] pos=(633.6,172.8) size=[133.2 x 144] -> right=766.8 bottom=316.8
+  [Rectangle 27] pos=(633.6,172.8) size=[133.2 x 3] -> right=766.8 bottom=175.8
+  [TextBox 28] pos=(633.6,183.6) size=[133.2 x 30] -> right=766.8 bottom=213.6
+    TEXT: 🛡
+  [TextBox 29] pos=(633.6,219.6) size=[133.2 x 20] -> right=766.8 bottom=239.6
+    TEXT: 4 级分级
+  [TextBox 30] pos=(633.6,241.2) size=[133.2 x 20] -> right=766.8 bottom=261.2
+    TEXT: CRISIS → LOW 拦截
+  [Rectangle 31] pos=(777.6,172.8) size=[133.2 x 144] -> right=910.8 bottom=316.8
+  [Rectangle 32] pos=(777.6,172.8) size=[133.2 x 3] -> right=910.8 bottom=175.8
+  [TextBox 33] pos=(777.6,183.6) size=[133.2 x 30] -> right=910.8 bottom=213.6
+    TEXT: 📊
+  [TextBox 34] pos=(777.6,219.6) size=[133.2 x 20] -> right=910.8 bottom=239.6
+    TEXT: 可视化
+  [TextBox 35] pos=(777.6,241.2) size=[133.2 x 20] -> right=910.8 bottom=261.2
+    TEXT: 雷达 + 热力 + 规则链
+  [Rectangle 36] pos=(57.6,327.6) size=[864 x 133.2] -> right=921.6 bottom=460.8
+  [Rectangle 37] pos=(57.6,327.6) size=[864 x 3] -> right=921.6 bottom=330.6
+  [TextBox 38] pos=(72,334.8) size=[360 x 20] -> right=432 bottom=354.8
+    TEXT: 筛查入口 /screening
+  [TextBox 39] pos=(72,356.4) size=[288 x 18] -> right=360 bottom=374.4
+    TEXT: 1. 做事时提不起兴趣
+  [Rectangle 40] pos=(360,359.4) size=[21.6 x 14] -> right=381.6 bottom=373.4
+  [Rectangle 41] pos=(385.2,359.4) size=[21.6 x 14] -> right=406.8 bottom=373.4
+  [Rectangle 42] pos=(410.4,359.4) size=[21.6 x 14] -> right=432 bottom=373.4
+  [Rectangle 43] pos=(435.6,359.4) size=[21.6 x 14] -> right=457.2 bottom=373.4
+  [TextBox 44] pos=(72,379.4) size=[288 x 18] -> right=360 bottom=397.4
+    TEXT: 2. 感到心情低落沮丧
+  [Rectangle 45] pos=(360,382.4) size=[21.6 x 14] -> right=381.6 bottom=396.4
+  [Rectangle 46] pos=(385.2,382.4) size=[21.6 x 14] -> right=406.8 bottom=396.4
+  [Rectangle 47] pos=(410.4,382.4) size=[21.6 x 14] -> right=432 bottom=396.4
+  [Rectangle 48] pos=(435.6,382.4) size=[21.6 x 14] -> right=457.2 bottom=396.4
+  [TextBox 49] pos=(72,402.5) size=[288 x 18] -> right=360 bottom=420.5
+    TEXT: 3. 入睡困难或嗜睡
+  [Rectangle 50] pos=(360,405.5) size=[21.6 x 14] -> right=381.6 bottom=419.5
+  [Rectangle 51] pos=(385.2,405.5) size=[21.6 x 14] -> right=406.8 bottom=419.5
+  [Rectangle 52] pos=(410.4,405.5) size=[21.6 x 14] -> right=432 bottom=419.5
+  [Rectangle 53] pos=(435.6,405.5) size=[21.6 x 14] -> right=457.2 bottom=419.5
+  [TextBox 54] pos=(504,356.4) size=[396 x 18] -> right=900 bottom=374.4
+    TEXT: 4. 感到紧张焦虑烦躁（GAD-7 第 1 题）
+  [Rectangle 55] pos=(792,361.6) size=[21.6 x 14] -> right=813.6 bottom=375.6
+  [Rectangle 56] pos=(817.2,361.6) size=[21.6 x 14] -> right=838.8 bottom=375.6
+  [Rectangle 57] pos=(842.4,361.6) size=[21.6 x 14] -> right=864 bottom=375.6
+  [Rectangle 58] pos=(867.6,361.6) size=[21.6 x 14] -> right=889.2 bottom=375.6
+  [Rectangle 59] pos=(504,385.2) size=[396 x 43.2] -> right=900 bottom=428.4
+  [TextBox 60] pos=(511.2,388.8) size=[381.6 x 20] -> right=892.8 bottom=408.8
+    TEXT: 请描述你最近的感受...
+  [Rectangle 61] pos=(741.6,432) size=[158.4 x 23] -> right=900 bottom=455
+  [TextBox 62] pos=(741.6,432) size=[158.4 x 23] -> right=900 bottom=455
+    TEXT: 提交评估 → 生成报告
+  MAX_BOTTOM=523.6 / SLIDE_H=540  MAX_RIGHT=959.8 / SLIDE_W=959.75
+
+=== Slide 14 ===
+  [Rectangle 1] pos=(0,0) size=[959.8 x 4] -> right=959.8 bottom=4 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 2] pos=(43.2,30.2) size=[864 x 22] -> right=907.2 bottom=52.2
+    TEXT: 05 · 系统演示
+  [TextBox 3] pos=(43.2,56.2) size=[864 x 32] -> right=907.2 bottom=88.2
+    TEXT: 评估报告页 · 最密集的核心页面
+  [Rectangle 4] pos=(43.2,111.6) size=[115.2 x 3] -> right=158.4 bottom=114.6
+  [TextBox 5] pos=(43.2,507.6) size=[432 x 16] -> right=475.2 bottom=523.6
+    TEXT: MindGuard · 神经符号双引擎心理风险筛查
+  [TextBox 6] pos=(756,507.6) size=[187.2 x 16] -> right=943.2 bottom=523.6
+    TEXT: 14 / 20
+  [Rectangle 7] pos=(43.2,136.8) size=[871.2 x 23] -> right=914.4 bottom=159.8
+  [Oval 8] pos=(57.6,144) size=[8 x 8] -> right=65.6 bottom=152
+  [Oval 9] pos=(73.4,144) size=[8 x 8] -> right=81.4 bottom=152
+  [Oval 10] pos=(89.3,144) size=[8 x 8] -> right=97.3 bottom=152
+  [TextBox 11] pos=(108,139) size=[576 x 18] -> right=684 bottom=157
+    TEXT: localhost:8000/report/106
+  [Rectangle 12] pos=(43.2,165.6) size=[871.2 x 39.6] -> right=914.4 bottom=205.2
+  [TextBox 13] pos=(57.6,169.2) size=[864 x 28] -> right=921.6 bottom=197.2
+    TEXT: 🚨 CRISIS 级危机风险 · 已自动创建高危干预工单 · 全国心理援助热线 400-161-9995
+  [Rectangle 14] pos=(43.2,212.4) size=[417.6 x 129.6] -> right=460.8 bottom=342
+  [TextBox 15] pos=(57.6,216) size=[388.8 x 18] -> right=446.4 bottom=234
+    TEXT: 📊 风险特征雷达图（10 维归一化）
+  [TextBox 16] pos=(57.6,234) size=[388.8 x 18] -> right=446.4 bottom=252
+    TEXT:       PHQ-9 ████████░ 3.15 |       GAD-7 ██████░░░ 2.62 |       文本消极 ██████████ 5.00 |       自杀风险 ██...
+  [Rectangle 17] pos=(43.2,349.2) size=[417.6 x 111.6] -> right=460.8 bottom=460.8
+  [TextBox 18] pos=(57.6,352.8) size=[388.8 x 18] -> right=446.4 bottom=370.8
+    TEXT: 🔍 10 维特征热力图
+  [Rectangle 19] pos=(57.6,374.4) size=[36 x 36] -> right=93.6 bottom=410.4
+  [TextBox 20] pos=(57.6,411.8) size=[36 x 14] -> right=93.6 bottom=425.8
+    TEXT: PHQ9
+  [Rectangle 21] pos=(97.2,374.4) size=[36 x 36] -> right=133.2 bottom=410.4
+  [TextBox 22] pos=(97.2,411.8) size=[36 x 14] -> right=133.2 bottom=425.8
+    TEXT: GAD7
+  [Rectangle 23] pos=(136.8,374.4) size=[36 x 36] -> right=172.8 bottom=410.4
+  [TextBox 24] pos=(136.8,411.8) size=[36 x 14] -> right=172.8 bottom=425.8
+    TEXT: 消极
+  [Rectangle 25] pos=(176.4,374.4) size=[36 x 36] -> right=212.4 bottom=410.4
+  [TextBox 26] pos=(176.4,411.8) size=[36 x 14] -> right=212.4 bottom=425.8
+    TEXT: 焦虑
+  [Rectangle 27] pos=(216,374.4) size=[36 x 36] -> right=252 bottom=410.4
+  [TextBox 28] pos=(216,411.8) size=[36 x 14] -> right=252 bottom=425.8
+    TEXT: 抑郁
+  [Rectangle 29] pos=(255.6,374.4) size=[36 x 36] -> right=291.6 bottom=410.4
+  [TextBox 30] pos=(255.6,411.8) size=[36 x 14] -> right=291.6 bottom=425.8
+    TEXT: 自杀
+  [Rectangle 31] pos=(295.2,374.4) size=[36 x 36] -> right=331.2 bottom=410.4
+  [TextBox 32] pos=(295.2,411.8) size=[36 x 14] -> right=331.2 bottom=425.8
+    TEXT: 时长
+  [Rectangle 33] pos=(334.8,374.4) size=[36 x 36] -> right=370.8 bottom=410.4
+  [TextBox 34] pos=(334.8,411.8) size=[36 x 14] -> right=370.8 bottom=425.8
+    TEXT: 相似
+  [Rectangle 35] pos=(374.4,374.4) size=[36 x 36] -> right=410.4 bottom=410.4
+  [TextBox 36] pos=(374.4,411.8) size=[36 x 14] -> right=410.4 bottom=425.8
+    TEXT: 音高
+  [Rectangle 37] pos=(414,374.4) size=[36 x 36] -> right=450 bottom=410.4
+  [TextBox 38] pos=(414,411.8) size=[36 x 14] -> right=450 bottom=425.8
+    TEXT: 语速
+  [Rectangle 39] pos=(475.2,212.4) size=[439.2 x 122.4] -> right=914.4 bottom=334.8
+  [TextBox 40] pos=(489.6,216) size=[410.4 x 18] -> right=900 bottom=234
+    TEXT: 🪜 可解释规则激活链
+  [Rectangle 41] pos=(489.6,234) size=[57.6 x 22] -> right=547.2 bottom=256
+  [TextBox 42] pos=(489.6,234) size=[57.6 x 22] -> right=547.2 bottom=256
+    TEXT: R003 ✓
+  [TextBox 43] pos=(554.4,236) size=[345.6 x 22] -> right=900 bottom=258
+    TEXT: 抑郁关键词 5 + 文本消极 1.0 → 激活
+  [Rectangle 44] pos=(489.6,257) size=[57.6 x 22] -> right=547.2 bottom=279
+  [TextBox 45] pos=(489.6,257) size=[57.6 x 22] -> right=547.2 bottom=279
+    TEXT: R004 ✓
+  [TextBox 46] pos=(554.4,259) size=[345.6 x 22] -> right=900 bottom=281
+    TEXT: 自杀关键词 3 ≥ 2 → 自杀风险 +0.30
+  [Rectangle 47] pos=(489.6,280.1) size=[57.6 x 22] -> right=547.2 bottom=302.1
+  [TextBox 48] pos=(489.6,280.1) size=[57.6 x 22] -> right=547.2 bottom=302.1
+    TEXT: R006 ✓
+  [TextBox 49] pos=(554.4,282.1) size=[345.6 x 22] -> right=900 bottom=304.1
+    TEXT: GAD-7 11 ≥ 10 + 文本消极 1.0 → 激活
+  [Rectangle 50] pos=(489.6,303.1) size=[57.6 x 22] -> right=547.2 bottom=325.1
+  [TextBox 51] pos=(489.6,303.1) size=[57.6 x 22] -> right=547.2 bottom=325.1
+    TEXT: → 最终
+  [TextBox 52] pos=(554.4,305.1) size=[345.6 x 22] -> right=900 bottom=327.1
+    TEXT: 综合分 72.96 → HIGH · 自杀 CRISIS
+  [Rectangle 53] pos=(475.2,342) size=[439.2 x 118.8] -> right=914.4 bottom=460.8
+  [TextBox 54] pos=(489.6,345.6) size=[410.4 x 18] -> right=900 bottom=363.6
+    TEXT: 📚 RAG 知识库建议 + 🤍 LLM 温柔话术
+  [Rectangle 55] pos=(489.6,371.2) size=[4 x 4] -> right=493.6 bottom=375.2
+  [TextBox 56] pos=(500.4,367.2) size=[403.2 x 18] -> right=903.6 bottom=385.2
+    TEXT: ① 危机热线：400-161-9995（24 小时）
+  [Rectangle 57] pos=(489.6,391.4) size=[4 x 4] -> right=493.6 bottom=395.4
+  [TextBox 58] pos=(500.4,387.4) size=[403.2 x 18] -> right=903.6 bottom=405.4
+    TEXT: ② 五感接地法：说出此刻看到的 5 件事
+  [Rectangle 59] pos=(489.6,411.5) size=[4 x 4] -> right=493.6 bottom=415.5
+  [TextBox 60] pos=(500.4,407.5) size=[403.2 x 18] -> right=903.6 bottom=425.5
+    TEXT: ③ 安全计划：移除身边危险物品
+  [Rectangle 61] pos=(489.6,431.7) size=[4 x 4] -> right=493.6 bottom=435.7
+  [TextBox 62] pos=(500.4,427.7) size=[403.2 x 18] -> right=903.6 bottom=445.7
+    TEXT: ④ LLM：「你愿意承受这些痛苦走到今天…」
+  [Rectangle 63] pos=(43.2,468) size=[871.2 x 28.8] -> right=914.4 bottom=496.8
+  [TextBox 64] pos=(57.6,470.2) size=[576 x 22] -> right=633.6 bottom=492.2
+    TEXT: 📖 PHQ-9 Cronbach α=0.89 · GAD-7 α=0.91 · 量表信效度达标
+  [Rectangle 65] pos=(756,469.4) size=[144 x 23] -> right=900 bottom=492.4
+  [TextBox 66] pos=(756,469.4) size=[144 x 23] -> right=900 bottom=492.4
+    TEXT: 📥 导出 Word 报告
+  MAX_BOTTOM=523.6 / SLIDE_H=540  MAX_RIGHT=959.8 / SLIDE_W=959.75
+
+=== Slide 15 ===
+  [Rectangle 1] pos=(0,0) size=[959.8 x 4] -> right=959.8 bottom=4 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 2] pos=(43.2,30.2) size=[864 x 22] -> right=907.2 bottom=52.2
+    TEXT: 05 · 系统演示
+  [TextBox 3] pos=(43.2,56.2) size=[864 x 32] -> right=907.2 bottom=88.2
+    TEXT: 管理后台 & Word 报告导出
+  [Rectangle 4] pos=(43.2,111.6) size=[115.2 x 3] -> right=158.4 bottom=114.6
+  [TextBox 5] pos=(43.2,507.6) size=[432 x 16] -> right=475.2 bottom=523.6
+    TEXT: MindGuard · 神经符号双引擎心理风险筛查
+  [TextBox 6] pos=(756,507.6) size=[187.2 x 16] -> right=943.2 bottom=523.6
+    TEXT: 15 / 20
+  [Rectangle 7] pos=(43.2,136.8) size=[871.2 x 23] -> right=914.4 bottom=159.8
+  [Oval 8] pos=(57.6,144) size=[8 x 8] -> right=65.6 bottom=152
+  [Oval 9] pos=(73.4,144) size=[8 x 8] -> right=81.4 bottom=152
+  [Oval 10] pos=(89.3,144) size=[8 x 8] -> right=97.3 bottom=152
+  [TextBox 11] pos=(108,139) size=[576 x 18] -> right=684 bottom=157
+    TEXT: localhost:8000/admin  (admin / admin123)
+  [Rectangle 12] pos=(43.2,169.2) size=[208.8 x 61.2] -> right=252 bottom=230.4
+  [Rectangle 13] pos=(43.2,169.2) size=[5 x 61.2] -> right=48.2 bottom=230.4
+  [TextBox 14] pos=(57.6,172.8) size=[108 x 28] -> right=165.6 bottom=200.8
+    TEXT: 118
+  [TextBox 15] pos=(165.6,180) size=[79.2 x 22] -> right=244.8 bottom=202
+    TEXT: 筛查会话
+  [Rectangle 16] pos=(266.4,169.2) size=[208.8 x 61.2] -> right=475.2 bottom=230.4
+  [Rectangle 17] pos=(266.4,169.2) size=[5 x 61.2] -> right=271.4 bottom=230.4
+  [TextBox 18] pos=(280.8,172.8) size=[108 x 28] -> right=388.8 bottom=200.8
+    TEXT: 117
+  [TextBox 19] pos=(388.8,180) size=[79.2 x 22] -> right=468 bottom=202
+    TEXT: 注册用户
+  [Rectangle 20] pos=(489.6,169.2) size=[208.8 x 61.2] -> right=698.4 bottom=230.4
+  [Rectangle 21] pos=(489.6,169.2) size=[5 x 61.2] -> right=494.6 bottom=230.4
+  [TextBox 22] pos=(504,172.8) size=[108 x 28] -> right=612 bottom=200.8
+    TEXT: 22
+  [TextBox 23] pos=(612,180) size=[79.2 x 22] -> right=691.2 bottom=202
+    TEXT: CRISIS+HIGH
+  [Rectangle 24] pos=(712.8,169.2) size=[208.8 x 61.2] -> right=921.6 bottom=230.4
+  [Rectangle 25] pos=(712.8,169.2) size=[5 x 61.2] -> right=717.8 bottom=230.4
+  [TextBox 26] pos=(727.2,172.8) size=[108 x 28] -> right=835.2 bottom=200.8
+    TEXT: 96
+  [TextBox 27] pos=(835.2,180) size=[79.2 x 22] -> right=914.4 bottom=202
+    TEXT: LOW+MEDIUM
+  [Rectangle 28] pos=(43.2,241.2) size=[288 x 144] -> right=331.2 bottom=385.2
+  [TextBox 29] pos=(57.6,244.8) size=[259.2 x 18] -> right=316.8 bottom=262.8
+    TEXT: 风险等级分布
+  [Rectangle 30] pos=(57.6,266.4) size=[21.6 x 14] -> right=79.2 bottom=280.4
+  [TextBox 31] pos=(86.4,264.4) size=[144 x 18] -> right=230.4 bottom=282.4
+    TEXT: LOW
+  [TextBox 32] pos=(180,264.4) size=[108 x 18] -> right=288 bottom=282.4
+    TEXT: 32 例 (27%)
+  [Rectangle 33] pos=(57.6,286.6) size=[21.6 x 14] -> right=79.2 bottom=300.6
+  [TextBox 34] pos=(86.4,284.6) size=[144 x 18] -> right=230.4 bottom=302.6
+    TEXT: MED
+  [TextBox 35] pos=(180,284.6) size=[108 x 18] -> right=288 bottom=302.6
+    TEXT: 35 例 (30%)
+  [Rectangle 36] pos=(57.6,306.7) size=[21.6 x 14] -> right=79.2 bottom=320.7
+  [TextBox 37] pos=(86.4,304.7) size=[144 x 18] -> right=230.4 bottom=322.7
+    TEXT: HIGH
+  [TextBox 38] pos=(180,304.7) size=[108 x 18] -> right=288 bottom=322.7
+    TEXT: 29 例 (25%)
+  [Rectangle 39] pos=(57.6,326.9) size=[21.6 x 14] -> right=79.2 bottom=340.9
+  [TextBox 40] pos=(86.4,324.9) size=[144 x 18] -> right=230.4 bottom=342.9
+    TEXT: CRISIS
+  [TextBox 41] pos=(180,324.9) size=[108 x 18] -> right=288 bottom=342.9
+    TEXT: 22 例 (19%)
+  [Rectangle 42] pos=(345.6,241.2) size=[288 x 144] -> right=633.6 bottom=385.2
+  [TextBox 43] pos=(360,244.8) size=[259.2 x 18] -> right=619.2 bottom=262.8
+    TEXT: 14 天筛查趋势
+  [TextBox 44] pos=(360,266.4) size=[259.2 x 18] -> right=619.2 bottom=284.4
+    TEXT: 日均 8.4 例 · 高峰 9/10 (15 例)
+  [Rectangle 45] pos=(360,354.2) size=[14.4 x 34.6] -> right=374.4 bottom=388.8
+  [Rectangle 46] pos=(378.7,342.7) size=[14.4 x 46.1] -> right=393.1 bottom=388.8
+  [Rectangle 47] pos=(397.4,360) size=[14.4 x 28.8] -> right=411.8 bottom=388.8
+  [Rectangle 48] pos=(416.2,331.2) size=[14.4 x 57.6] -> right=430.6 bottom=388.8
+  [Rectangle 49] pos=(434.9,348.5) size=[14.4 x 40.3] -> right=449.3 bottom=388.8
+  [Rectangle 50] pos=(453.6,319.7) size=[14.4 x 69.1] -> right=468 bottom=388.8
+  [Rectangle 51] pos=(472.3,337) size=[14.4 x 51.8] -> right=486.7 bottom=388.8
+  [Rectangle 52] pos=(491,302.4) size=[14.4 x 86.4] -> right=505.4 bottom=388.8
+  [Rectangle 53] pos=(509.8,342.7) size=[14.4 x 46.1] -> right=524.2 bottom=388.8
+  [Rectangle 54] pos=(528.5,325.4) size=[14.4 x 63.4] -> right=542.9 bottom=388.8
+  [Rectangle 55] pos=(547.2,348.5) size=[14.4 x 40.3] -> right=561.6 bottom=388.8
+  [Rectangle 56] pos=(565.9,337) size=[14.4 x 51.8] -> right=580.3 bottom=388.8
+  [Rectangle 57] pos=(584.6,331.2) size=[14.4 x 57.6] -> right=599 bottom=388.8
+  [Rectangle 58] pos=(603.4,342.7) size=[14.4 x 46.1] -> right=617.8 bottom=388.8
+  [Rectangle 59] pos=(648,241.2) size=[266.4 x 144] -> right=914.4 bottom=385.2
+  [TextBox 60] pos=(662.4,244.8) size=[237.6 x 18] -> right=900 bottom=262.8
+    TEXT: 年级 × 风险矩阵
+  [TextBox 61] pos=(662.4,266.4) size=[43.2 x 16] -> right=705.6 bottom=282.4
+    TEXT: 大一
+  [TextBox 62] pos=(705.6,262.8) size=[36 x 14] -> right=741.6 bottom=276.8
+    TEXT: L
+  [Rectangle 63] pos=(705.6,277.2) size=[32.4 x 15.8] -> right=738 bottom=293
+  [TextBox 64] pos=(745.2,262.8) size=[36 x 14] -> right=781.2 bottom=276.8
+    TEXT: M
+  [Rectangle 65] pos=(745.2,277.2) size=[32.4 x 15.8] -> right=777.6 bottom=293
+  [TextBox 66] pos=(784.8,262.8) size=[36 x 14] -> right=820.8 bottom=276.8
+    TEXT: H
+  [Rectangle 67] pos=(784.8,277.2) size=[32.4 x 15.8] -> right=817.2 bottom=293
+  [TextBox 68] pos=(824.4,262.8) size=[36 x 14] -> right=860.4 bottom=276.8
+    TEXT: C
+  [Rectangle 69] pos=(824.4,277.2) size=[32.4 x 15.8] -> right=856.8 bottom=293
+  [TextBox 70] pos=(662.4,286.6) size=[43.2 x 16] -> right=705.6 bottom=302.6
+    TEXT: 大二
+  [Rectangle 71] pos=(705.6,297.4) size=[32.4 x 15.8] -> right=738 bottom=313.2
+  [Rectangle 72] pos=(745.2,297.4) size=[32.4 x 15.8] -> right=777.6 bottom=313.2
+  [Rectangle 73] pos=(784.8,297.4) size=[32.4 x 15.8] -> right=817.2 bottom=313.2
+  [Rectangle 74] pos=(824.4,297.4) size=[32.4 x 15.8] -> right=856.8 bottom=313.2
+  [TextBox 75] pos=(662.4,306.7) size=[43.2 x 16] -> right=705.6 bottom=322.7
+    TEXT: 大三
+  [Rectangle 76] pos=(705.6,317.5) size=[32.4 x 15.8] -> right=738 bottom=333.3
+  [Rectangle 77] pos=(745.2,317.5) size=[32.4 x 15.8] -> right=777.6 bottom=333.3
+  [Rectangle 78] pos=(784.8,317.5) size=[32.4 x 15.8] -> right=817.2 bottom=333.3
+  [Rectangle 79] pos=(824.4,317.5) size=[32.4 x 15.8] -> right=856.8 bottom=333.3
+  [TextBox 80] pos=(662.4,326.9) size=[43.2 x 16] -> right=705.6 bottom=342.9
+    TEXT: 大四
+  [Rectangle 81] pos=(705.6,337.7) size=[32.4 x 15.8] -> right=738 bottom=353.5
+  [Rectangle 82] pos=(745.2,337.7) size=[32.4 x 15.8] -> right=777.6 bottom=353.5
+  [Rectangle 83] pos=(784.8,337.7) size=[32.4 x 15.8] -> right=817.2 bottom=353.5
+  [Rectangle 84] pos=(824.4,337.7) size=[32.4 x 15.8] -> right=856.8 bottom=353.5
+  [TextBox 85] pos=(662.4,347) size=[43.2 x 16] -> right=705.6 bottom=363
+    TEXT: 研一
+  [Rectangle 86] pos=(705.6,357.8) size=[32.4 x 15.8] -> right=738 bottom=373.6
+  [Rectangle 87] pos=(745.2,357.8) size=[32.4 x 15.8] -> right=777.6 bottom=373.6
+  [Rectangle 88] pos=(784.8,357.8) size=[32.4 x 15.8] -> right=817.2 bottom=373.6
+  [Rectangle 89] pos=(824.4,357.8) size=[32.4 x 15.8] -> right=856.8 bottom=373.6
+  [Rectangle 90] pos=(43.2,396) size=[871.2 x 100.8] -> right=914.4 bottom=496.8
+  [Rectangle 91] pos=(43.2,396) size=[871.2 x 3] -> right=914.4 bottom=399
+  [TextBox 92] pos=(57.6,403.2) size=[360 x 18] -> right=417.6 bottom=421.2
+    TEXT: 📄 Word 报告导出预览
+  [TextBox 93] pos=(57.6,421.2) size=[540 x 16] -> right=597.6 bottom=437.2
+    TEXT: 1. 封面页：学校 + MindGuard + 筛查日期 + 风险等级
+  [TextBox 94] pos=(57.6,435.6) size=[540 x 16] -> right=597.6 bottom=451.6
+    TEXT: 2. 基础信息：姓名（脱敏）· 年级 · 答题时长 120s
+  [TextBox 95] pos=(57.6,450) size=[540 x 16] -> right=597.6 bottom=466
+    TEXT: 3. 量表得分：PHQ-9 = 17 · GAD-7 = 11 · 文本消极度 = 1.0
+  [TextBox 96] pos=(57.6,464.4) size=[540 x 16] -> right=597.6 bottom=480.4
+    TEXT: 4. 规则链：R003 + R004 + R006 → 综合分 72.96 HIGH
+  [TextBox 97] pos=(57.6,478.8) size=[540 x 16] -> right=597.6 bottom=494.8
+    TEXT: 5. RAG 建议：危机热线 + 五感接地法 + 安全计划
+  [Rectangle 98] pos=(648,421.2) size=[252 x 57.6] -> right=900 bottom=478.8
+  [TextBox 99] pos=(648,421.2) size=[252 x 25.2] -> right=900 bottom=446.4
+    TEXT: 📥 一键导出
+  [TextBox 100] pos=(648,446.4) size=[252 x 21.6] -> right=900 bottom=468
+    TEXT: session_106_report.docx
+  [TextBox 101] pos=(648,462.2) size=[252 x 14] -> right=900 bottom=476.2
+    TEXT: 约 38 KB · 完整图文报告
+  MAX_BOTTOM=523.6 / SLIDE_H=540  MAX_RIGHT=959.8 / SLIDE_W=959.75
+
+=== Slide 16 ===
+  [Rectangle 1] pos=(0,0) size=[959.8 x 4] -> right=959.8 bottom=4 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 2] pos=(43.2,30.2) size=[864 x 22] -> right=907.2 bottom=52.2
+    TEXT: 06 · 效果验证
+  [TextBox 3] pos=(43.2,56.2) size=[864 x 32] -> right=907.2 bottom=88.2
+    TEXT: 对比实验 · 神经符号引擎 vs 纯 PHQ-9
+  [Rectangle 4] pos=(43.2,111.6) size=[115.2 x 3] -> right=158.4 bottom=114.6
+  [TextBox 5] pos=(43.2,507.6) size=[432 x 16] -> right=475.2 bottom=523.6
+    TEXT: MindGuard · 神经符号双引擎心理风险筛查
+  [TextBox 6] pos=(756,507.6) size=[187.2 x 16] -> right=943.2 bottom=523.6
+    TEXT: 16 / 20
+  [Rectangle 7] pos=(43.2,136.8) size=[417.6 x 108] -> right=460.8 bottom=244.8
+  [Rectangle 8] pos=(43.2,136.8) size=[5 x 108] -> right=48.2 bottom=244.8
+  [TextBox 9] pos=(57.6,140.4) size=[396 x 100.8] -> right=453.6 bottom=241.2
+    TEXT: 实验设置 · 样本：118 例模拟筛查数据（含 5 类典型场景） · 基线：传统纯 PHQ-9（≥10 分判"高风险"） · 对比：本系统神经符号双引擎（量表+文本+规则） · 指标：检出率 / 漏检...
+  [Rectangle 10] pos=(475.2,136.8) size=[439.2 x 108] -> right=914.4 bottom=244.8
+  [Rectangle 11] pos=(475.2,136.8) size=[5 x 108] -> right=480.2 bottom=244.8
+  [TextBox 12] pos=(489.6,140.4) size=[417.6 x 100.8] -> right=907.2 bottom=241.2
+    TEXT: 方法学 · 双盲评估：3 名科研助手独立标注金标准 · 金标准：PHQ-9 + GAD-7 + 文本分析 + 人工复核 · 排除：答题时长 < 30s 或纯重复文本的无效样本 · 统计：检出率 = T...
+  [Chart 13] pos=(43.2,252) size=[424.8 x 144] -> right=468 bottom=396
+  [Chart 14] pos=(489.6,252) size=[424.8 x 144] -> right=914.4 bottom=396
+  [Rectangle 15] pos=(43.2,410.4) size=[871.2 x 79.2] -> right=914.4 bottom=489.6
+  [Rectangle 16] pos=(57.6,414) size=[4 x 68.4] -> right=61.6 bottom=482.4
+  [TextBox 17] pos=(68.4,416.2) size=[252 x 28] -> right=320.4 bottom=444.2
+    TEXT: 16.3%
+  [TextBox 18] pos=(68.4,439.2) size=[252 x 28] -> right=320.4 bottom=467.2
+    TEXT: 检出率净提升 | (36→82 例)
+  [Rectangle 19] pos=(338.4,414) size=[4 x 68.4] -> right=342.4 bottom=482.4
+  [TextBox 20] pos=(349.2,416.2) size=[252 x 28] -> right=601.2 bottom=444.2
+    TEXT: 12 例
+  [TextBox 21] pos=(349.2,439.2) size=[252 x 28] -> right=601.2 bottom=467.2
+    TEXT: 隐性危机全检出 | 纯量表全部漏掉
+  [Rectangle 22] pos=(619.2,414) size=[4 x 68.4] -> right=623.2 bottom=482.4
+  [TextBox 23] pos=(630,416.2) size=[252 x 28] -> right=882 bottom=444.2
+    TEXT: 72.7%
+  [TextBox 24] pos=(630,439.2) size=[252 x 28] -> right=882 bottom=467.2
+    TEXT: 假阳性减少 | (11→3 例)
+  [TextBox 25] pos=(792,414) size=[115.2 x 72] -> right=907.2 bottom=486
+    TEXT: 结论：双引擎在检出率、漏检率、假阳性率三项指标上均显著优于纯量表筛查
+  MAX_BOTTOM=523.6 / SLIDE_H=540  MAX_RIGHT=959.8 / SLIDE_W=959.75
+
+=== Slide 17 ===
+  [Rectangle 1] pos=(0,0) size=[959.8 x 4] -> right=959.8 bottom=4 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 2] pos=(43.2,30.2) size=[864 x 22] -> right=907.2 bottom=52.2
+    TEXT: 06 · 效果验证
+  [TextBox 3] pos=(43.2,56.2) size=[864 x 32] -> right=907.2 bottom=88.2
+    TEXT: 5 个典型案例 · 全部纯 PHQ-9 漏检的隐性危机
+  [Rectangle 4] pos=(43.2,111.6) size=[115.2 x 3] -> right=158.4 bottom=114.6
+  [TextBox 5] pos=(43.2,507.6) size=[432 x 16] -> right=475.2 bottom=523.6
+    TEXT: MindGuard · 神经符号双引擎心理风险筛查
+  [TextBox 6] pos=(756,507.6) size=[187.2 x 16] -> right=943.2 bottom=523.6
+    TEXT: 17 / 20
+  [Rectangle 7] pos=(43.2,136.8) size=[64.8 x 28] -> right=108 bottom=164.8
+  [TextBox 8] pos=(43.2,139.8) size=[64.8 x 22] -> right=108 bottom=161.8
+    TEXT: 编号
+  [Rectangle 9] pos=(43.2,136.8) size=[86.4 x 28] -> right=129.6 bottom=164.8
+  [TextBox 10] pos=(43.2,139.8) size=[86.4 x 22] -> right=129.6 bottom=161.8
+    TEXT: 身份
+  [Rectangle 11] pos=(43.2,136.8) size=[108 x 28] -> right=151.2 bottom=164.8
+  [TextBox 12] pos=(43.2,139.8) size=[108 x 22] -> right=151.2 bottom=161.8
+    TEXT: 纯 PHQ-9
+  [Rectangle 13] pos=(43.2,136.8) size=[259.2 x 28] -> right=302.4 bottom=164.8
+  [TextBox 14] pos=(43.2,139.8) size=[259.2 x 22] -> right=302.4 bottom=161.8
+    TEXT: 开放文本（脱敏）
+  [Rectangle 15] pos=(43.2,136.8) size=[79.2 x 28] -> right=122.4 bottom=164.8
+  [TextBox 16] pos=(43.2,139.8) size=[79.2 x 22] -> right=122.4 bottom=161.8
+    TEXT: 本引擎
+  [Rectangle 17] pos=(43.2,136.8) size=[273.6 x 28] -> right=316.8 bottom=164.8
+  [TextBox 18] pos=(43.2,139.8) size=[273.6 x 22] -> right=316.8 bottom=161.8
+    TEXT: 触发原因
+  [Rectangle 19] pos=(43.2,166.8) size=[64.8 x 40] -> right=108 bottom=206.8
+  [TextBox 20] pos=(49.2,174.8) size=[52.8 x 28] -> right=102 bottom=202.8
+    TEXT: 案例 1
+  [Rectangle 21] pos=(108,166.8) size=[86.4 x 40] -> right=194.4 bottom=206.8
+  [TextBox 22] pos=(114,174.8) size=[74.4 x 28] -> right=188.4 bottom=202.8
+    TEXT: 大四学生
+  [Rectangle 23] pos=(194.4,166.8) size=[108 x 40] -> right=302.4 bottom=206.8
+  [TextBox 24] pos=(200.4,174.8) size=[96 x 28] -> right=296.4 bottom=202.8
+    TEXT: PHQ-9 = 4（正常）
+  [Rectangle 25] pos=(302.4,166.8) size=[259.2 x 40] -> right=561.6 bottom=206.8
+  [TextBox 26] pos=(308.4,174.8) size=[247.2 x 28] -> right=555.6 bottom=202.8
+    TEXT: "秋招被拒 12 次，活着没意思"
+  [Rectangle 27] pos=(561.6,166.8) size=[79.2 x 40] -> right=640.8 bottom=206.8
+  [TextBox 28] pos=(567.6,174.8) size=[67.2 x 28] -> right=634.8 bottom=202.8
+    TEXT: HIGH
+  [Rectangle 29] pos=(640.8,166.8) size=[273.6 x 40] -> right=914.4 bottom=206.8
+  [TextBox 30] pos=(646.8,174.8) size=[261.6 x 28] -> right=908.4 bottom=202.8
+    TEXT: 命中"活着没意思"
+  [Rectangle 31] pos=(43.2,208.8) size=[64.8 x 40] -> right=108 bottom=248.8
+  [TextBox 32] pos=(49.2,216.8) size=[52.8 x 28] -> right=102 bottom=244.8
+    TEXT: 案例 2
+  [Rectangle 33] pos=(108,208.8) size=[86.4 x 40] -> right=194.4 bottom=248.8
+  [TextBox 34] pos=(114,216.8) size=[74.4 x 28] -> right=188.4 bottom=244.8
+    TEXT: 研三学生
+  [Rectangle 35] pos=(194.4,208.8) size=[108 x 40] -> right=302.4 bottom=248.8
+  [TextBox 36] pos=(200.4,216.8) size=[96 x 28] -> right=296.4 bottom=244.8
+    TEXT: PHQ-9 = 2（正常）
+  [Rectangle 37] pos=(302.4,208.8) size=[259.2 x 40] -> right=561.6 bottom=248.8
+  [TextBox 38] pos=(308.4,216.8) size=[247.2 x 28] -> right=555.6 bottom=244.8
+    TEXT: "论文被拒第二次，想跳楼"
+  [Rectangle 39] pos=(561.6,208.8) size=[79.2 x 40] -> right=640.8 bottom=248.8
+  [TextBox 40] pos=(567.6,216.8) size=[67.2 x 28] -> right=634.8 bottom=244.8
+    TEXT: CRISIS
+  [Rectangle 41] pos=(640.8,208.8) size=[273.6 x 40] -> right=914.4 bottom=248.8
+  [TextBox 42] pos=(646.8,216.8) size=[261.6 x 28] -> right=908.4 bottom=244.8
+    TEXT: 命中"跳楼"→红色警示触发
+  [Rectangle 43] pos=(43.2,250.8) size=[64.8 x 40] -> right=108 bottom=290.8
+  [TextBox 44] pos=(49.2,258.8) size=[52.8 x 28] -> right=102 bottom=286.8
+    TEXT: 案例 3
+  [Rectangle 45] pos=(108,250.8) size=[86.4 x 40] -> right=194.4 bottom=290.8
+  [TextBox 46] pos=(114,258.8) size=[74.4 x 28] -> right=188.4 bottom=286.8
+    TEXT: 大三学生
+  [Rectangle 47] pos=(194.4,250.8) size=[108 x 40] -> right=302.4 bottom=290.8
+  [TextBox 48] pos=(200.4,258.8) size=[96 x 28] -> right=296.4 bottom=286.8
+    TEXT: PHQ-9 = 6（轻度）
+  [Rectangle 49] pos=(302.4,250.8) size=[259.2 x 40] -> right=561.6 bottom=290.8
+  [TextBox 50] pos=(308.4,258.8) size=[247.2 x 28] -> right=555.6 bottom=286.8
+    TEXT: "室友都找到工作了，我撑不住了"
+  [Rectangle 51] pos=(561.6,250.8) size=[79.2 x 40] -> right=640.8 bottom=290.8
+  [TextBox 52] pos=(567.6,258.8) size=[67.2 x 28] -> right=634.8 bottom=286.8
+    TEXT: MEDIUM
+  [Rectangle 53] pos=(640.8,250.8) size=[273.6 x 40] -> right=914.4 bottom=290.8
+  [TextBox 54] pos=(646.8,258.8) size=[261.6 x 28] -> right=908.4 bottom=286.8
+    TEXT: 命中"撑不住"
+  [Rectangle 55] pos=(43.2,292.8) size=[64.8 x 40] -> right=108 bottom=332.8
+  [TextBox 56] pos=(49.2,300.8) size=[52.8 x 28] -> right=102 bottom=328.8
+    TEXT: 案例 4
+  [Rectangle 57] pos=(108,292.8) size=[86.4 x 40] -> right=194.4 bottom=332.8
+  [TextBox 58] pos=(114,300.8) size=[74.4 x 28] -> right=188.4 bottom=328.8
+    TEXT: 大一新生
+  [Rectangle 59] pos=(194.4,292.8) size=[108 x 40] -> right=302.4 bottom=332.8
+  [TextBox 60] pos=(200.4,300.8) size=[96 x 28] -> right=296.4 bottom=328.8
+    TEXT: PHQ-9 = 3（正常）
+  [Rectangle 61] pos=(302.4,292.8) size=[259.2 x 40] -> right=561.6 bottom=332.8
+  [TextBox 62] pos=(308.4,300.8) size=[247.2 x 28] -> right=555.6 bottom=328.8
+    TEXT: "军训太累了，不想上学"
+  [Rectangle 63] pos=(561.6,292.8) size=[79.2 x 40] -> right=640.8 bottom=332.8
+  [TextBox 64] pos=(567.6,300.8) size=[67.2 x 28] -> right=634.8 bottom=328.8
+    TEXT: MEDIUM
+  [Rectangle 65] pos=(640.8,292.8) size=[273.6 x 40] -> right=914.4 bottom=332.8
+  [TextBox 66] pos=(646.8,300.8) size=[261.6 x 28] -> right=908.4 bottom=328.8
+    TEXT: 命中"不想上学"
+  [Rectangle 67] pos=(43.2,334.8) size=[64.8 x 40] -> right=108 bottom=374.8
+  [TextBox 68] pos=(49.2,342.8) size=[52.8 x 28] -> right=102 bottom=370.8
+    TEXT: 案例 5
+  [Rectangle 69] pos=(108,334.8) size=[86.4 x 40] -> right=194.4 bottom=374.8
+  [TextBox 70] pos=(114,342.8) size=[74.4 x 28] -> right=188.4 bottom=370.8
+    TEXT: 大二学生
+  [Rectangle 71] pos=(194.4,334.8) size=[108 x 40] -> right=302.4 bottom=374.8
+  [TextBox 72] pos=(200.4,342.8) size=[96 x 28] -> right=296.4 bottom=370.8
+    TEXT: PHQ-9 = 5（轻度）
+  [Rectangle 73] pos=(302.4,334.8) size=[259.2 x 40] -> right=561.6 bottom=374.8
+  [TextBox 74] pos=(308.4,342.8) size=[247.2 x 28] -> right=555.6 bottom=370.8
+    TEXT: "期末压力大，感觉要崩溃了"
+  [Rectangle 75] pos=(561.6,334.8) size=[79.2 x 40] -> right=640.8 bottom=374.8
+  [TextBox 76] pos=(567.6,342.8) size=[67.2 x 28] -> right=634.8 bottom=370.8
+    TEXT: MEDIUM
+  [Rectangle 77] pos=(640.8,334.8) size=[273.6 x 40] -> right=914.4 bottom=374.8
+  [TextBox 78] pos=(646.8,342.8) size=[261.6 x 28] -> right=908.4 bottom=370.8
+    TEXT: 命中"压力大" + R003
+  [Rectangle 79] pos=(43.2,378) size=[540 x 25.2] -> right=583.2 bottom=403.2
+  [TextBox 80] pos=(57.6,380.2) size=[518.4 x 20] -> right=576 bottom=400.2
+    TEXT: 说明：以上 5 例根据真实校园心理工作场景改编（已脱敏）。纯 PHQ-9 均 <10 分判"正常"。
+  [Rectangle 81] pos=(597.6,378) size=[316.8 x 25.2] -> right=914.4 bottom=403.2
+  [TextBox 82] pos=(612,380.2) size=[302.4 x 20] -> right=914.4 bottom=400.2
+    TEXT: 5 例中：CRISIS 1 · HIGH 1 · MEDIUM 3 · 纯量表漏检率 100%
+  [Chart 83] pos=(43.2,410.4) size=[871.2 x 93.6] -> right=914.4 bottom=504
+  MAX_BOTTOM=523.6 / SLIDE_H=540  MAX_RIGHT=959.8 / SLIDE_W=959.75
+
+=== Slide 18 ===
+  [Rectangle 1] pos=(0,0) size=[959.8 x 4] -> right=959.8 bottom=4 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 2] pos=(43.2,30.2) size=[864 x 22] -> right=907.2 bottom=52.2
+    TEXT: 06 · 效果验证
+  [TextBox 3] pos=(43.2,56.2) size=[864 x 32] -> right=907.2 bottom=88.2
+    TEXT: 方案可行性 · 成本 ≈ 0 元
+  [Rectangle 4] pos=(43.2,111.6) size=[115.2 x 3] -> right=158.4 bottom=114.6
+  [TextBox 5] pos=(43.2,507.6) size=[432 x 16] -> right=475.2 bottom=523.6
+    TEXT: MindGuard · 神经符号双引擎心理风险筛查
+  [TextBox 6] pos=(756,507.6) size=[187.2 x 16] -> right=943.2 bottom=523.6
+    TEXT: 18 / 20
+  [Rectangle 7] pos=(43.2,136.8) size=[212.4 x 345.6] -> right=255.6 bottom=482.4
+  [Rectangle 8] pos=(43.2,136.8) size=[212.4 x 4] -> right=255.6 bottom=140.8
+  [TextBox 9] pos=(53.2,147.6) size=[198 x 24] -> right=251.2 bottom=171.6
+    TEXT: 技术可行性
+  [Rectangle 10] pos=(53.2,178.8) size=[4 x 4] -> right=57.2 bottom=182.8
+  [TextBox 11] pos=(63.2,174.8) size=[187.2 x 20] -> right=250.4 bottom=194.8
+    TEXT: FastAPI/SQLite/ECharts 生产级成熟
+  [Rectangle 12] pos=(53.2,206.8) size=[4 x 4] -> right=57.2 bottom=210.8
+  [TextBox 13] pos=(63.2,202.8) size=[187.2 x 20] -> right=250.4 bottom=222.8
+    TEXT: 核心引擎自研（纯 Python）
+  [Rectangle 14] pos=(53.2,234.8) size=[4 x 4] -> right=57.2 bottom=238.8
+  [TextBox 15] pos=(63.2,230.8) size=[187.2 x 20] -> right=250.4 bottom=250.8
+    TEXT: requirements.txt 仅 7 个核心包
+  [Rectangle 16] pos=(53.2,262.8) size=[4 x 4] -> right=57.2 bottom=266.8
+  [TextBox 17] pos=(63.2,258.8) size=[187.2 x 20] -> right=250.4 bottom=278.8
+    TEXT: PyInstaller 解压即用
+  [Rectangle 18] pos=(270,136.8) size=[212.4 x 345.6] -> right=482.4 bottom=482.4
+  [Rectangle 19] pos=(270,136.8) size=[212.4 x 4] -> right=482.4 bottom=140.8
+  [TextBox 20] pos=(280,147.6) size=[198 x 24] -> right=478 bottom=171.6
+    TEXT: 经济可行性
+  [Rectangle 21] pos=(280,178.8) size=[4 x 4] -> right=284 bottom=182.8
+  [TextBox 22] pos=(290,174.8) size=[187.2 x 20] -> right=477.2 bottom=194.8
+    TEXT: 硬件：复用现有服务器
+  [Rectangle 23] pos=(280,206.8) size=[4 x 4] -> right=284 bottom=210.8
+  [TextBox 24] pos=(290,202.8) size=[187.2 x 20] -> right=477.2 bottom=222.8
+    TEXT: 软件：全部开源 MIT/Apache
+  [Rectangle 25] pos=(280,234.8) size=[4 x 4] -> right=284 bottom=238.8
+  [TextBox 26] pos=(290,230.8) size=[187.2 x 20] -> right=477.2 bottom=250.8
+    TEXT: LLM API：可选配置
+  [Rectangle 27] pos=(280,262.8) size=[4 x 4] -> right=284 bottom=266.8
+  [TextBox 28] pos=(290,258.8) size=[187.2 x 20] -> right=477.2 bottom=278.8
+    TEXT: 量表：PHQ-9/GAD-7 公共领域
+  [Rectangle 29] pos=(280,290.8) size=[4 x 4] -> right=284 bottom=294.8
+  [TextBox 30] pos=(290,286.8) size=[187.2 x 20] -> right=477.2 bottom=306.8
+    TEXT: 合计 ≈ 0 元
+  [Rectangle 31] pos=(496.8,136.8) size=[212.4 x 345.6] -> right=709.2 bottom=482.4
+  [Rectangle 32] pos=(496.8,136.8) size=[212.4 x 4] -> right=709.2 bottom=140.8
+  [TextBox 33] pos=(506.8,147.6) size=[198 x 24] -> right=704.8 bottom=171.6
+    TEXT: 推广价值
+  [Rectangle 34] pos=(506.8,178.8) size=[4 x 4] -> right=510.8 bottom=182.8
+  [TextBox 35] pos=(516.8,174.8) size=[187.2 x 20] -> right=704 bottom=194.8
+    TEXT: 响应教育部教育纲要方向
+  [Rectangle 36] pos=(506.8,206.8) size=[4 x 4] -> right=510.8 bottom=210.8
+  [TextBox 37] pos=(516.8,202.8) size=[187.2 x 20] -> right=704 bottom=222.8
+    TEXT: 试点：本校 50-100 志愿者
+  [Rectangle 38] pos=(506.8,234.8) size=[4 x 4] -> right=510.8 bottom=238.8
+  [TextBox 39] pos=(516.8,230.8) size=[187.2 x 20] -> right=704 bottom=250.8
+    TEXT: 同类院校解压即用
+  [Rectangle 40] pos=(506.8,262.8) size=[4 x 4] -> right=510.8 bottom=266.8
+  [TextBox 41] pos=(516.8,258.8) size=[187.2 x 20] -> right=704 bottom=278.8
+    TEXT: 5 分钟部署完成
+  [Rectangle 42] pos=(506.8,290.8) size=[4 x 4] -> right=510.8 bottom=294.8
+  [TextBox 43] pos=(516.8,286.8) size=[187.2 x 20] -> right=704 bottom=306.8
+    TEXT: 无 GPU / 无外部数据库
+  [Rectangle 44] pos=(723.6,136.8) size=[212.4 x 345.6] -> right=936 bottom=482.4
+  [Rectangle 45] pos=(723.6,136.8) size=[212.4 x 4] -> right=936 bottom=140.8
+  [TextBox 46] pos=(733.6,147.6) size=[198 x 24] -> right=931.6 bottom=171.6
+    TEXT: 部署要求
+  [Rectangle 47] pos=(733.6,178.8) size=[4 x 4] -> right=737.6 bottom=182.8
+  [TextBox 48] pos=(743.6,174.8) size=[187.2 x 20] -> right=930.8 bottom=194.8
+    TEXT: Python 3.11 环境
+  [Rectangle 49] pos=(733.6,206.8) size=[4 x 4] -> right=737.6 bottom=210.8
+  [TextBox 50] pos=(743.6,202.8) size=[187.2 x 20] -> right=930.8 bottom=222.8
+    TEXT:   或 PyInstaller 打包版
+  [Rectangle 51] pos=(733.6,234.8) size=[4 x 4] -> right=737.6 bottom=238.8
+  [TextBox 52] pos=(743.6,230.8) size=[187.2 x 20] -> right=930.8 bottom=250.8
+    TEXT: 数据库：SQLite 自动建表
+  [Rectangle 53] pos=(733.6,262.8) size=[4 x 4] -> right=737.6 bottom=266.8
+  [TextBox 54] pos=(743.6,258.8) size=[187.2 x 20] -> right=930.8 bottom=278.8
+    TEXT: 端口：8000（可配置）
+  [Rectangle 55] pos=(733.6,290.8) size=[4 x 4] -> right=737.6 bottom=294.8
+  [TextBox 56] pos=(743.6,286.8) size=[187.2 x 20] -> right=930.8 bottom=306.8
+    TEXT: 浏览器：Chrome / Edge
+  MAX_BOTTOM=523.6 / SLIDE_H=540  MAX_RIGHT=959.8 / SLIDE_W=959.75
+
+=== Slide 19 ===
+  [Rectangle 1] pos=(0,0) size=[959.8 x 4] -> right=959.8 bottom=4 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 2] pos=(43.2,30.2) size=[864 x 22] -> right=907.2 bottom=52.2
+    TEXT: 07 · 团队与计划
+  [TextBox 3] pos=(43.2,56.2) size=[864 x 32] -> right=907.2 bottom=88.2
+    TEXT: 团队分工 · 实施里程碑
+  [Rectangle 4] pos=(43.2,111.6) size=[115.2 x 3] -> right=158.4 bottom=114.6
+  [TextBox 5] pos=(43.2,507.6) size=[432 x 16] -> right=475.2 bottom=523.6
+    TEXT: MindGuard · 神经符号双引擎心理风险筛查
+  [TextBox 6] pos=(756,507.6) size=[187.2 x 16] -> right=943.2 bottom=523.6
+    TEXT: 19 / 20
+  [Rectangle 7] pos=(43.2,136.8) size=[417.6 x 345.6] -> right=460.8 bottom=482.4
+  [Rectangle 8] pos=(43.2,136.8) size=[417.6 x 4] -> right=460.8 bottom=140.8
+  [TextBox 9] pos=(57.6,147.6) size=[403.2 x 22] -> right=460.8 bottom=169.6
+    TEXT: 团队成员
+  [Rectangle 10] pos=(57.6,180) size=[388.8 x 133.2] -> right=446.4 bottom=313.2
+  [Rectangle 11] pos=(72,194.4) size=[57.6 x 57.6] -> right=129.6 bottom=252
+  [TextBox 12] pos=(72,194.4) size=[57.6 x 57.6] -> right=129.6 bottom=252
+    TEXT: 阮
+  [TextBox 13] pos=(144,184) size=[302.4 x 24] -> right=446.4 bottom=208
+    TEXT: 阮家炜
+  [TextBox 14] pos=(144,206) size=[302.4 x 20] -> right=446.4 bottom=226
+    TEXT: 负责人
+  [TextBox 15] pos=(144,228) size=[302.4 x 86.4] -> right=446.4 bottom=314.4
+    TEXT: 后端架构设计 · 神经符号引擎核心开发 | 规则知识库 · 危机分级系统 · 对比实验
+  [Rectangle 16] pos=(57.6,327.6) size=[388.8 x 133.2] -> right=446.4 bottom=460.8
+  [Rectangle 17] pos=(72,342) size=[57.6 x 57.6] -> right=129.6 bottom=399.6
+  [TextBox 18] pos=(72,342) size=[57.6 x 57.6] -> right=129.6 bottom=399.6
+    TEXT: 张
+  [TextBox 19] pos=(144,331.6) size=[302.4 x 24] -> right=446.4 bottom=355.6
+    TEXT: 张修瑜
+  [TextBox 20] pos=(144,353.6) size=[302.4 x 20] -> right=446.4 bottom=373.6
+    TEXT: 成员
+  [TextBox 21] pos=(144,375.6) size=[302.4 x 86.4] -> right=446.4 bottom=462
+    TEXT: 前端 Vue3 + ECharts 开发 | 系统演示 · 文档编写 · 数据整理
+  [Rectangle 22] pos=(489.6,136.8) size=[424.8 x 345.6] -> right=914.4 bottom=482.4
+  [Rectangle 23] pos=(489.6,136.8) size=[424.8 x 4] -> right=914.4 bottom=140.8
+  [TextBox 24] pos=(504,147.6) size=[410.4 x 22] -> right=914.4 bottom=169.6
+    TEXT: 实施里程碑
+  [Oval 25] pos=(518.4,188) size=[14 x 14] -> right=532.4 bottom=202
+  [Rectangle 26] pos=(523.4,202) size=[2 x 41.8] -> right=525.4 bottom=243.8
+  [TextBox 27] pos=(536.4,184) size=[100.8 x 16] -> right=637.2 bottom=200
+    TEXT: 2026 Q2
+  [TextBox 28] pos=(640.8,182) size=[259.2 x 36] -> right=900 bottom=218
+    TEXT: 需求分析 · 技术选型 · FastAPI+Vue3 基础架构
+  [Oval 29] pos=(518.4,239.8) size=[14 x 14] -> right=532.4 bottom=253.8
+  [Rectangle 30] pos=(523.4,253.8) size=[2 x 41.8] -> right=525.4 bottom=295.6
+  [TextBox 31] pos=(536.4,235.8) size=[100.8 x 16] -> right=637.2 bottom=251.8
+    TEXT: 2026 Q3
+  [TextBox 32] pos=(640.8,233.8) size=[259.2 x 36] -> right=900 bottom=269.8
+    TEXT: 双引擎核心 · 规则库+危机分级 · RAG+LLM 集成
+  [Oval 33] pos=(518.4,291.7) size=[14 x 14] -> right=532.4 bottom=305.7
+  [Rectangle 34] pos=(523.4,305.7) size=[2 x 41.8] -> right=525.4 bottom=347.5
+  [TextBox 35] pos=(536.4,287.7) size=[100.8 x 16] -> right=637.2 bottom=303.7
+    TEXT: 2026 Q4
+  [TextBox 36] pos=(640.8,285.7) size=[259.2 x 36] -> right=900 bottom=321.7
+    TEXT: 前端 6 页联调 · 118 例对比实验 · 试用意向书
+  [Oval 37] pos=(518.4,343.5) size=[14 x 14] -> right=532.4 bottom=357.5
+  [Rectangle 38] pos=(523.4,357.5) size=[2 x 41.8] -> right=525.4 bottom=399.3
+  [TextBox 39] pos=(536.4,339.5) size=[100.8 x 16] -> right=637.2 bottom=355.5
+    TEXT: 2027 Q1
+  [TextBox 40] pos=(640.8,337.5) size=[259.2 x 36] -> right=900 bottom=373.5
+    TEXT: 本校心理中心试点 · 双盲评估 · 输出效果报告
+  [Oval 41] pos=(518.4,395.4) size=[14 x 14] -> right=532.4 bottom=409.4
+  [TextBox 42] pos=(536.4,391.4) size=[100.8 x 16] -> right=637.2 bottom=407.4
+    TEXT: 2027 Q2
+  [TextBox 43] pos=(640.8,389.4) size=[259.2 x 36] -> right=900 bottom=425.4
+    TEXT: 推广 2-3 所兄弟院校 · V2.0 BERT 语义向量
+  MAX_BOTTOM=523.6 / SLIDE_H=540  MAX_RIGHT=959.8 / SLIDE_W=959.75
+
+=== Slide 20 ===
+  [Rectangle 1] pos=(0,0) size=[959.8 x 4] -> right=959.8 bottom=4 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 2] pos=(43.2,30.2) size=[864 x 22] -> right=907.2 bottom=52.2
+    TEXT: 07 · 总结与展望
+  [TextBox 3] pos=(43.2,56.2) size=[864 x 32] -> right=907.2 bottom=88.2
+    TEXT: 核心结论 + 未来方向
+  [Rectangle 4] pos=(43.2,111.6) size=[115.2 x 3] -> right=158.4 bottom=114.6
+  [TextBox 5] pos=(43.2,507.6) size=[432 x 16] -> right=475.2 bottom=523.6
+    TEXT: MindGuard · 神经符号双引擎心理风险筛查
+  [TextBox 6] pos=(756,507.6) size=[187.2 x 16] -> right=943.2 bottom=523.6
+    TEXT: 20 / 20
+  [Rectangle 7] pos=(43.2,136.8) size=[417.6 x 288] -> right=460.8 bottom=424.8
+  [Rectangle 8] pos=(43.2,136.8) size=[417.6 x 4] -> right=460.8 bottom=140.8
+  [TextBox 9] pos=(57.6,147.6) size=[403.2 x 22] -> right=460.8 bottom=169.6
+    TEXT: 📌 四条核心结论
+  [Rectangle 10] pos=(57.6,182.4) size=[6 x 32] -> right=63.6 bottom=214.4
+  [TextBox 11] pos=(72,176.4) size=[374.4 x 18] -> right=446.4 bottom=194.4
+    TEXT: 问题定位准
+  [TextBox 12] pos=(72,194.4) size=[374.4 x 22] -> right=446.4 bottom=216.4
+    TEXT: 直击三大痛点：漏检率高 / 缺乏可解释性 / 建议同质化
+  [Rectangle 13] pos=(57.6,247.2) size=[6 x 32] -> right=63.6 bottom=279.2
+  [TextBox 14] pos=(72,241.2) size=[374.4 x 18] -> right=446.4 bottom=259.2
+    TEXT: 技术路线新
+  [TextBox 15] pos=(72,259.2) size=[374.4 x 22] -> right=446.4 bottom=281.2
+    TEXT: 可解释神经符号双引擎，区别于 BERT/LLM 黑箱
+  [Rectangle 16] pos=(57.6,312) size=[6 x 32] -> right=63.6 bottom=344
+  [TextBox 17] pos=(72,306) size=[374.4 x 18] -> right=446.4 bottom=324
+    TEXT: 效果数据实
+  [TextBox 18] pos=(72,324) size=[374.4 x 22] -> right=446.4 bottom=346
+    TEXT: 118 例：检出率提升 16.3% · 12 例隐性危机全检出 · 假阳性减 72.7%
+  [Rectangle 19] pos=(57.6,376.8) size=[6 x 32] -> right=63.6 bottom=408.8
+  [TextBox 20] pos=(72,370.8) size=[374.4 x 18] -> right=446.4 bottom=388.8
+    TEXT: 工程化完成
+  [TextBox 21] pos=(72,388.8) size=[374.4 x 22] -> right=446.4 bottom=410.8
+    TEXT: 纯 Python · PyInstaller 一键打包 · 零新依赖
+  [Rectangle 22] pos=(489.6,136.8) size=[424.8 x 288] -> right=914.4 bottom=424.8
+  [Rectangle 23] pos=(489.6,136.8) size=[424.8 x 4] -> right=914.4 bottom=140.8
+  [TextBox 24] pos=(504,147.6) size=[410.4 x 22] -> right=914.4 bottom=169.6
+    TEXT: 🔮 五个未来改进方向
+  [Rectangle 25] pos=(504,184.4) size=[4 x 4] -> right=508 bottom=188.4
+  [TextBox 26] pos=(518.4,178.4) size=[72 x 16] -> right=590.4 bottom=194.4
+    TEXT: V2.0
+  [TextBox 27] pos=(590.4,178.4) size=[309.6 x 34] -> right=900 bottom=212.4
+    TEXT: 语音模态：librosa + Whisper，启用 2 维预留特征
+  [Rectangle 28] pos=(504,231.9) size=[4 x 4] -> right=508 bottom=235.9
+  [TextBox 29] pos=(518.4,225.9) size=[72 x 16] -> right=590.4 bottom=241.9
+    TEXT: V2.0
+  [TextBox 30] pos=(590.4,225.9) size=[309.6 x 34] -> right=900 bottom=259.9
+    TEXT: 语义向量：轻量中文 SBERT 替代关键词匹配
+  [Rectangle 31] pos=(504,279.4) size=[4 x 4] -> right=508 bottom=283.4
+  [TextBox 32] pos=(518.4,273.4) size=[72 x 16] -> right=590.4 bottom=289.4
+    TEXT: 真实试点
+  [TextBox 33] pos=(590.4,273.4) size=[309.6 x 34] -> right=900 bottom=307.4
+    TEXT: 本校心理中心 50-100 志愿者双盲评估
+  [Rectangle 34] pos=(504,327) size=[4 x 4] -> right=508 bottom=331
+  [TextBox 35] pos=(518.4,321) size=[72 x 16] -> right=590.4 bottom=337
+    TEXT: 推广扩展
+  [TextBox 36] pos=(590.4,321) size=[309.6 x 34] -> right=900 bottom=355
+    TEXT: 2-3 所兄弟院校 + 试点报告
+  [Rectangle 37] pos=(504,374.5) size=[4 x 4] -> right=508 bottom=378.5
+  [TextBox 38] pos=(518.4,368.5) size=[72 x 16] -> right=590.4 bottom=384.5
+    TEXT: 学术产出
+  [TextBox 39] pos=(590.4,368.5) size=[309.6 x 34] -> right=900 bottom=402.5
+    TEXT: 会议论文 CCML/CHIL · 软著申请
+  [Rectangle 40] pos=(0,439.2) size=[959.8 x 100.8] -> right=959.8 bottom=540 [OVERFLOW-RIGHT: 0pt]
+  [TextBox 41] pos=(0,446.4) size=[959.8 x 32] -> right=959.8 bottom=478.4 [OVERFLOW-RIGHT: 0pt]
+    TEXT: 感谢聆听 · 欢迎提问
+  [TextBox 42] pos=(43.2,475.2) size=[871.2 x 57.6] -> right=914.4 bottom=532.8
+    TEXT: MindGuard · 神经符号双引擎驱动的校园心理风险智能筛查与干预系统 团队：阮家炜（负责人） · 张修瑜    |    答辩 PPT · 2026 年 9 月
+  MAX_BOTTOM=540 / SLIDE_H=540  MAX_RIGHT=959.8 / SLIDE_W=959.75
+

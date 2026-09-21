@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <title>匿名风险筛查 · 多模态心理健康风险筛查系统</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/static/css/app.css">
+  <link rel="stylesheet" href="/static/css/vendor/bootstrap-icons.min.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo"><span style="font-size:18px;">🧠</span>多模态心理健康风险筛查系统</div>
+    <nav>
+      <a href="/">首页</a>
+      <a href="/screening" class="active">开始筛查</a>
+      <a href="/admin">管理员后台</a>
+    </nav>
+  </header>
+
+  <div class="container" id="app">
+
+    <!-- wizard 步骤指示 -->
+    <div v-if="step<4" class="wizard-steps">
+      <div class="wizard-step" :class="{active:step===0,done:step>0}" data-num="1">
+        <i class="bi bi-person" style="font-size:14px;margin-right:2px;"></i>知情同意
+      </div>
+      <div class="wizard-step" :class="{active:step===1,done:step>1}" data-num="2">
+        PHQ-9 抑郁筛查
+      </div>
+      <div class="wizard-step" :class="{active:step===2,done:step>2}" data-num="3">
+        GAD-7 焦虑筛查
+      </div>
+      <div class="wizard-step" :class="{active:step===3,done:step>3}" data-num="4">
+        开放文本 + 提交
+      </div>
+    </div>
+
+    <!-- 步骤 0：匿名 + 知情同意 -->
+    <div v-if="step===0">
+      <h1 style="font-size:26px;">🧘 匿名风险筛查</h1>
+      <p class="tagline">本系统为心理风险初筛辅助工具，不构成疾病诊断。所有数据匿名存储、加密传输。</p>
+
+      <div class="card">
+        <h3><i class="bi bi-person-circle" style="color:#1C7A6E;"></i> ① 匿名标识</h3>
+        <input v-model="anonId" placeholder="随便填一个你自己记得住的代号（英文/数字均可）">
+      </div>
+
+      <div class="card">
+        <h3><i class="bi bi-info-circle" style="color:#1C7A6E;"></i> ② 基本信息（可选）</h3>
+        <div style="display:flex;gap:12px;">
+          <input v-model="grade" placeholder="年级（如：大二）" style="flex:1;">
+          <input v-model="major" placeholder="专业" style="flex:1;">
+        </div>
+      </div>
+
+      <div class="card">
+        <h3><i class="bi bi-shield-check" style="color:#1C7A6E;"></i> ③ 知情同意</h3>
+        <p class="tagline" id="consentText">加载中...</p>
+        <label style="display:flex;align-items:flex-start;gap:10px;margin-top:14px;cursor:pointer;">
+          <input type="checkbox" v-model="consentChecked" style="margin-top:4px;width:auto;">
+          <span style="font-size:13px;color:#47535C;">我已阅读并同意，我的数据将匿名存储并严格保密。</span>
+        </label>
+      </div>
+
+      <button class="btn" :disabled="!anonId || !consentChecked"
+              @click="step=1; loadQuestions()">
+        下一步 · PHQ-9 抑郁筛查 <i class="bi bi-arrow-right" style="margin-left:4px;"></i>
+      </button>
+    </div>
+
+    <!-- 步骤 1：PHQ-9 -->
+    <div v-if="step===1">
+      <h1 style="font-size:26px;">📝 PHQ-9 抑郁筛查量表</h1>
+      <p class="tagline">在过去两周内，以下情况发生的频率是？共 9 题。</p>
+
+      <div v-for="(q,idx) in phq9Questions" :key="idx" class="question-block">
+        <div class="question-text">
+          <span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:#E6F2EF;color:#1C7A6E;border-radius:50%;font-size:12px;font-weight:600;flex-shrink:0;">[[ idx+1 ]]</span>
+          [[ q ]]
+        </div>
+        <div class="options">
+          <button v-for="opt in questionOpts" :key="opt.value"
+                  class="opt-btn"
+                  :class="{active: phq9[idx]===opt.value}"
+                  @click="phq9[idx]=opt.value">
+            [[ opt.label ]]
+          </button>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;">
+        <button class="btn ghost" @click="step=0"><i class="bi bi-arrow-left" style="margin-right:4px;"></i>上一步</button>
+        <button class="btn" @click="step=2">下一步 · GAD-7 焦虑筛查 <i class="bi bi-arrow-right" style="margin-left:4px;"></i></button>
+      </div>
+    </div>
+
+    <!-- 步骤 2：GAD-7 -->
+    <div v-if="step===2">
+      <h1 style="font-size:26px;">📝 GAD-7 焦虑筛查量表</h1>
+      <p class="tagline">在过去两周内，以下情况发生的频率是？共 7 题。</p>
+
+      <div v-for="(q,idx) in gad7Questions" :key="idx" class="question-block">
+        <div class="question-text">
+          <span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;background:#E6F2EF;color:#1C7A6E;border-radius:50%;font-size:12px;font-weight:600;flex-shrink:0;">[[ idx+1 ]]</span>
+          [[ q ]]
+        </div>
+        <div class="options">
+          <button v-for="opt in questionOpts" :key="opt.value"
+                  class="opt-btn"
+                  :class="{active: gad7[idx]===opt.value}"
+                  @click="gad7[idx]=opt.value">
+            [[ opt.label ]]
+          </button>
+        </div>
+      </div>
+
+      <div style="display:flex;gap:10px;">
+        <button class="btn ghost" @click="step=1"><i class="bi bi-arrow-left" style="margin-right:4px;"></i>上一步</button>
+        <button class="btn" @click="step=3">下一步 · 开放文本 <i class="bi bi-arrow-right" style="margin-left:4px;"></i></button>
+      </div>
+    </div>
+
+    <!-- 步骤 3：开放文本 + 提交 -->
+    <div v-if="step===3">
+      <h1 style="font-size:26px;">✍️ 最近的感受（开放文本，可选）</h1>
+      <p class="tagline">随便写几句最近的心情或经历，系统会从文本中提取情绪特征。所有文本只用于情绪分析，不会保留原文。</p>
+
+      <div class="card">
+        <textarea v-model="openText" rows="6"
+                  placeholder="例如：最近总觉得很累，什么都提不起兴趣..."></textarea>
+      </div>
+
+      <div class="progress-track"><div class="progress-bar" style="width:100%"></div></div>
+      <p class="tagline" style="text-align:right;margin-top:6px;">
+        <i class="bi bi-info-circle" style="margin-right:4px;"></i>（语音采集模块演示版暂未启用）
+      </p>
+
+      <div style="display:flex;gap:10px;margin-top:14px;">
+        <button class="btn ghost" @click="step=2"><i class="bi bi-arrow-left" style="margin-right:4px;"></i>上一步</button>
+        <button class="btn" @click="submit" :disabled="submitting">
+          [[ submitting ? '分析中...' : '提交 · 神经符号推理分析' ]]
+          <i v-if="!submitting" class="bi bi-rocket" style="margin-left:4px;"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- 步骤 4：完整报告（嵌入当前页面） -->
+    <div v-if="step===4">
+      <div class="card" style="background:linear-gradient(135deg,#E6F2EF,#F0F7F5);border:none;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:12px;">
+          <div>
+            <div style="color:#1C7A6E;font-size:12px;font-weight:600;margin-bottom:6px;">本次评估（会话 #[[ result.session_id ]]）</div>
+            <h2 style="margin:0;color:#203248;font-size:22px;">
+              <i class="bi bi-clipboard-check" style="color:#1C7A6E;margin-right:8px;"></i>
+              完整评估报告
+            </h2>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <a :href="'/report/' + result.session_id" class="btn ghost small">
+              <i class="bi bi-box-arrow-up-right" style="margin-right:4px;"></i>独立报告页
+            </a>
+            <button class="btn ghost small" @click="reset">
+              <i class="bi bi-arrow-clockwise" style="margin-right:4px;"></i>重新开始
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="report-wrapper" v-html="result.report_html"></div>
+    </div>
+  </div>
+
+  <footer>
+    免责声明：本报告仅供心理老师参考，不构成"精神疾病诊断"。
+  </footer>
+
+  <script src="/static/js/vue.global.prod.js"></script>
+  <script src="/static/js/axios.min.js"></script>
+  <script>
+  const { createApp } = Vue;
+  createApp({
+    delimiters: ['[[', ']]'],
+    data() {
+      return {
+        step: 0, anonId: '', grade: '', major: '',
+        consentChecked: false, consentText: '',
+        phq9: new Array(9).fill(null), gad7: new Array(7).fill(null),
+        phq9Questions: [], gad7Questions: [], questionOpts: [],
+        openText: '',
+        submitting: false, result: null,
+      };
+    },
+    mounted() {
+      axios.get('/api/screening/consent').then(r => {
+        const el = document.getElementById('consentText');
+        if (el) el.textContent = r.data.text;
+      });
+    },
+    methods: {
+      loadQuestions() {
+        axios.get('/api/screening/questions').then(r => {
+          // API 返回 phq9/gad7 为纯字符串数组，options 在顶层
+          this.phq9Questions = r.data.phq9 || [];
+          this.gad7Questions = r.data.gad7 || [];
+          this.questionOpts  = r.data.options || [];
+        });
+      },
+      submit() {
+    // 验证必填项
+    if (this.phq9.includes(null) || this.phq9.includes('')) {
+        alert('请完成所有 PHQ-9 题目后再提交');
+        return;
+    }
+    if (this.gad7.includes(null) || this.gad7.includes('')) {
+        alert('请完成所有 GAD-7 题目后再提交');
+        return;
+    }
+    this.submitting = true;
+    const t0 = Date.now();
+        axios.post('/api/screening/submit', {
+          anon_id: this.anonId,
+          grade: this.grade,
+          major: this.major,
+          phq9_answers: this.phq9,
+          gad7_answers: this.gad7,
+          open_text: this.openText,
+          response_duration_sec: (Date.now() - t0) / 1000,
+        }).then(r => {
+          this.result = r.data;
+          this.step = 4;
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }).catch(err => {
+                  let errMsg = err.message;
+        if (err.response && err.response.data) {
+            if (Array.isArray(err.response.data.detail)) {
+                errMsg = err.response.data.detail.map(e => e.msg || e.message).join('; ');
+            } else if (typeof err.response.data.detail === 'string') {
+                errMsg = err.response.data.detail;
+            } else {
+                errMsg = JSON.stringify(err.response.data);
+            }
+        }
+        alert('提交失败：' + errMsg);
+        }).finally(() => this.submitting = false);
+      },
+      reset() {
+        this.step = 0; this.anonId = ''; this.consentChecked = false;
+        this.phq9 = new Array(9).fill(null);
+        this.gad7 = new Array(7).fill(null);
+        this.openText = ''; this.result = null;
+      },
+    },
+  }).mount('#app');
+  </script>
+
+// 提交成功后存 anonId
+const origFetch = window.fetch;
+window.fetch = function(...args) {
+  return origFetch.apply(this, args).then(async resp => {
+    if (args[0] && typeof args[0] === 'string' && args[0].includes('/api/screening/submit')) {
+      const clone = resp.clone();
+      try {
+        const data = await clone.json();
+        if (data && data.anon_id) {
+          localStorage.setItem('mg_anon_id', data.anon_id);
+        }
+      } catch(e) {}
+    }
+    return resp;
+  });
+};
+</body>
+</html>

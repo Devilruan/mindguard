@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <title>管理员登录 · MindGuard</title>
+  <link rel="stylesheet" href="/static/css/app.css">
+  <link rel="stylesheet" href="/static/css/vendor/bootstrap-icons.min.css">
+  <link rel="icon" href="/favicon.ico">
+  <style>
+    body{display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:linear-gradient(135deg,#1C7A6E 0%,#287855 100%);font-family:system-ui,sans-serif;}
+    .login-box{background:#fff;border-radius:16px;padding:48px 40px;box-shadow:0 20px 60px rgba(0,0,0,.2);width:380px;}
+    .login-logo{text-align:center;margin-bottom:28px;}
+    .login-logo .emoji{font-size:48px;}
+    .login-logo h1{color:#203248;margin:8px 0 4px;font-size:20px;}
+    .login-logo p{color:#97A3AC;margin:0;font-size:13px;}
+    .form-group{margin-bottom:20px;}
+    .form-group label{display:block;font-size:13px;color:#47535C;margin-bottom:6px;font-weight:600;}
+    .form-group input{width:100%;padding:12px 14px;border:1px solid #D9E0E5;border-radius:8px;font-size:14px;box-sizing:border-box;transition:border-color .2s;}
+    .form-group input:focus{outline:none;border-color:#1C7A6E;box-shadow:0 0 0 3px rgba(28,122,110,.1);}
+    .btn-login{width:100%;padding:13px;background:#1C7A6E;color:#fff;border:none;border-radius:8px;font-size:15px;font-weight:600;cursor:pointer;transition:background .2s;}
+    .btn-login:hover{background:#166258;}
+    .btn-login:disabled{background:#97A3AC;cursor:not-allowed;}
+    .login-error{background:#FEE2E2;color:#AC4E42;padding:10px 14px;border-radius:6px;font-size:13px;margin-bottom:16px;display:none;}
+    .login-error.show{display:block;}
+    .back-link{display:block;text-align:center;margin-top:20px;color:rgba(255,255,255,.9);text-decoration:none;font-size:14px;}
+    .back-link:hover{color:#fff;}
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="emoji">🧠</div>
+      <h1>MindGuard 管理后台</h1>
+      <p>神经符号心理健康风险筛查系统</p>
+    </div>
+
+    <div id="loginError" class="login-error"></div>
+
+    <form id="loginForm" onsubmit="return handleLogin(event)">
+      <div class="form-group">
+        <label>用户名</label>
+        <input type="text" id="username" autocomplete="username" required placeholder="默认: admin">
+      </div>
+      <div class="form-group">
+        <label>密码</label>
+        <input type="password" id="password" autocomplete="current-password" required placeholder="默认: admin123">
+      </div>
+      <button type="submit" id="btnLogin" class="btn-login">登 录</button>
+    </form>
+  </div>
+  <a href="/" class="back-link">← 返回首页</a>
+
+  <script>
+    function handleLogin(e) {
+      e.preventDefault();
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+      const btn = document.getElementById('btnLogin');
+      const errBox = document.getElementById('loginError');
+
+      errBox.classList.remove('show');
+      btn.disabled = true;
+      btn.textContent = '登录中...';
+
+      fetch('/api/admin/login', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
+        body: JSON.stringify({username, password}),
+      })
+      .then(r => {
+        if (r.ok) {
+          window.location.href = '/admin';
+        } else {
+          return r.json().then(d => { throw new Error(d.detail || '登录失败'); });
+        }
+      })
+      .catch(err => {
+        errBox.textContent = err.message;
+        errBox.classList.add('show');
+        btn.disabled = false;
+        btn.textContent = '登 录';
+      });
+      return false;
+    }
+  </script>
+</body>
+</html>

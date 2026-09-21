@@ -1,0 +1,775 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <title>管理员后台 · 多模态心理健康风险筛查系统</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/static/css/app.css">
+  <link rel="stylesheet" href="/static/css/vendor/bootstrap-icons.min.css">
+  <script src="/static/js/echarts.min.js"></script>
+</head>
+<body>
+  <div id="app">
+  <header class="topbar">
+    <div class="logo"><span style="font-size:18px;">🧠</span>管理员后台 · 多模态心理健康风险筛查系统</div>
+    <nav>
+      <a href="/">首页</a>
+      <a href="/screening">筛查入口</a>
+      <a href="/my-records">我的档案</a>
+      <a href="/resources">心理资源</a>
+      <a href="/admin" class="active">后台</a>
+      <a href="#" onclick="logout()" style="color:#AC4E42;">退出登录</a>
+    </nav>
+  </header>
+
+  <div class="admin-layout">
+    <!-- 侧边栏 -->
+    <aside class="admin-sidebar">
+      <div class="menu-title">数据看板</div>
+      <div class="menu-item" :class="{active:tab==='dashboard'}" @click="tab='dashboard'">
+        <i class="bi bi-speedometer2"></i>概览仪表盘
+      </div>
+      <div class="menu-item" :class="{active:tab==='analytics'}" @click="switchAnalytics">
+        <i class="bi bi-bar-chart-line"></i>智能分析
+      </div>
+      <div class="menu-item" :class="{active:tab==='alerts'}" @click="switchTab('alerts')">
+        <i class="bi bi-exclamation-triangle"></i>预警队列
+        <span v-if="urgentCount>0"
+              style="margin-left:auto;background:#AC4E42;color:#fff;font-size:11px;padding:1px 7px;border-radius:10px;">[[ urgentCount ]]</span>
+      </div>
+      <div class="menu-item" :class="{active:tab==='sessions'}" @click="switchTab('sessions')">
+        <i class="bi bi-clipboard-data"></i>筛查会话
+      </div>
+
+      <div class="menu-title">规则引擎</div>
+      <div class="menu-item" :class="{active:tab==='rules'}" @click="switchTab('rules')">
+        <i class="bi bi-diagram-3"></i>心理学规则库
+      </div>
+
+      <div class="menu-title">干预管理</div>
+      <div class="menu-item" :class="{active:tab==='interventions'}" @click="switchTab('interventions')">
+        <i class="bi bi-bell"></i>干预工单
+        <span v-if="interventionCounts.pending>0"
+              style="margin-left:auto;background:#B91C1C;color:#fff;font-size:11px;padding:1px 7px;border-radius:10px;">[[ interventionCounts.pending ]]</span>
+      </div>
+
+      <div class="menu-title">系统</div>
+      <div class="menu-item" :class="{active:tab==='export'}" @click="tab='export'">
+        <i class="bi bi-download"></i>数据导出
+      </div>
+    </aside>
+
+    <!-- 主内容 -->
+    <main class="admin-main">
+
+      <!-- 概览仪表盘 -->
+      <div v-if="tab==='dashboard'">
+        <div class="stat-grid">
+          <div class="stat-box"><div class="big">[[ stats.total_sessions ]]</div><div class="lbl">累计筛查会话</div></div>
+          <div class="stat-box"><div class="big">[[ stats.total_users ]]</div><div class="lbl">独立匿名用户</div></div>
+          <div class="stat-box"><div class="big" style="color:#D97706;">[[ stats.sessions_last_7_days ]]</div><div class="lbl">近 7 天筛查</div></div>
+          <div class="stat-box"><div class="big" style="color:#AC4E42;">[[ stats.urgent_pending ]]</div><div class="lbl">极高风险待预警</div></div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;">
+          <div class="chart-wrap">
+            <div style="font-weight:600;color:#203248;margin-bottom:10px;">风险等级分布</div>
+            <div id="riskChart" style="height:260px;"></div>
+          </div>
+          <div class="chart-wrap">
+            <div style="font-weight:600;color:#203248;margin-bottom:10px;">PHQ-9 / GAD-7 得分分布</div>
+            <div id="scoreChart" style="height:260px;"></div>
+          </div>
+        </div>
+
+        <div class="chart-wrap" style="margin-top:16px;">
+          <div style="font-weight:600;color:#203248;margin-bottom:10px;">近 14 天筛查趋势</div>
+          <div id="trendChart" style="height:220px;"></div>
+        </div>
+      </div>
+
+      <!-- 智能分析 -->
+      <div v-if="tab==='analytics'">
+        <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);">
+          <div class="stat-box"><div class="big">[[ totalHits ]]</div><div class="lbl">规则累计触发</div></div>
+          <div class="stat-box"><div class="big" :style="forecastColor">[[ forecast.trend_dir ]]</div><div class="lbl">筛查量趋势</div></div>
+          <div class="stat-box"><div class="big">[[ majors.length ]]</div><div class="lbl">覆盖专业</div></div>
+          <div class="stat-box"><div class="big">[[ grades.length ]]</div><div class="lbl">覆盖年级</div></div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;">
+          <div class="chart-wrap">
+            <div style="font-weight:600;color:#203248;margin-bottom:10px;">
+              <i class="bi bi-diagram-3" style="color:#1C7A6E;"></i> 规则命中率 TOP（评估规则有效性）
+            </div>
+            <div id="ruleHitsChart" style="height:280px;"></div>
+          </div>
+          <div class="chart-wrap">
+            <div style="font-weight:600;color:#203248;margin-bottom:10px;">
+              <i class="bi bi-grid-3x3-gap" style="color:#1C7A6E;"></i> 年级 × 风险等级 热力矩阵
+            </div>
+            <div id="heatmapChart" style="height:280px;"></div>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
+          <div class="chart-wrap">
+            <div style="font-weight:600;color:#203248;margin-bottom:10px;">
+              <i class="bi bi-people" style="color:#1C7A6E;"></i> 专业分布
+            </div>
+            <div id="majorChart" style="height:260px;"></div>
+          </div>
+          <div class="chart-wrap">
+            <div style="font-weight:600;color:#203248;margin-bottom:10px;">
+              <i class="bi bi-graph-up-arrow" style="color:#1C7A6E;"></i> 未来 7 天筛查量预测
+            </div>
+            <div id="forecastChart" style="height:260px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 预警队列 -->
+      <div v-if="tab==='alerts'">
+        <div class="card" style="padding:20px;">
+          <div class="card-header">
+            <h3><i class="bi bi-exclamation-triangle" style="color:#AC4E42;"></i> 高危预警队列</h3>
+            <span>
+              <button class="btn ghost small" @click="loadAlerts">刷新</button>
+              <button class="btn small" style="margin-left:8px;" @click="sendAllAlerts">
+                <i class="bi bi-bell" style="margin-right:4px;"></i>批量推送全部预警
+              </button>
+            </span>
+          </div>
+          <p class="tagline">聚合所有 <strong>高风险 / 极高风险</strong> 会话，按风险分降序排列。已创建干预工单的标绿，未处理的标红。</p>
+
+          <table>
+            <thead>
+              <tr><th>会话</th><th>匿名ID</th><th>年级</th><th>时间</th><th>风险分</th><th>自杀风险</th><th>触发规则</th><th>等级</th><th>工单</th></tr>
+            </thead>
+            <tbody>
+              <tr v-for="a in alerts.rows" :key="a.session_id">
+                <td>#[[ a.session_id ]]</td>
+                <td><code>[[ a.anon_id ]]</code></td>
+                <td>[[ a.grade || '-' ]]</td>
+                <td>[[ formatTime(a.created_at) ]]</td>
+                <td><strong>[[ a.risk_score ]]</strong></td>
+                <td>
+                  <span v-if="a.suicide_risk>0" style="color:#AC4E42;font-weight:700;">⚠️ [[ a.suicide_risk ]]</span>
+                  <span v-else>-</span>
+                </td>
+                <td><code>[[ (a.triggered_rules||[]).join(', ') ]]</code></td>
+                <td><span class="badge" :class="a.risk_level">[[ levelLabel(a.risk_level) ]]</span></td>
+                <td>
+                  <span v-if="a.has_intervention" style="color:#1C7A6E;">
+                    <i class="bi bi-check-circle-fill"></i> [[ intervLabel(a.intervention_status) ]]
+                  </span>
+                  <button v-else class="btn ghost small" @click="createIntervention(a.session_id)">创建工单</button>
+                </td>
+              </tr>
+              <tr v-if="!alerts.count">
+                <td colspan="9" style="text-align:center;color:#97A3AC;padding:40px;">暂无高危会话，非常棒 🎉</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 筛查会话 -->
+      <div v-if="tab==='sessions'">
+        <div class="card" style="padding:20px;">
+          <div class="card-header">
+            <h3><i class="bi bi-clipboard-data" style="color:#1C7A6E;"></i> 筛查会话列表</h3>
+            <span>
+              <select v-model="filterLevel" style="padding:6px 10px;border-radius:4px;border:1px solid #D9E0E5;font-size:13px;">
+                <option value="">全部风险</option>
+                <option value="low">低风险</option>
+                <option value="medium">中风险</option>
+                <option value="high">高风险</option>
+                <option value="urgent">极高风险</option>
+              </select>
+              <button class="btn ghost small" @click="loadSessions" style="margin-left:8px;">筛选</button>
+              <button class="btn small" @click="sendAlerts" style="margin-left:8px;">
+                <i class="bi bi-bell" style="margin-right:4px;"></i>批量推预警
+              </button>
+            </span>
+          </div>
+          <table>
+            <thead>
+              <tr><th>ID</th><th>匿名标识</th><th>时间</th><th>PHQ-9</th><th>GAD-7</th>
+                <th>综合分</th><th>等级</th><th>触发规则</th><th>操作</th></tr>
+            </thead>
+            <tbody>
+              <tr v-for="s in sessions.rows" :key="s.id">
+                <td>[[ s.id ]]</td>
+                <td><code>[[ s.anon_id ]]</code></td>
+                <td>[[ formatTime(s.created_at) ]]</td>
+                <td>[[ s.phq9 ]]</td>
+                <td>[[ s.gad7 ]]</td>
+                <td>[[ s.risk_score ]]</td>
+                <td><span class="badge" :class="s.risk_level">[[ levelLabel(s.risk_level) ]]</span></td>
+                <td>[[ s.activation_count ]] 条</td>
+                <td>
+                  <button class="btn ghost small" @click="showDetail(s.id)">详情</button>
+                  <button class="btn ghost small" style="margin-left:4px;" @click="createIntervention(s.id)">
+                    <i class="bi bi-plus-circle"></i> 工单
+                  </button>
+                </td>
+              </tr>
+              <tr v-if="!sessions.rows || sessions.rows.length===0">
+                <td colspan="9" style="text-align:center;color:#97A3AC;padding:40px;">暂无会话数据，请先到 /screening 做一次筛查</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- 规则库 -->
+      <div v-if="tab==='rules'">
+        <div class="card">
+          <div class="card-header">
+            <h3><i class="bi bi-diagram-3" style="color:#1C7A6E;"></i> 心理学规则库（神经符号引擎核心）</h3>
+            <span>
+              <button class="btn ghost small" @click="learnRules">
+                <i class="bi bi-lightning" style="margin-right:4px;"></i>运行 RIPPER 规则学习（演示）
+              </button>
+              <button class="btn ghost small" @click="resetRules" style="margin-left:8px;">
+                <i class="bi bi-arrow-clockwise" style="margin-right:4px;"></i>恢复默认
+              </button>
+            </span>
+          </div>
+          <p class="tagline">规则库定义了神经符号引擎如何从多模态特征中组合推导出风险等级。每条规则包含 <code>规则ID</code>、<code>优先级</code>、<code>触发条件</code> 和 <code>触发后的结论标签</code>。</p>
+
+          <div v-for="r in rules" :key="r.id" class="rule-card">
+            <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+              <div>
+                <span class="rid">[[ r.id ]]</span>
+                <span class="rpri">优先级 [[ r.priority ]]</span>
+                <strong style="margin-left:10px;color:#203248;">THEN [[ r.consequence ]]</strong>
+              </div>
+              <button class="btn ghost small" @click="removeRule(r.id)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+            <div class="rcond">
+              <i class="bi bi-code-slash" style="color:#1C7A6E;margin-right:6px;"></i>
+              IF [[ formatConds(r.conditions) ]]
+            </div>
+            <div class="rexpl">💡 [[ r.explain ]]</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3><i class="bi bi-plus-circle" style="color:#1C7A6E;"></i> 手动添加规则</h3>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+            <input v-model="newRule.id" placeholder="规则ID（如 R010）" style="width:160px;">
+            <input v-model="newRule.priority" placeholder="优先级（数字越大越优先）" style="width:180px;">
+            <input v-model="newRule.consequence" placeholder="触发后的标签" style="width:200px;">
+            <input v-model="newRule.explain" placeholder="人类可读的规则说明" style="flex:1;min-width:200px;">
+          </div>
+          <p class="tagline" style="margin-bottom:8px;"><strong>触发条件格式</strong>：每行一个条件，用 AND 连接。可用特征：
+            <code>phq9_score</code> <code>gad7_score</code> <code>text_negativity</code>
+            <code>has_suicide_keyword</code> <code>response_duration_sec</code> 等。
+          </p>
+          <textarea v-model="newRule.conditionsText" rows="3"
+                    placeholder="phq9_score >= 10&#10;text_negativity >= 0.6"></textarea>
+          <div style="margin-top:12px;">
+            <button class="btn" @click="addRule()"><i class="bi bi-plus" style="margin-right:4px;"></i>添加规则</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 干预工单 -->
+      <div v-if="tab==='interventions'">
+        <div class="card">
+          <div class="card-header">
+            <h3><i class="bi bi-bell" style="color:#1C7A6E;"></i> 干预工单系统</h3>
+            <span>
+              <select v-model="filterIntervStatus" style="padding:6px 10px;border-radius:4px;border:1px solid #D9E0E5;font-size:13px;">
+                <option value="">全部状态</option>
+                <option value="pending">待处理</option>
+                <option value="processing">处理中</option>
+                <option value="closed">已关闭</option>
+              </select>
+            </span>
+          </div>
+          <p class="tagline">当筛查结果为 <strong>高风险 / 极高风险</strong> 时，系统自动创建干预工单，心理老师可跟进、记录处理过程、关闭工单。</p>
+
+          <table>
+            <thead>
+              <tr><th>工单 #</th><th>关联会话</th><th>风险等级</th><th>创建时间</th><th>状态</th>
+                <th>处理人</th><th>备注/跟进</th><th>操作</th></tr>
+            </thead>
+            <tbody>
+              <tr v-for="iv in interventions" :key="iv.id">
+                <td>#[[ iv.id ]]</td>
+                <td>会话 [[ iv.session_id ]]</td>
+                <td><span class="badge" :class="iv.risk_level">[[ levelLabel(iv.risk_level) ]]</span></td>
+                <td>[[ formatTime(iv.created_at) ]]</td>
+                <td><span class="badge" :class="'interv-' + iv.status">[[ intervLabel(iv.status) ]]</span></td>
+                <td>[[ iv.assigned_to || '-' ]]</td>
+                <td style="max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" :title="iv.notes">[[ iv.notes ]]</td>
+                <td>
+                  <button v-if="iv.status==='pending'" class="btn ghost small" @click="updateIntervention(iv.id,'processing')">认领处理</button>
+                  <button v-if="iv.status==='processing'" class="btn ghost small" @click="updateIntervention(iv.id,'closed')">关闭</button>
+                </td>
+              </tr>
+              <tr v-if="!interventions.length">
+                <td colspan="8" style="text-align:center;color:#97A3AC;padding:40px;">暂无干预工单</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <style>
+            .interv-pending{background:#FEE2E2;color:#B91C1C;border-radius:10px;padding:2px 10px;font-size:12px;font-weight:600}
+            .interv-processing{background:#FFF7E6;color:#B8760F;border-radius:10px;padding:2px 10px;font-size:12px;font-weight:600}
+            .interv-closed{background:#E6F2EF;color:#1C7A6E;border-radius:10px;padding:2px 10px;font-size:12px;font-weight:600}
+          </style>
+        </div>
+      </div>
+
+      <!-- 数据导出 -->
+      <div v-if="tab==='export'">
+        <div class="card">
+          <h3><i class="bi bi-download" style="color:#1C7A6E;"></i> 数据导出</h3>
+          <p class="tagline">导出所有筛查会话原始数据，供离线分析和科研使用。</p>
+
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;">
+            <a href="/api/admin/export/sessions?format=csv" class="btn">
+              <i class="bi bi-filetype-csv" style="margin-right:6px;"></i>导出会话数据 (CSV)
+            </a>
+            <a href="/api/admin/export/sessions?format=json" class="btn ghost">
+              <i class="bi bi-filetype-json" style="margin-right:6px;"></i>导出会话数据 (JSON)
+            </a>
+          </div>
+
+          <div style="margin-top:28px;padding:16px;background:#F7F9FA;border-radius:8px;">
+            <div style="font-weight:600;color:#203248;margin-bottom:8px;">📁 导出字段说明</div>
+            <table>
+              <thead><tr><th>字段</th><th>说明</th></tr></thead>
+              <tbody>
+                <tr><td>session_id</td><td>会话唯一编号</td></tr>
+                <tr><td>anon_id</td><td>用户匿名标识</td></tr>
+                <tr><td>created_at</td><td>筛查时间（UTC）</td></tr>
+                <tr><td>phq9_score</td><td>PHQ-9 抑郁量表得分（0–27）</td></tr>
+                <tr><td>gad7_score</td><td>GAD-7 焦虑量表得分（0–21）</td></tr>
+                <tr><td>risk_score</td><td>综合风险分（0–100）</td></tr>
+                <tr><td>risk_level</td><td>风险等级：low / medium / high / urgent</td></tr>
+                <tr><td>activated_rules</td><td>触发的心理学规则列表</td></tr>
+                <tr><td>features</td><td>多模态特征向量（文本消极度、语音韵律等）</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- 会话详情模态 -->
+  <div v-if="detail" class="modal-backdrop" @click.self="detail=null">
+    <div class="modal-box" style="max-width:780px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;">
+        <h2 style="margin:0;">会话 #[[ detail.session.id ]] 评估详情</h2>
+        <button class="btn ghost small" @click="detail=null">
+          <i class="bi bi-x-lg"></i>
+        </button>
+      </div>
+
+      <table style="margin-top:14px;">
+        <thead><tr><th>时间</th><th>PHQ-9</th><th>GAD-7</th><th>综合风险分</th><th>等级</th></tr></thead>
+        <tbody>
+          <tr>
+            <td>[[ formatTime(detail.session.created_at) ]]</td>
+            <td>[[ detail.session.phq9 ]]/27</td>
+            <td>[[ detail.session.gad7 ]]/21</td>
+            <td><strong>[[ detail.session.risk_score ]]</strong></td>
+            <td><span class="badge" :class="detail.session.risk_level">[[ levelLabel(detail.session.risk_level) ]]</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:22px;color:#1C7A6E;border-bottom:2px solid #E1E7EC;padding-bottom:6px;">
+        <i class="bi bi-diagram-3" style="margin-right:6px;"></i>触发的心理学规则
+      </h3>
+      <div v-if="detail.session.activated_rules.length">
+        <div v-for="r in detail.session.activated_rules" :key="r.rule_id" class="rule-card">
+          <strong>[[ r.rule_id ]]</strong> · 优先级 [[ r.priority ]]
+          <div style="color:#47535C;margin-top:4px;">💡 [[ r.explain ]]</div>
+        </div>
+      </div>
+      <div v-else class="tagline">本次筛查未触发心理学规则</div>
+
+      <h3 style="margin-top:22px;color:#1C7A6E;border-bottom:2px solid #E1E7EC;padding-bottom:6px;">
+        <i class="bi bi-list-ol" style="margin-right:6px;"></i>推理链路（神经符号引擎）
+      </h3>
+      <div style="background:#F7F9FA;border-radius:6px;padding:14px;max-height:240px;overflow:auto;">
+        <div v-for="(line,i) in detail.session.explanation_chain" :key="i"
+             style="padding:4px 0;font-family:monospace;font-size:12px;color:#47535C;">
+          <span style="color:#1C7A6E;margin-right:8px;">▸</span> [[ line ]]
+        </div>
+      </div>
+
+      <div style="text-align:right;margin-top:20px;display:flex;gap:8px;justify-content:flex-end;">
+        <a :href="'/report/' + detail.session.id" target="_blank" class="btn ghost small">
+          <i class="bi bi-box-arrow-up-right" style="margin-right:4px;"></i>独立报告页
+        </a>
+        <button class="btn ghost" @click="detail=null">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/js/vue.global.prod.js"></script>
+  <script src="/static/js/axios.min.js"></script>
+  <script>
+  const { createApp } = Vue;
+  createApp({
+    delimiters: ['[[', ']]'],
+    data() {
+      return {
+        tab: 'dashboard',
+        stats: { total_sessions:0, total_users:0, sessions_last_7_days:0,
+                 urgent_pending:0, risk_distribution:{}, grade_distribution:[], score_distribution:{}, trend:[] },
+        sessions: { total:0, rows:[] },
+        rules: [],
+        interventions: [],
+        interventionCounts: { pending:0 },
+        detail: null,
+        filterLevel: '',
+        filterIntervStatus: '',
+        newRule: { id:'', priority:5, consequence:'', explain:'', conditionsText:'' },
+        charts: {},
+        // 智能分析
+        ruleHits: { total_triggered: 0, rows: [] },
+        gradeMatrix: { matrix: {}, levels: [] },
+        majors: [],
+        grades: [],
+        forecast: { history: [], forecast: [], trend_dir: '', slope: 0 },
+        // 预警队列
+        alerts: { count: 0, rows: [] },
+        urgentCount: 0,
+      };
+    },
+    mounted() {
+      this.loadAll();
+      this.loadAnalytics();
+      this.loadAlerts();
+    },
+    methods: {
+      switchAnalytics() {
+        if (this.tab !== 'analytics') {
+          this.tab = 'analytics';
+          this.$nextTick(() => this.renderAnalyticsCharts());
+        }
+      },
+      switchTab(name) {
+        this.tab = name;
+        if (name === 'sessions') this.loadSessions();
+        if (name === 'alerts') this.loadAlerts();
+        if (name === 'rules') this.loadRules();
+        if (name === 'interventions') this.loadInterventions();
+      },
+      loadAnalytics() {
+        Promise.all([
+          axios.get('/api/analytics/rule-hits'),
+          axios.get('/api/analytics/grade-matrix'),
+          axios.get('/api/analytics/major-dist'),
+          axios.get('/api/analytics/trend-forecast'),
+        ]).then(([a, b, c, d]) => {
+          this.ruleHits = a.data;
+          this.gradeMatrix = b.data;
+          this.majors = c.data;
+          this.forecast = d.data;
+          this.grades = Object.keys(b.data.matrix || {});
+          // 若当前在 analytics tab 则渲染
+          if (this.tab === 'analytics') {
+            this.$nextTick(() => this.renderAnalyticsCharts());
+          }
+        }).catch(err => console.warn('loadAnalytics:', err));
+      },
+      loadAlerts() {
+        axios.get('/api/analytics/urgent-queue').then(r => {
+          this.alerts = r.data;
+          this.urgentCount = (r.data.rows || []).filter(x => !x.has_intervention).length;
+        }).catch(err => console.warn('loadAlerts:', err));
+      },
+      sendAllAlerts() {
+        const ids = (this.alerts.rows || []).map(x => x.session_id);
+        if (!ids.length) return alert('暂无高危会话');
+        if (!confirm(`为 ${ids.length} 个高危会话推送预警并创建干预工单？`)) return;
+        axios.post('/api/admin/alerts/send', { session_ids: ids })
+          .then(r => { alert(r.data.message); this.loadAlerts(); })
+          .catch(err => alert(err.response?.data?.detail || '推送失败'));
+      },
+      renderAnalyticsCharts() {
+        // dispose 旧图表
+        for (const k in this.charts) {
+          if (k === 'risk' || k === 'score' || k === 'trend') continue; // 保留 overview 图表
+          try { this.charts[k].dispose(); } catch(e){}
+        }
+
+        // 1. 规则命中率条形图
+        const rEl = document.getElementById('ruleHitsChart');
+        if (rEl) {
+          const rows = (this.ruleHits.rows || []).slice(0, 8);
+          const c = echarts.init(rEl);
+          c.setOption({
+            tooltip: { trigger: 'axis' },
+            grid: { left: 60, right: 20, top: 10, bottom: 30 },
+            xAxis: { type: 'value', name: '触发次数' },
+            yAxis: { type: 'category', data: rows.map(r => r.rule_id).reverse() },
+            series: [{
+              type: 'bar', data: rows.map(r => r.hits).reverse(),
+              itemStyle: { color: '#1C7A6E', borderRadius: [0,4,4,0] },
+              label: { show: true, position: 'right' },
+            }],
+          });
+          this.charts.ruleHits = c;
+        }
+
+        // 2. 年级×风险热力矩阵
+        const hEl = document.getElementById('heatmapChart');
+        if (hEl) {
+          const matrix = this.gradeMatrix.matrix || {};
+          const levels = this.gradeMatrix.levels || ['low','medium','high','urgent'];
+          const grades = Object.keys(matrix);
+          const data = [];
+          grades.forEach((g, gi) => {
+            levels.forEach((lv, li) => {
+              data.push([li, gi, matrix[g][lv] || 0]);
+            });
+          });
+          const c = echarts.init(hEl);
+          c.setOption({
+            tooltip: {
+              position: 'top',
+              formatter: p => `${grades[p.value[1]]} · ${this.levelLabel(levels[p.value[0]])}<br/>人数: <strong>${p.value[2]}</strong>`,
+            },
+            grid: { left: 70, right: 20, top: 10, bottom: 50 },
+            xAxis: { type: 'category', data: levels.map(l => this.levelLabel(l)), splitArea: { show: true } },
+            yAxis: { type: 'category', data: grades, splitArea: { show: true } },
+            visualMap: { min: 0, max: 15, calculable: false, orient: 'horizontal', left: 'center', bottom: 0,
+                         inRange: { color: ['#F7F9FA', '#B8DDD7', '#1C7A6E'] } },
+            series: [{ type: 'heatmap', data, label: { show: true } }],
+          });
+          this.charts.heatmap = c;
+        }
+
+        // 3. 专业分布
+        const mEl = document.getElementById('majorChart');
+        if (mEl) {
+          const majors = this.majors || [];
+          const c = echarts.init(mEl);
+          c.setOption({
+            tooltip: {},
+            series: [{
+              type: 'pie', radius: ['35%', '70%'],
+              data: majors.map(m => ({ name: m.major, value: m.count })),
+              label: { formatter: '{b}\n{c}' },
+            }],
+          });
+          this.charts.major = c;
+        }
+
+        // 4. 预测折线图
+        const fEl = document.getElementById('forecastChart');
+        if (fEl) {
+          const hist = this.forecast.history || [];
+          const fc = this.forecast.forecast || [];
+          const allDates = [...hist.map(h => h.date), ...fc.map(f => f.date)];
+          const allCounts = [...hist.map(h => h.count), ...fc.map(f => f.count)];
+          const realCounts = [...hist.map(h => h.count), ...Array(fc.length).fill(null)];
+          const predCounts = [...Array(hist.length).fill(null), ...fc.map(f => f.count)];
+          const c = echarts.init(fEl);
+          c.setOption({
+            tooltip: { trigger: 'axis' },
+            legend: { data: ['实际筛查量', '预测筛查量'] },
+            grid: { left: 40, right: 20, top: 30, bottom: 40 },
+            xAxis: { type: 'category', data: allDates },
+            yAxis: { type: 'value' },
+            series: [
+              { name: '实际筛查量', type: 'line', data: realCounts, smooth: true,
+                itemStyle: { color: '#1C7A6E' }, areaStyle: { color: 'rgba(28,122,110,.12)' } },
+              { name: '预测筛查量', type: 'line', data: predCounts, connectNulls: false,
+                itemStyle: { color: '#AC4E42' }, lineStyle: { type: 'dashed' }, symbol: 'diamond' },
+            ],
+          });
+          this.charts.forecast = c;
+        }
+      },
+      loadAll() {
+        this.loadStats();
+        this.loadSessions();
+        this.loadRules();
+        this.loadInterventions();
+      },
+      loadStats() {
+        axios.get('/api/admin/stats/overview').then(r => {
+          this.stats = r.data;
+          // 只在 dashboard tab 且 DOM 就绪时才渲染图表
+          if (this.tab === 'dashboard') {
+            this.$nextTick(() => {
+              try { this.renderCharts(); } catch(e) { console.warn('renderCharts:', e); }
+            });
+          }
+        }).catch(err => console.warn('loadStats:', err));
+      },
+      loadSessions() {
+        const q = this.filterLevel ? '?level=' + this.filterLevel : '';
+        axios.get('/api/admin/sessions' + q).then(r => this.sessions = r.data)
+             .catch(err => console.warn('loadSessions:', err));
+      },
+      loadRules() {
+        axios.get('/api/rules/list').then(r => this.rules = r.data)
+             .catch(err => console.warn('loadRules:', err));
+      },
+      loadInterventions() {
+        axios.get('/api/admin/interventions').then(r => {
+          let list = r.data || [];
+          if (this.filterIntervStatus) list = list.filter(x => x.status === this.filterIntervStatus);
+          this.interventions = list;
+          this.interventionCounts.pending = (r.data || []).filter(x => x.status==='pending').length;
+        }).catch(err => console.warn('loadInterventions:', err));
+      },
+      showDetail(id) {
+        axios.get('/api/admin/sessions/' + id).then(r => this.detail = r.data);
+      },
+      createIntervention(sessionId) {
+        axios.post('/api/admin/interventions', { session_id:sessionId, status:'pending', notes:'自动/手动创建' })
+          .then(() => { alert('已创建干预工单'); this.loadInterventions(); })
+          .catch(err => alert(err.response?.data?.detail || '创建失败'));
+      },
+      updateIntervention(ivId, status) {
+        axios.put('/api/admin/interventions/' + ivId, { status:status })
+          .then(() => this.loadInterventions());
+      },
+      sendAlerts() {
+        const ids = this.sessions.rows.filter(s=>['high','urgent'].includes(s.risk_level)).map(s=>s.id);
+        if(!ids.length) return alert('暂无高风险会话');
+        axios.post('/api/admin/alerts/send', { session_ids: ids })
+          .then(r => alert(r.data.message));
+      },
+      learnRules() {
+        if(!confirm('运行 RIPPER 规则学习（演示：基于模拟数据）？')) return;
+        axios.post('/api/rules/learn').then(r => { alert(r.data.message); this.loadRules(); });
+      },
+      resetRules() {
+        if(!confirm('恢复默认规则库？')) return;
+        axios.post('/api/rules/reset-defaults').then(() => this.loadRules());
+      },
+      removeRule(id) {
+        if(!confirm('删除规则 ' + id + '？')) return;
+        axios.delete('/api/rules/' + id).then(() => this.loadRules());
+      },
+      addRule() {
+        const conds = this.newRule.conditionsText.trim().split('\n').map(l => {
+          const parts = l.trim().split(/\s+/);
+          if(parts.length<3) return null;
+          const [feat, op, thr] = parts;
+          const t = isNaN(+thr) ? thr.replace(/["']/g,'') : +thr;
+          return [feat, op, t];
+        }).filter(Boolean);
+        axios.post('/api/rules/add', {
+          rule_id: this.newRule.id, priority: +this.newRule.priority,
+          consequence: this.newRule.consequence, explain: this.newRule.explain,
+          conditions: conds,
+        }).then(() => {
+          alert('已添加');
+          this.newRule={id:'',priority:5,consequence:'',explain:'',conditionsText:''};
+          this.loadRules();
+        }).catch(err => alert(err.response.data.detail || '添加失败'));
+      },
+      formatConds(conds) {
+        return (conds||[]).map(c => c.join(' ')).join(' AND ');
+      },
+      formatTime(s) { if(!s) return ''; return s.replace('T',' ').slice(0,16); },
+      levelLabel(l) {
+        return {low:'低风险',medium:'中风险',high:'高风险',urgent:'极高风险'}[l] || l;
+      },
+      intervLabel(s) {
+        return {pending:'待处理',processing:'处理中',closed:'已关闭'}[s] || s;
+      },
+      renderCharts() {
+        // 1. 先 dispose 旧实例
+        for (const k in this.charts) {
+          try { this.charts[k].dispose(); } catch(e){}
+        }
+        this.charts = {};
+
+        // 2. 仪表盘风险分布饼图
+        const riskEl = document.getElementById('riskChart');
+        if (riskEl) {
+          try {
+            const riskData = Object.entries(this.stats.risk_distribution || {})
+              .map(([k,v]) => ({name: this.levelLabel(k), value: v}));
+            const risk = echarts.init(riskEl);
+            risk.setOption({
+              tooltip:{trigger:'item'},
+              series:[{type:'pie', radius:['42%','72%'], data:riskData,
+                       label:{formatter:'{b}\n{c} ({d}%)'}}],
+              color:['#287855','#E6A817','#D97706','#AC4E42'],
+            });
+            this.charts.risk = risk;
+          } catch(e) { console.warn('riskChart:', e); }
+        }
+
+        // 3. PHQ-9 / GAD-7 得分分布
+        const scoreEl = document.getElementById('scoreChart');
+        if (scoreEl) {
+          try {
+            const sd = this.stats.score_distribution || {};
+            const score = echarts.init(scoreEl);
+            score.setOption({
+              tooltip:{},
+              legend:{data:['PHQ-9','GAD-7']},
+              xAxis:{type:'category', data:Object.keys(sd.phq9 || {})},
+              yAxis:{type:'value'},
+              series:[
+                {name:'PHQ-9',type:'bar',data:Object.values(sd.phq9 || {}),itemStyle:{color:'#1C7A6E'}},
+                {name:'GAD-7',type:'bar',data:Object.values(sd.gad7 || {}),itemStyle:{color:'#E6A817'}},
+              ],
+            });
+            this.charts.score = score;
+          } catch(e) { console.warn('scoreChart:', e); }
+        }
+
+        // 4. 近14天趋势
+        const trendEl = document.getElementById('trendChart');
+        if (trendEl) {
+          try {
+            const trendData = this.stats.trend || [];
+            const trend = echarts.init(trendEl);
+            trend.setOption({
+              tooltip:{},
+              xAxis:{type:'category', data:trendData.map(t => t.date)},
+              yAxis:{type:'value'},
+              series:[{type:'line', data:trendData.map(t => t.count),
+                       smooth:true, itemStyle:{color:'#1C7A6E'},
+                       areaStyle:{color:'rgba(28,122,110,.15)'}}],
+              grid:{bottom:40},
+            });
+            this.charts.trend = trend;
+          } catch(e) { console.warn('trendChart:', e); }
+        }
+      },
+    },
+    computed: {
+      totalHits() {
+        return this.ruleHits.total_triggered || 0;
+      },
+      forecastColor() {
+        const d = this.forecast.trend_dir || '';
+        if (d === '上升') return { color: '#AC4E42' };
+        if (d === '下降') return { color: '#287855' };
+        return { color: '#E6A817' };
+      },
+    },
+  }).mount('#app');
+
+  function logout() {
+    if (!confirm('确认退出登录？')) return;
+    fetch('/api/admin/logout', {method: 'POST', credentials: 'include'})
+      .then(() => window.location.href = '/admin');
+  }
+  </script>
+  </div>
+</body>
+</html>

@@ -1,0 +1,247 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>心情打卡 · MindGuard</title>
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link href="/static/css/vendor/bootstrap.min.css" rel="stylesheet">
+<link href="/static/css/app.css" rel="stylesheet">
+<style>
+  body { background: #F5F8F9; min-height: 100vh; }
+  .mood-emoji { font-size: 36px; cursor: pointer; padding: 12px; border-radius: 50%; transition: all 0.2s; }
+  .mood-emoji:hover { transform: scale(1.15); }
+  .mood-emoji.selected { background: #E6A817; box-shadow: 0 0 10px rgba(230,168,23,0.4); }
+  .mood-calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; max-width: 400px; }
+  .cal-cell { aspect-ratio: 1; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 11px; cursor: pointer; transition: all 0.15s; color: #666; }
+  .cal-cell.future { visibility: hidden; }
+  .cal-cell.blank { visibility: hidden; }
+  .cal-cell.r1 { background: #AC4E42; color: white; }
+  .cal-cell.r2 { background: #C97B3A; color: white; }
+  .cal-cell.r3 { background: #E6A817; color: #203248; }
+  .cal-cell.r4 { background: #7BB8B0; color: white; }
+  .cal-cell.r5 { background: #1C7A6E; color: white; }
+  .cal-cell.empty { background: #E8EEF0; }
+  .cal-cell:hover { opacity: 0.85; transform: scale(1.1); }
+  .heatmap-legend { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #666; justify-content: center; margin-top: 10px; }
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark" style="background:#203248;">
+  <a class="navbar-brand" href="/">🧠 MindGuard</a>
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item"><a class="nav-link" href="/">首页</a></li>
+      <li class="nav-item"><a class="nav-link" href="/screening">风险筛查</a></li>
+      <li class="nav-item"><a class="nav-link" href="/my-records">我的档案</a></li>
+      <li class="nav-item active"><a class="nav-link" href="/mood-journal">心情打卡</a></li>
+      <li class="nav-item"><a class="nav-link" href="/cbt">CBT 自助</a></li>
+      <li class="nav-item"><a class="nav-link" href="/breathing">呼吸训练</a></li>
+      <li class="nav-item"><a class="nav-link" href="/resources">心理资源</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div id="app" class="container-fluid py-5" style="max-width:1200px;">
+  <div class="row">
+    <!-- 左：打卡 -->
+    <div class="col-md-5 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <h4 class="mb-3">📝 今天心情怎么样？</h4>
+          <p class="text-muted small">选一个最符合你此刻感受的表情，再用一句话描述一下</p>
+
+          <div id="mood-grid" class="d-flex justify-content-around my-4">
+            <span class="mood-emoji" data-emotion="happy" data-score="9" onclick="selectMood(this)">😊</span>
+            <span class="mood-emoji" data-emotion="calm" data-score="7" onclick="selectMood(this)">😌</span>
+            <span class="mood-emoji" data-emotion="anxious" data-score="4" onclick="selectMood(this)">😰</span>
+            <span class="mood-emoji" data-emotion="sad" data-score="2" onclick="selectMood(this)">😢</span>
+            <span class="mood-emoji" data-emotion="angry" data-score="3" onclick="selectMood(this)">😤</span>
+            <span class="mood-emoji" data-emotion="empty" data-score="1" onclick="selectMood(this)">🥱</span>
+          </div>
+
+          <div class="mb-3">
+            <input type="text" id="mood-text" class="form-control" placeholder="一句话说说发生了什么（可选）" maxlength="200">
+          </div>
+
+          <div class="mb-3">
+            <label class="text-muted small">心情指数：<span id="score-label" class="font-weight-bold" style="color:#E6A817">5</span>/10</label>
+            <input type="range" id="mood-score" min="1" max="10" value="5" class="form-control" style="accent-color:#1C7A6E;">
+          </div>
+
+          <button class="btn btn-block" style="background:#1C7A6E;color:white;" onclick="submitMood()">✨ 记录今天</button>
+
+          <div class="mt-4" id="save-status"></div>
+        </div>
+      </div>
+
+      <!-- 紧急联系人 -->
+      <div class="card shadow-sm mt-4">
+        <div class="card-body p-4">
+          <h5 class="mb-3">🔗 安全代理 / 紧急联系人</h5>
+          <p class="text-muted small">设置一个信任的人。如果系统检测到你连续高危，会自动提醒你联系 TA。</p>
+          <div class="form-group">
+            <input type="text" id="contact-name" class="form-control form-control-sm" placeholder="联系人姓名">
+          </div>
+          <div class="form-group">
+            <input type="tel" id="contact-phone" class="form-control form-control-sm" placeholder="联系电话">
+          </div>
+          <button class="btn btn-sm btn-outline-primary" onclick="saveContact()">保存</button>
+          <div id="contact-status" class="small mt-2"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 右：热力图日历 + 趋势 -->
+    <div class="col-md-7 mb-4">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <h4 class="mb-3">📅 心情热力图 · 最近 30 天</h4>
+          <div id="heatmap" class="mood-calendar mx-auto"></div>
+          <div class="heatmap-legend">
+            <span>低</span>
+            <div class="cal-cell r1"></div>
+            <div class="cal-cell r2"></div>
+            <div class="cal-cell r3"></div>
+            <div class="cal-cell r4"></div>
+            <div class="cal-cell r5"></div>
+            <span>高</span>
+          </div>
+
+          <div class="mt-4">
+            <h5>📈 趋势预测</h5>
+            <div id="trend-info" class="text-muted small">加载中...</div>
+          </div>
+
+          <div class="mt-4">
+            <h5>🗓 最近记录</h5>
+            <div id="recent-entries" class="list-group" style="max-height:250px;overflow-y:auto;">
+              <div class="text-muted small text-center py-3">暂无记录，先记一条吧</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="/static/js/vendor/vue.min.js"></script>
+<script>
+// anonId 管理
+let anonId = localStorage.getItem('mg_anon_id');
+if (!anonId) { anonId = 'U' + Math.random().toString(36).slice(2,8).toUpperCase(); localStorage.setItem('mg_anon_id', anonId); }
+document.getElementById('save-status').innerHTML = '<small class="text-muted">匿名标识：' + anonId + '</small>';
+
+let selectedEmotion = null;
+
+function selectMood(el) {
+  document.querySelectorAll('.mood-emoji').forEach(e => e.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedEmotion = el.dataset.emotion;
+  document.getElementById('mood-score').value = el.dataset.score;
+  document.getElementById('score-label').textContent = el.dataset.score;
+}
+
+document.getElementById('mood-score').addEventListener('input', e => {
+  document.getElementById('score-label').textContent = e.target.value;
+});
+
+async function submitMood() {
+  const score = parseInt(document.getElementById('mood-score').value);
+  const text = document.getElementById('mood-text').value;
+  if (!selectedEmotion) { alert('请先选择一个表情'); return; }
+
+  try {
+    const res = await fetch('/api/features/mood-journal', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ anon_id: anonId, mood_score: score, emotion: selectedEmotion, text })
+    });
+    const data = await res.json();
+    document.getElementById('save-status').innerHTML = '<span class="text-success">✅ 已记录！明天见~</span>';
+    document.getElementById('mood-text').value = '';
+    selectedEmotion = null;
+    document.querySelectorAll('.mood-emoji').forEach(e => e.classList.remove('selected'));
+    loadMoods();
+  } catch(e) {
+    document.getElementById('save-status').innerHTML = '<span class="text-danger">保存失败：' + e.message + '</span>';
+  }
+}
+
+function saveContact() {
+  const name = document.getElementById('contact-name').value.trim();
+  const phone = document.getElementById('contact-phone').value.trim();
+  if (!name || !phone) { alert('请填写完整'); return; }
+  fetch('/api/features/emergency-contact', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ anon_id: anonId, contact_name: name, contact_phone: phone, relation: '朋友', notify_threshold: 'urgent' })
+  }).then(() => {
+    document.getElementById('contact-status').innerHTML = '<span class="text-success">✅ 已保存</span>';
+  });
+}
+
+async function loadMoods() {
+  const res = await fetch('/api/features/mood-journal/' + anonId);
+  const data = await res.json();
+  renderHeatmap(data.records);
+  renderTrend(data.prediction);
+  renderRecent(data.records);
+}
+
+function renderHeatmap(records) {
+  const grid = document.getElementById('heatmap');
+  grid.innerHTML = '';
+  const labels = ['一','二','三','四','五','六','日'];
+
+  // 生成 30 天日期
+  const today = new Date();
+  const days = [];
+  for (let i = 29; i >= 0; i--) {
+    const d = new Date(today);
+    d.setDate(today.getDate() - i);
+    days.push(d);
+  }
+
+  // 填充
+  days.forEach((d, idx) => {
+    const dayName = labels[d.getDay() === 0 ? 6 : d.getDay() - 1];
+    const entry = records.find(r => r.created_at.slice(0,10) === d.toISOString().slice(0,10));
+    let cls = 'empty';
+    let title = d.toLocaleDateString('zh-CN') + ' · 无记录';
+    if (entry) {
+      const s = entry.mood_score;
+      if (s <= 2) cls = 'r1';
+      else if (s <= 4) cls = 'r2';
+      else if (s <= 6) cls = 'r3';
+      else if (s <= 8) cls = 'r4';
+      else cls = 'r5';
+      title = d.toLocaleDateString('zh-CN') + ' · ' + ['🥱','😢','😤','😰','😌','😊'][Math.min(5, Math.floor(s/2))] + ' ' + entry.mood_score + '/10';
+    }
+    const cell = document.createElement('div');
+    cell.className = 'cal-cell ' + cls;
+    cell.title = title;
+    cell.textContent = idx % 7 === 0 ? dayName : '';
+    grid.appendChild(cell);
+  });
+}
+
+function renderTrend(pred) {
+  if (!pred) { document.getElementById('trend-info').innerHTML = '数据不足（需要至少 3 条记录）'; return; }
+  const arrow = pred.direction === 'improving' ? '📈' : pred.direction === 'worsening' ? '📉' : '➡️';
+  const text = pred.direction === 'improving' ? '情绪正在好转，继续保持' : pred.direction === 'worsening' ? '情绪在下滑，多留意自己' : '情绪相对稳定';
+  document.getElementById('trend-info').innerHTML = arrow + ' <b>' + text + '</b>（slope=' + pred.slope + '）<br>未来 7 天预测分数：' + pred.predictions.join(' → ');
+}
+
+function renderRecent(records) {
+  const box = document.getElementById('recent-entries');
+  if (!records.length) { box.innerHTML = '<div class="text-muted small text-center py-3">暂无记录</div>'; return; }
+  box.innerHTML = records.slice(0, 10).map(r => {
+    const emoji = {'happy':'😊','calm':'😌','anxious':'😰','sad':'😢','angry':'😤','empty':'🥱'}[r.emotion] || '😐';
+    return '<div class="list-group-item d-flex justify-content-between align-items-center"><div><b>' + emoji + ' ' + r.mood_score + '/10</b><div class="small text-muted">' + (r.text || '—') + '</div></div><small class="text-muted">' + r.created_at.slice(5,16) + '</small></div>';
+  }).join('');
+}
+
+loadMoods();
+</script>
+</body>
+</html>

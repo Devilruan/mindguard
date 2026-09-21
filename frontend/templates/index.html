@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <title>首页 · MindGuard 多模态心理健康风险筛查系统</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/static/css/app.css">
+  <link rel="stylesheet" href="/static/css/vendor/bootstrap-icons.min.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="logo"><span style="font-size:18px;">🧠</span>MindGuard · 多模态心理健康风险筛查</div>
+    <nav>
+      <a href="/" class="active">首页</a>
+      <a href="/screening">开始筛查</a>
+      <a href="/my-records">我的档案</a>
+      <a href="/resources">心理资源</a>
+      <a href="/admin">管理员</a>
+    </nav>
+  </header>
+
+  <div class="container-wide">
+
+    <!-- Hero 主视觉 -->
+    <div class="hero">
+      <div class="badge">🧠 神经符号推理</div>
+      <div class="badge">🔍 可解释 AI</div>
+      <div class="badge">🎯 多模态融合</div>
+      <h1>让每一次心理风险判断，都有据可循</h1>
+      <p class="sub">
+        针对高校心理筛查"黑盒结论、漏检率高、干预脱节"三大痛点，以
+        <strong>神经符号双引擎</strong>为核心，融合量表、文本等多模态信号，
+        输出<strong>分数 + 触发规则 + 推理链</strong>的完整评估报告，
+        实现"可解释、可复核、可落地"的风险初筛闭环。
+      </p>
+      <div class="cta">
+        <a href="/screening" class="btn" style="background:#fff;color:#1C7A6E;">
+          <i class="bi bi-play-circle" style="margin-right:6px;"></i>立即筛查
+        </a>
+        <a href="/admin" class="btn" style="background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.4);">
+          <i class="bi bi-graph-up" style="margin-right:6px;"></i>管理后台
+        </a>
+      </div>
+    </div>
+
+    <!-- 每日一句 + 实时统计 + 快速打卡（并排紧凑排列） -->
+    <div style="display:grid; grid-template-columns:1fr 1.1fr 1fr; gap:20px; margin:24px 0 28px;">
+
+      <!-- 每日一句 -->
+      <div class="card" style="background:linear-gradient(135deg,#E6F2EF,#D4EBE6); border:none;">
+        <div style="font-size:12px; color:#1C7A6E; font-weight:600; letter-spacing:1px; margin-bottom:8px;">💬 今日心理格言</div>
+        <div id="aff-text" style="font-size:15px; color:#203248; line-height:1.7; font-weight:500;">加载中...</div>
+      </div>
+
+      <!-- 实时统计 -->
+      <div class="card" style="padding:18px 20px;">
+        <div style="font-size:12px; color:#6B7883; font-weight:600; letter-spacing:1px; margin-bottom:12px;">📊 系统实时数据</div>
+        <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:10px; text-align:center;">
+          <div>
+            <div id="stat-total" style="font-size:22px; font-weight:bold; color:#1C7A6E;">-</div>
+            <div style="font-size:11px; color:#888;">累计筛查</div>
+          </div>
+          <div>
+            <div id="stat-today" style="font-size:22px; font-weight:bold; color:#E6A817;">-</div>
+            <div style="font-size:11px; color:#888;">今日筛查</div>
+          </div>
+          <div>
+            <div id="stat-users" style="font-size:22px; font-weight:bold; color:#C97B3A;">-</div>
+            <div style="font-size:11px; color:#888;">匿名用户</div>
+          </div>
+          <div>
+            <div id="stat-urgent" style="font-size:22px; font-weight:bold; color:#AC4E42;">-</div>
+            <div style="font-size:11px; color:#888;">已关注高危</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 快速打卡 -->
+      <div class="card" style="padding:18px 20px;">
+        <div style="font-size:12px; color:#6B7883; font-weight:600; letter-spacing:1px; margin-bottom:12px;">⚡ 自助工具</div>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:10px;">
+          <a href="/mood-journal" style="text-align:center; text-decoration:none; color:#203248; padding:8px 4px; border-radius:8px; background:#F7F9FA; transition:.2s;" onmouseover="this.style.background='#E6F2EF'" onmouseout="this.style.background='#F7F9FA'">
+            <div style="font-size:20px;">📝</div>
+            <div style="font-size:12px; font-weight:600; margin-top:4px;">心情打卡</div>
+          </a>
+          <a href="/cbt" style="text-align:center; text-decoration:none; color:#203248; padding:8px 4px; border-radius:8px; background:#F7F9FA; transition:.2s;" onmouseover="this.style.background='#E6F2EF'" onmouseout="this.style.background='#F7F9FA'">
+            <div style="font-size:20px;">🧠</div>
+            <div style="font-size:12px; font-weight:600; margin-top:4px;">CBT 自助</div>
+          </a>
+          <a href="/breathing" style="text-align:center; text-decoration:none; color:#203248; padding:8px 4px; border-radius:8px; background:#F7F9FA; transition:.2s;" onmouseover="this.style.background='#E6F2EF'" onmouseout="this.style.background='#F7F9FA'">
+            <div style="font-size:20px;">🌬️</div>
+            <div style="font-size:12px; font-weight:600; margin-top:4px;">呼吸训练</div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 核心指标 -->
+    <div class="stat-grid">
+      <div class="stat-box">
+        <div class="big">≥0.85</div>
+        <div class="lbl">抑郁识别 AUC</div>
+      </div>
+      <div class="stat-box">
+        <div class="big">+8%</div>
+        <div class="lbl">准确率提升</div>
+      </div>
+      <div class="stat-box">
+        <div class="big">100%</div>
+        <div class="lbl">结论可复核</div>
+      </div>
+      <div class="stat-box">
+        <div class="big">50万+</div>
+        <div class="lbl">服务目标（人/年）</div>
+      </div>
+    </div>
+
+    <!-- 核心能力 -->
+    <h3 style="margin:36px 0 16px; color:#203248; font-size:18px;"><i class="bi bi-lightning-charge" style="color:#1C7A6E;"></i> 核心能力</h3>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="icon">🧠</div>
+        <h4>神经符号双引擎</h4>
+        <p>RIPPER 规则学习从数据中提炼心理学规则，可解释推理引擎组合执行，输出每条结论的触发依据。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🔍</div>
+        <h4>多模态融合评估</h4>
+        <p>融合 PHQ-9 / GAD-7 量表、开放文本语义、作答时长等信号，缓解单一问卷"答假"问题。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">📋</div>
+        <h4>完整可复核报告</h4>
+        <p>学生端匿名反馈，心理老师端查看"分数 + 触发规则 + 推理链"，每条结论有据可循。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🔔</div>
+        <h4>分级预警 & 干预闭环</h4>
+        <p>极高风险自动触发干预工单，支持心理老师推送预警、跟进记录、关闭工单，形成管理闭环。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">⚙️</div>
+        <h4>规则库热更新</h4>
+        <p>管理员可实时增删改查心理学规则，支持运行 RIPPER 自动规则学习，无需重新部署。</p>
+      </div>
+      <div class="feature-card">
+        <div class="icon">🛡️</div>
+        <h4>伦理合规设计</h4>
+        <p>匿名存储、知情同意、语音只取韵律不识别内容，明确"风险初筛辅助，不替代诊断"边界。</p>
+      </div>
+    </div>
+
+    <!-- 竞品对比 -->
+    <div class="card">
+      <h3><i class="bi bi-bar-chart" style="color:#1C7A6E;"></i> 为什么是我们？—— 与主流开源方案对比</h3>
+      <p class="tagline">当前开源的多模态抑郁筛查系统（SENTIRA、Mindful 等）均采用 Late Fusion（Logistic Regression / 加权投票），无一具备神经符号推理层——输出结果无法溯源。</p>
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>维度</th>
+            <th>SENTIRA / Mindful 等</th>
+            <th>本项目</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>多模态融合</td>
+            <td><span class="cross">✗</span> Late Fusion</td>
+            <td class="ours"><span class="tick">✓</span> 神经符号双引擎</td>
+          </tr>
+          <tr>
+            <td>结果可解释</td>
+            <td><span class="cross">✗</span> 黑盒</td>
+            <td class="ours"><span class="tick">✓</span> 100% 可溯源</td>
+          </tr>
+          <tr>
+            <td>风险标签</td>
+            <td>仅分数</td>
+            <td class="ours">分数 + 触发规则 + 证据链</td>
+          </tr>
+          <tr>
+            <td>规则库管理</td>
+            <td>✗ 无</td>
+            <td class="ours">✓ 热更新 + RIPPER 学习</td>
+          </tr>
+          <tr>
+            <td>分级预警 & 干预</td>
+            <td>✗ 无</td>
+            <td class="ours">✓ 工单闭环</td>
+          </tr>
+          <tr>
+            <td>伦理合规</td>
+            <td>基础匿名</td>
+            <td class="ours">知情同意 + 数据脱敏</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 技术栈 -->
+    <div class="card">
+      <h3><i class="bi bi-stack" style="color:#1C7A6E;"></i> 技术栈</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-top:12px;">
+        <code>FastAPI</code><code>SQLAlchemy</code><code>SQLite</code>
+        <code>Vue 3</code><code>Axios</code><code>ECharts 5</code>
+        <code>Jinja2</code><code>Bootstrap Icons</code>
+        <code>wittgenstein (RIPPER)</code><code>pyreason</code>
+        <code>DAIC-WOZ / MODMA</code>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    MindGuard · 多模态心理健康风险智能筛查系统 · 神经符号推理 + 规则学习
+  </footer>
+
+<script>
+// 每日一句
+fetch('/api/features/daily-affirmation').then(r=>r.json()).then(d=>{
+  document.getElementById('aff-text').textContent = '"' + d.text + '" — ' + d.category;
+}).catch(()=>{});
+
+// 实时统计
+fetch('/api/features/home-stats').then(r=>r.json()).then(d=>{
+  document.getElementById('stat-total').textContent = d.total_sessions || 0;
+  document.getElementById('stat-today').textContent = d.today_sessions || 0;
+  document.getElementById('stat-users').textContent = d.total_users || 0;
+  document.getElementById('stat-urgent').textContent = d.urgent_count || 0;
+}).catch(()=>{});
+</script>
+
+</body>
+</html>

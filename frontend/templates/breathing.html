@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>引导式呼吸训练 · MindGuard</title>
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+<link href="/static/css/vendor/bootstrap.min.css" rel="stylesheet">
+<link href="/static/css/app.css" rel="stylesheet">
+<style>
+  body { background: linear-gradient(135deg, #1C7A6E 0%, #2A9D8F 50%, #81C3B7 100%); min-height: 100vh; color: white; font-family: "Microsoft YaHei", sans-serif; overflow: hidden; }
+  .breath-container { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 90vh; }
+  .bubble { width: 220px; height: 220px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.9), rgba(255,255,255,0.4)); box-shadow: 0 0 60px rgba(255,255,255,0.4), inset 0 0 40px rgba(28,122,110,0.3); display: flex; align-items: center; justify-content: center; transition: transform 0.5s ease-in-out; animation: none; }
+  .bubble.inhale { animation: inhale 4s ease-in-out forwards; }
+  .bubble.hold { animation: hold 4s ease-in-out forwards; }
+  .bubble.exhale { animation: exhale 8s ease-in-out forwards; }
+  @keyframes inhale { 0% { transform: scale(1); } 100% { transform: scale(1.5); } }
+  @keyframes hold { 0% { transform: scale(1.5); } 100% { transform: scale(1.5); } }
+  @keyframes exhale { 0% { transform: scale(1.5); } 100% { transform: scale(1); } }
+  .phase-text { font-size: 24px; font-weight: bold; margin-top: 30px; letter-spacing: 4px; }
+  .count-text { font-size: 64px; font-weight: 300; margin-top: 10px; opacity: 0.8; }
+  .controls { margin-top: 50px; display: flex; gap: 15px; }
+  .btn-mg { background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); color: white; padding: 12px 30px; border-radius: 30px; font-size: 16px; transition: all 0.3s; }
+  .btn-mg:hover { background: rgba(255,255,255,0.35); }
+  .btn-mg.active { background: white; color: #1C7A6E; }
+  .presets { margin-top: 30px; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+  .preset { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); color: white; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-size: 13px; }
+  .preset:hover { background: rgba(255,255,255,0.3); }
+  .nav-link { color: rgba(255,255,255,0.8); text-decoration: none; margin: 0 12px; font-size: 14px; }
+  .nav-link:hover { color: white; }
+</style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg" style="background:rgba(0,0,0,0.1); padding:12px 30px;">
+  <a class="navbar-brand" style="color:white; font-weight:bold;">🧘 MindGuard</a>
+  <div style="margin-left:auto;">
+    <a class="nav-link" href="/">首页</a>
+    <a class="nav-link" href="/screening">风险筛查</a>
+    <a class="nav-link" href="/my-records">我的档案</a>
+    <a class="nav-link" href="/mood-journal">心情打卡</a>
+    <a class="nav-link" href="/cbt">CBT 自助</a>
+    <a class="nav-link active" href="/breathing" style="color:white; border-bottom:2px solid white;">呼吸训练</a>
+    <a class="nav-link" href="/resources">心理资源</a>
+  </div>
+</nav>
+
+<div class="breath-container">
+  <div class="bubble" id="bubble">
+    <span id="count-text" style="font-size:48px; color:#1C7A6E; font-weight:bold;">☁️</span>
+  </div>
+  <div class="phase-text" id="phase-text">准备好了吗？</div>
+  <div class="count-text" id="count-text2" style="display:none;"></div>
+
+  <div class="presets">
+    <div class="preset" onclick="setMode('478')">4-7-8 呼吸（舒缓焦虑）</div>
+    <div class="preset" onclick="setMode('box')">箱式呼吸（专注力）</div>
+    <div class="preset" onclick="setMode('calm')">深长呼吸（放松）</div>
+  </div>
+
+  <div class="controls">
+    <button class="btn-mg active" id="start-btn" onclick="start()">▶ 开始</button>
+    <button class="btn-mg" id="stop-btn" onclick="stop()">⏹ 停止</button>
+  </div>
+</div>
+
+<script>
+let timer = null;
+let phaseIndex = 0;
+let count = 0;
+
+const modes = {
+  '478':  [{name:'吸气', sec:4}, {name:'屏息', sec:7}, {name:'呼气', sec:8}],
+  'box':  [{name:'吸气', sec:4}, {name:'屏息', sec:4}, {name:'呼气', sec:4}, {name:'屏息', sec:4}],
+  'calm': [{name:'吸气', sec:5}, {name:'呼气', sec:5}],
+};
+
+let currentMode = modes['478'];
+
+function setMode(m) {
+  stop();
+  currentMode = modes[m];
+  document.getElementById('phase-text').textContent = '已选择 ' + m + '，点击开始';
+  document.getElementById('bubble').className = 'bubble';
+  document.getElementById('count-text').textContent = '☁️';
+}
+
+function start() {
+  document.getElementById('start-btn').classList.add('active');
+  document.getElementById('stop-btn').classList.remove('active');
+  phaseIndex = 0;
+  runPhase();
+}
+
+function stop() {
+  if (timer) clearInterval(timer);
+  timer = null;
+  document.getElementById('bubble').className = 'bubble';
+  document.getElementById('phase-text').textContent = '已停止';
+  document.getElementById('count-text').textContent = '☁️';
+  document.getElementById('count-text2').style.display = 'none';
+  document.getElementById('start-btn').classList.remove('active');
+  document.getElementById('stop-btn').classList.add('active');
+}
+
+function runPhase() {
+  const phase = currentMode[phaseIndex % currentMode.length];
+  const bubble = document.getElementById('bubble');
+  bubble.className = 'bubble ' + phase.name;
+  document.getElementById('phase-text').textContent = phase.name + ' ' + phase.sec + '秒';
+
+  count = phase.sec;
+  const ct = document.getElementById('count-text');
+  const ct2 = document.getElementById('count-text2');
+  ct.style.display = 'none';
+  ct2.style.display = 'block';
+  ct2.textContent = count;
+
+  if (timer) clearInterval(timer);
+  timer = setInterval(() => {
+    count--;
+    if (count > 0) {
+      ct2.textContent = count;
+    } else {
+      clearInterval(timer);
+      phaseIndex++;
+      setTimeout(runPhase, 300);
+    }
+  }, 1000);
+}
+</script>
+</body>
+</html>

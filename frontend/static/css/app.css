@@ -1,0 +1,154 @@
+/* =========================================================================
+   多模态心理健康风险筛查系统 · 设计系统
+   品牌色：深青 #1C7A6E / 浅青 #E6F2EF / 墨色 #203248
+   ========================================================================= */
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0;background:#F4F6F8;color:#203248;font-family:'Microsoft YaHei','微软雅黑','PingFang SC',system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+a{color:#1C7A6E;text-decoration:none}a:hover{text-decoration:underline}
+code{background:#F0F4F6;padding:1px 6px;border-radius:3px;font-size:12px;color:#1C7A6E}
+
+/* ---------- 顶栏 ---------- */
+.topbar{display:flex;align-items:center;justify-content:space-between;background:#fff;padding:14px 40px;box-shadow:0 1px 0 rgba(28,122,110,.08);position:sticky;top:0;z-index:10}
+.topbar .logo{font-size:15px;font-weight:600;color:#203248;display:flex;align-items:center;gap:10px}
+.topbar nav{display:flex;gap:24px}
+.topbar nav a{font-size:14px;color:#47535C;padding:6px 0;border-bottom:2px solid transparent;transition:.2s}
+.topbar nav a:hover,.topbar nav a.active{color:#1C7A6E;border-bottom-color:#1C7A6E;text-decoration:none}
+
+/* ---------- 容器 ---------- */
+.container{max-width:960px;margin:0 auto;padding:40px 24px 80px}
+.container-wide{max-width:1280px;margin:0 auto;padding:40px 24px 80px}
+.tagline{color:#6B7883;font-size:14px;line-height:1.7}
+
+/* ---------- 卡片 ---------- */
+.card{background:#fff;border-radius:10px;padding:24px;box-shadow:0 2px 12px rgba(32,50,72,.06);margin-bottom:20px;border:1px solid #EEF2F5}
+.card h3{margin-top:0;color:#203248;font-size:16px;display:flex;align-items:center;gap:8px}
+.card-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px}
+.card-header h3{margin:0}
+
+/* ---------- Hero ---------- */
+.hero{background:linear-gradient(135deg,#1C7A6E 0%,#145F56 100%);color:#fff;border-radius:16px;padding:56px 48px;margin-bottom:32px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-80px;top:-80px;width:320px;height:320px;background:rgba(255,255,255,.06);border-radius:50%}
+.hero::before{content:'';position:absolute;left:-40px;bottom:-60px;width:200px;height:200px;background:rgba(255,255,255,.04);border-radius:50%}
+.hero h1{font-size:34px;margin:0 0 14px 0;font-weight:700}
+.hero .sub{font-size:16px;opacity:.9;line-height:1.7;max-width:640px;margin-bottom:28px}
+.hero .cta{display:flex;gap:12px}
+.hero .badge{display:inline-block;background:rgba(255,255,255,.15);padding:6px 14px;border-radius:20px;font-size:12px;margin-right:8px;margin-bottom:8px}
+
+/* ---------- 按钮 ---------- */
+.btn{display:inline-block;padding:10px 22px;background:#1C7A6E;color:#fff;border:none;border-radius:6px;font-size:14px;cursor:pointer;transition:.2s;font-weight:500}
+.btn:hover{background:#145F56;transform:translateY(-1px);box-shadow:0 4px 12px rgba(28,122,110,.3)}
+.btn:disabled{background:#C8D5D3;cursor:not-allowed;transform:none;box-shadow:none}
+.btn.ghost{background:transparent;color:#1C7A6E;border:1px solid #1C7A6E}
+.btn.ghost:hover{background:#E6F2EF}
+.btn.small{padding:6px 14px;font-size:13px}
+
+/* ---------- 表单 ---------- */
+input,select,textarea{width:100%;padding:10px 14px;border:1px solid #D9E0E5;border-radius:6px;font-size:14px;transition:.2s;background:#fff;font-family:inherit}
+input:focus,select:focus,textarea:focus{outline:none;border-color:#1C7A6E;box-shadow:0 0 0 3px rgba(28,122,110,.12)}
+textarea{resize:vertical;min-height:100px}
+
+/* ---------- 问题卡片 ---------- */
+.question-block{background:#fff;border:1px solid #EEF2F5;border-radius:8px;padding:20px;margin-bottom:14px;transition:.2s}
+.question-block:hover{border-color:#1C7A6E;box-shadow:0 2px 8px rgba(28,122,110,.1)}
+.question-text{font-size:14px;font-weight:500;margin-bottom:12px;color:#203248;display:flex;align-items:flex-start;gap:8px}
+.options{display:flex;flex-wrap:wrap;gap:8px}
+.opt-btn{flex:1;min-width:120px;padding:10px 14px;border:1px solid #D9E0E5;border-radius:6px;background:#fff;color:#47535C;font-size:13px;cursor:pointer;transition:.2s}
+.opt-btn:hover{border-color:#1C7A6E;color:#1C7A6E}
+.opt-btn.active{background:#1C7A6E;color:#fff;border-color:#1C7A6E}
+
+/* ---------- 进度条 ---------- */
+.progress-track{height:6px;background:#EEF2F5;border-radius:3px;overflow:hidden;margin:24px 0 8px}
+.progress-bar{height:100%;background:linear-gradient(90deg,#1C7A6E,#2DB8A7);border-radius:3px;transition:width .4s}
+.wizard-steps{display:flex;justify-content:space-between;margin-bottom:20px}
+.wizard-step{flex:1;text-align:center;font-size:12px;color:#97A3AC;padding:6px 0;border-top:2px solid #EEF2F5;position:relative;margin:0 4px}
+.wizard-step.active{color:#1C7A6E;border-top-color:#1C7A6E;font-weight:600}
+.wizard-step.done{color:#287855;border-top-color:#287855}
+.wizard-step::before{content:attr(data-num);position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:#F4F6F8;color:#97A3AC;width:18px;height:18px;border-radius:50%;font-size:11px;line-height:18px}
+.wizard-step.active::before{background:#1C7A6E;color:#fff}
+.wizard-step.done::before{background:#287855;color:#fff;content:'✓'}
+
+/* ---------- 统计网格 ---------- */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.stat-box{background:#fff;border-radius:10px;padding:22px;border:1px solid #EEF2F5;position:relative;overflow:hidden}
+.stat-box::after{content:'';position:absolute;top:0;right:0;width:60px;height:60px;background:rgba(28,122,110,.08);border-radius:0 10px 0 40px}
+.stat-box .big{font-size:30px;font-weight:700;color:#1C7A6E}
+.stat-box .lbl{font-size:13px;color:#6B7883;margin-top:4px}
+
+/* ---------- 表格 ---------- */
+table{width:100%;border-collapse:collapse;font-size:13px}
+table th{text-align:left;padding:12px 14px;background:#F4F6F8;color:#47535C;font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.5px;border-bottom:2px solid #EEF2F5}
+table td{padding:12px 14px;border-bottom:1px solid #EEF2F5}
+table tr:hover td{background:#F9FBFB}
+
+/* ---------- 风险标签 ---------- */
+.badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:12px;font-weight:600}
+.badge.low{background:#E6F2EF;color:#1C7A6E}
+.badge.medium{background:#FFF7E6;color:#B8760F}
+.badge.high{background:#FFE8D6;color:#C2410C}
+.badge.urgent{background:#FEE2E2;color:#B91C1C}
+
+/* ---------- 规则卡片 ---------- */
+.rule-card{background:#F7F9FA;border-left:3px solid #1C7A6E;border-radius:0 6px 6px 0;padding:14px;margin-bottom:12px}
+.rule-card .rid{font-family:monospace;background:#E6F2EF;color:#1C7A6E;padding:2px 8px;border-radius:3px;font-size:12px;margin-right:8px}
+.rule-card .rpri{font-size:12px;color:#97A3AC;margin-left:6px}
+.rule-card .rcond{font-family:monospace;font-size:12px;color:#47535C;margin-top:8px;padding:8px;background:#fff;border-radius:4px;overflow-x:auto}
+.rule-card .rexpl{font-size:12px;color:#6B7883;margin-top:6px}
+
+/* ---------- 模态 ---------- */
+.modal-backdrop{position:fixed;inset:0;background:rgba(32,50,72,.5);display:flex;align-items:center;justify-content:center;z-index:100}
+.modal-box{background:#fff;border-radius:12px;padding:28px;max-width:720px;width:90%;max-height:85vh;overflow-y:auto;box-shadow:0 20px 60px rgba(32,50,72,.2)}
+
+/* ---------- 报告 ---------- */
+.report-wrapper{margin-top:20px}
+.report-section{margin-bottom:28px}
+.report-section h3{color:#1C7A6E;font-size:16px;border-bottom:2px solid #E1E7EC;padding-bottom:8px;margin-bottom:14px}
+.metric-card{background:#F7F9FA;border-radius:8px;padding:18px;text-align:center}
+.metric-card .num{font-size:32px;font-weight:700;color:#203248}
+.metric-card .lbl{font-size:12px;color:#6B7883;margin-top:4px}
+.metric-card .sub{font-size:11px;color:#97A3AC;margin-top:6px}
+
+/* ---------- 侧边栏（admin） ---------- */
+.admin-layout{display:flex;gap:24px;max-width:1400px;margin:0 auto;padding:32px 24px 80px}
+.admin-sidebar{width:220px;flex-shrink:0;background:#fff;border-radius:10px;padding:20px 0;box-shadow:0 2px 12px rgba(32,50,72,.06);height:fit-content;position:sticky;top:80px}
+.admin-sidebar .menu-title{font-size:11px;color:#97A3AC;text-transform:uppercase;letter-spacing:1px;padding:0 20px;margin:16px 0 8px}
+.admin-sidebar .menu-item{display:flex;align-items:center;gap:10px;padding:10px 20px;color:#47535C;font-size:14px;cursor:pointer;transition:.2s;border-left:3px solid transparent}
+.admin-sidebar .menu-item:hover{background:#F7F9FA;color:#1C7A6E}
+.admin-sidebar .menu-item.active{background:#E6F2EF;color:#1C7A6E;border-left-color:#1C7A6E;font-weight:600}
+.admin-main{flex:1;min-width:0}
+
+/* ---------- 功能卡片 ---------- */
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin:28px 0}
+.feature-card{background:#fff;border-radius:10px;padding:22px;border:1px solid #EEF2F5;transition:.2s}
+.feature-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(28,122,110,.12);border-color:#1C7A6E}
+.feature-card .icon{width:44px;height:44px;background:#E6F2EF;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:14px}
+.feature-card h4{margin:0 0 8px 0;font-size:15px;color:#203248}
+.feature-card p{margin:0;font-size:13px;color:#6B7883;line-height:1.6}
+
+/* ---------- 竞品对比表（首页） ---------- */
+.compare-table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px;margin-top:16px;border-radius:8px;overflow:hidden;border:1px solid #EEF2F5}
+.compare-table th{background:#F7F9FA;color:#47535C;font-weight:600;padding:12px;text-align:left;border-bottom:2px solid #EEF2F5}
+.compare-table td{padding:12px;border-bottom:1px solid #EEF2F5}
+.compare-table tr:last-child td{border-bottom:none}
+.compare-table .ours{background:#E6F2EF;color:#1C7A6E;font-weight:600}
+.compare-table .tick{color:#287855}
+.compare-table .cross{color:#C2410C}
+
+/* ---------- 底部 ---------- */
+footer{text-align:center;color:#97A3AC;font-size:12px;padding:32px 24px;border-top:1px solid #EEF2F5;margin-top:48px}
+
+/* ---------- 图表容器 ---------- */
+.chart-wrap{background:#fff;border-radius:10px;padding:20px;border:1px solid #EEF2F5}
+
+/* ---------- 进度环 ---------- */
+.progress-ring-container{display:flex;justify-content:center;margin:20px 0}
+
+/* ---------- 响应式 ---------- */
+@media(max-width:768px){
+  .topbar{padding:12px 16px;flex-wrap:wrap;gap:8px}
+  .hero{padding:36px 24px}
+  .hero h1{font-size:24px}
+  .stat-grid{grid-template-columns:repeat(2,1fr)}
+  .admin-layout{flex-direction:column}
+  .admin-sidebar{position:static;width:100%;display:flex;overflow-x:auto}
+  .admin-sidebar .menu-item{white-space:nowrap}
+}
