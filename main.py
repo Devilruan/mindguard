@@ -201,6 +201,10 @@ def breathing():
 def mood_journal_page():
     return _read_html('mood_journal.html')
 
+@app.get('/healing', response_class=HTMLResponse)
+def healing_page():
+    return _read_html('healing.html')
+
 @app.get('/cbt', response_class=HTMLResponse)
 def cbt_page():
     return _read_html('cbt.html')

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MindGuard · 心理资源</title>
   <link rel="icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/static/css/app.css">
+  <link rel="stylesheet" href="/static/css/app.css?v=4.6">
 </head>
 <body>
 
@@ -37,8 +37,8 @@
     <!-- 全国热线 -->
     <section style="margin-top:36px">
       <h3 style="color:#F8FAFC;font-size:18px;font-weight:700;margin-bottom:20px">📞 全国心理援助热线</h3>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px">
-        <div class="card" style="padding:24px;border-left:3px solid #EF4444">
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:20px">
+        <div class="card lg-glow hotline-card" style="padding:24px;--glow-color:rgba(239,68,68,0.14);--strip-color:rgba(239,68,68,0.55);border-left:3px solid var(--strip-color)">
           <div style="display:flex;justify-content:space-between;align-items:start">
             <div>
               <div style="font-size:13px;color:#94A3B8;margin-bottom:4px">全国心理援助热线</div>
@@ -48,7 +48,7 @@
           </div>
           <div style="font-size:12px;color:#64748B;margin-top:10px">北京心理危机研究与干预中心</div>
         </div>
-        <div class="card" style="padding:24px;border-left:3px solid #2DD4BF">
+        <div class="card lg-glow hotline-card" style="padding:24px;--glow-color:rgba(45,212,191,0.14);--strip-color:rgba(45,212,191,0.55);border-left:3px solid var(--strip-color)">
           <div style="display:flex;justify-content:space-between;align-items:start">
             <div>
               <div style="font-size:13px;color:#94A3B8;margin-bottom:4px">生命热线</div>
@@ -58,7 +58,7 @@
           </div>
           <div style="font-size:12px;color:#64748B;margin-top:10px">上海市心理援助热线</div>
         </div>
-        <div class="card" style="padding:24px;border-left:3px solid #818CF8">
+        <div class="card lg-glow hotline-card" style="padding:24px;--glow-color:rgba(129,140,248,0.14);--strip-color:rgba(129,140,248,0.55);border-left:3px solid var(--strip-color)">
           <div style="display:flex;justify-content:space-between;align-items:start">
             <div>
               <div style="font-size:13px;color:#94A3B8;margin-bottom:4px">希望 24 热线</div>
@@ -68,7 +68,7 @@
           </div>
           <div style="font-size:12px;color:#64748B;margin-top:10px">全国公益心理援助</div>
         </div>
-        <div class="card" style="padding:24px;border-left:3px solid #FBBF24">
+        <div class="card lg-glow hotline-card" style="padding:24px;--glow-color:rgba(251,191,36,0.14);--strip-color:rgba(251,191,36,0.55);border-left:3px solid var(--strip-color)">
           <div style="display:flex;justify-content:space-between;align-items:start">
             <div>
               <div style="font-size:13px;color:#94A3B8;margin-bottom:4px">心理危机干预热线</div>
@@ -85,23 +85,23 @@
     <section style="margin-top:40px">
       <h3 style="color:#F8FAFC;font-size:18px;font-weight:700;margin-bottom:6px">🎯 干预方案（基于风险级别自动匹配）</h3>
       <p style="color:#94A3B8;font-size:13px;margin-bottom:20px">做完测评后，系统会根据你的风险等级推荐以下方案</p>
-      <div id="resourceCards" class="feature-grid">
-        <div class="feature-card">
+      <div id="resourceCards" class="feature-grid" style="grid-template-columns:repeat(2,1fr);gap:20px">
+        <div class="feature-card lg-glow" style="--glow-color:rgba(45,212,191,0.15);">
           <div class="icon-wrap">🟢</div>
           <h4>低风险 · 自我觉察</h4>
           <p>每日一句 + 呼吸训练 + 心情打卡。保持规律作息，适度运动，和信任的人聊聊天。</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card lg-glow" style="--glow-color:rgba(251,191,36,0.15);">
           <div class="icon-wrap">🟡</div>
           <h4>中风险 · CBT 自助</h4>
           <p>认知扭曲检测 + CBT 重构练习 + 规律呼吸。识别让你情绪变坏的思维模式。</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card lg-glow" style="--glow-color:rgba(249,115,22,0.15);">
           <div class="icon-wrap">🟠</div>
           <h4>高风险 · 专业支持</h4>
           <p>强烈建议联系学校心理老师或预约心理咨询。你也可以拨打上方的援助热线。</p>
         </div>
-        <div class="feature-card">
+        <div class="feature-card lg-glow" style="--glow-color:rgba(239,68,68,0.14);">
           <div class="icon-wrap">🔴</div>
           <h4>极高风险 · 立即行动</h4>
           <p>请立即拨打 400-161-9995 或 120。不要一个人扛，求助本身就是勇敢。</p>
@@ -111,7 +111,7 @@
 
     <!-- 温馨提示 -->
     <section style="margin-top:40px">
-      <div style="background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.2);border-radius:16px;padding:28px">
+      <div class="tip-panel" style="background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.28);border-radius:20px;padding:28px;backdrop-filter:blur(18px) saturate(180%);-webkit-backdrop-filter:blur(18px) saturate(180%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.18), 0 8px 28px rgba(2,8,23,0.3)">
         <div style="display:flex;gap:14px;align-items:flex-start">
           <div style="font-size:24px;flex-shrink:0">💛</div>
           <div>
@@ -133,12 +133,12 @@
     fetch('/api/features/intervention-resources').then(r => r.json()).then(data => {
       const grid = document.getElementById('resourceCards');
       if (data && data.resources && grid) {
-        grid.innerHTML = data.resources.map(r => 
-          <div class="feature-card">
-            <div class="icon-wrap"></div>
-            <h4></h4>
-            <p></p>
-          </div>
+        grid.innerHTML = data.resources.map(r =>
+          '<div class="feature-card">' +
+            '<div class="icon-wrap">' + (r.icon || '💡') + '</div>' +
+            '<h4>' + (r.name || '') + '</h4>' +
+            '<p>' + (r.desc || '') + '</p>' +
+          '</div>'
         ).join('');
       }
     }).catch(() => {});
@@ -147,6 +147,6 @@
   <footer>
     MindGuard · 神经符号心理健康风险智能筛查系统 · 让每一次判断都有据可循
   </footer>
-  <script src="/static/js/app.js"></script>
+  <script src="/static/js/app.js?v=4.6"></script>
 </body>
 </html>

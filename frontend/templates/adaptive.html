@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>自适应测评 · MindGuard</title>
   <link rel="icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/static/css/app.css">
-  <link rel="stylesheet" href="/static/css/vendor/
+  <link rel="stylesheet" href="/static/css/app.css?v=4.6">
+  <link rel="stylesheet" href="/static/css/vendor/bootstrap-icons.min.css?v=3.0">
 </head>
 <body>
 
@@ -36,13 +36,13 @@
             对你答过的每一题都在更新对你的了解，用更少的题，得到更准的结果。
           </p>
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px">
-            <div style="background:rgba(14,165,153,0.12);border:1px solid rgba(14,165,153,0.25);border-radius:10px;padding:12px 16px;font-size:13px;color:#2DD4BF">
+            <div class="cat-pill lg-glow" style="--glow-color:rgba(45,212,191,0.15);color:#2DD4BF;">
               📊 <strong>50+</strong> 多维题库
             </div>
-            <div style="background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.25);border-radius:10px;padding:12px 16px;font-size:13px;color:#A5B4FC">
+            <div class="cat-pill lg-glow" style="--glow-color:rgba(129,140,248,0.16);color:#A5B4FC;">
               🎲 <strong>贝叶斯</strong> 概率更新
             </div>
-            <div style="background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.25);border-radius:10px;padding:12px 16px;font-size:13px;color:#FBBF24">
+            <div class="cat-pill lg-glow" style="--glow-color:rgba(251,191,36,0.16);color:#FBBF24;">
               ⚡ <strong>20 题</strong> 上限自动停止
             </div>
           </div>
@@ -121,7 +121,7 @@
     MindGuard · 神经符号心理健康风险智能筛查系统
   </footer>
 
-  <script src="/static/js/app.js"></script>
+  <script src="/static/js/app.js?v=4.6"></script>
   <script src="/static/js/echarts.min.js"></script>
 <script>
 /* ═══════════════════════════════════════════════════════════
@@ -136,7 +136,7 @@ fetch('/api/adaptive/info').then(r => r.json()).then(info => {
   const grid = document.getElementById('dimPreview');
   Object.values(info.dimensions).forEach(m => {
     grid.insertAdjacentHTML('beforeend', `
-      <div class="feature-card">
+      <div class="feature-card lg-glow" style="--glow-color:${m.color}22">
         <div class="icon-wrap" style="background:linear-gradient(135deg, ${m.color}22, ${m.color}15)">
           ${m.icon}
         </div>
@@ -145,6 +145,7 @@ fetch('/api/adaptive/info').then(r => r.json()).then(info => {
       </div>
     `);
   });
+  if (window.initLiquidGlow) initLiquidGlow();
 });
 
 function startTest() {
@@ -206,7 +207,7 @@ function showResult(result) {
   if (typeof applyMoodTheme !== 'undefined') applyMoodTheme(result.risk_level);
 
   // 综合分数
-  document.getElementById('overallScore').textContent = result.overall_score;
+  rollScore(document.getElementById('overallScore'), result.overall_score);
   const riskLabel = document.getElementById('riskLabel');
   riskLabel.textContent = result.risk_level_cn;
   const riskColors = { low: '#2DD4BF', medium: '#FBBF24', high: '#C97B3A', urgent: '#EF4444' };
@@ -215,32 +216,40 @@ function showResult(result) {
 
   document.getElementById('aiSummary').textContent = result.ai_summary;
 
-  // 8 维卡片
+  // 8 维卡片：错峰入场 + 色条从 0 填充
   const grid = document.getElementById('dimGrid');
   grid.innerHTML = '';
+  let di = 0;
+  const fills = [];
   Object.entries(result.dimensions).forEach(([k, d]) => {
     const barColor = riskColors[d.level] || '#94A3B8';
     grid.insertAdjacentHTML('beforeend', `
-      <div class="dim-card">
+      <div class="dim-card glow-${d.level}" style="animation-delay:${di * 90}ms">
         <div class="dim-header">
           <div class="dim-name">${d.icon} ${d.name}</div>
           <div class="dim-score ${d.level}" style="color:${barColor}">${d.score}</div>
         </div>
-        <div class="dim-bar"><div class="dim-bar-fill" style="width:${d.score}%;background:${barColor}"></div></div>
+        <div class="dim-bar"><div class="dim-bar-fill" data-score="${d.score}" style="width:0%;background:${barColor}"></div></div>
         <div class="dim-suggestion">${d.suggestion}</div>
       </div>
     `);
+    fills.push(grid.lastElementChild.querySelector('.dim-bar-fill'));
+    di++;
+  });
+  // 卡片入场后色条填充动画（错峰）
+  fills.forEach((f, i) => {
+    setTimeout(() => { f.style.width = f.dataset.score + '%'; }, 260 + i * 90);
   });
 
   // 雷达图
   renderRadar(result);
 
-  // 规则链
+  // 规则链（错峰滑入）
   if (result.activated_rules && result.activated_rules.length) {
     const list = document.getElementById('rulesList');
-    result.activated_rules.forEach(r => {
+    result.activated_rules.forEach((r, i) => {
       list.insertAdjacentHTML('beforeend', `
-        <div class="rule-card">
+        <div class="rule-card glow-low" style="animation-delay:${i * 80}ms">
           <span class="rid">${r.rule_id}</span>${r.explain}
         </div>
       `);
@@ -248,12 +257,31 @@ function showResult(result) {
   } else {
     document.getElementById('rulesSection').style.display = 'none';
   }
+
+  // 动态卡片（8维+规则链）全部渲染后补光斑层
+  if (window.initLiquidGlow) initLiquidGlow();
+}
+
+// 综合指数数字滚动（cubicOut 缓动）
+function rollScore(el, target) {
+  const dur = 1300, t0 = performance.now();
+  const fmt = v => (v % 1 === 0 ? String(v) : v.toFixed(1));
+  function tick(t) {
+    const p = Math.min((t - t0) / dur, 1);
+    const e = 1 - Math.pow(1 - p, 3);
+    el.textContent = fmt(target * e);
+    if (p < 1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
 }
 
 function renderRadar(result) {
   const chart = echarts.init(document.getElementById('radarChart'));
   chart.setOption({
     backgroundColor: 'transparent',
+    animation: true,
+    animationDuration: 1800,
+    animationEasing: 'cubicOut',
     tooltip: {
       trigger: 'item',
       backgroundColor: 'rgba(11,17,32,0.9)',

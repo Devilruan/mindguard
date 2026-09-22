@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/static/css/app.css">
+  <link rel="stylesheet" href="/static/css/app.css?v=4.6">
 </head>
 <body>
   <header class="topbar">
@@ -32,11 +32,11 @@
           <div style="font-size:16px;font-weight:600;color:#F8FAFC">今天心情怎么样？</div>
         </div>
         <div id="moodPicker" style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap">
-          <button class="mood-btn" data-mood="5" style="font-size:28px;padding:12px 16px;border-radius:12px;border:2px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.02);cursor:pointer;transition:.2s">😄</button>
-          <button class="mood-btn" data-mood="4" style="font-size:28px;padding:12px 16px;border-radius:12px;border:2px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.02);cursor:pointer;transition:.2s">🙂</button>
-          <button class="mood-btn" data-mood="3" style="font-size:28px;padding:12px 16px;border-radius:12px;border:2px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.02);cursor:pointer;transition:.2s">😐</button>
-          <button class="mood-btn" data-mood="2" style="font-size:28px;padding:12px 16px;border-radius:12px;border:2px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.02);cursor:pointer;transition:.2s">😔</button>
-          <button class="mood-btn" data-mood="1" style="font-size:28px;padding:12px 16px;border-radius:12px;border:2px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.02);cursor:pointer;transition:.2s">😢</button>
+          <button class="mood-btn" data-mood="5" style="font-size:28px;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,0.16);background:rgba(255,255,255,0.06);cursor:pointer;transition:all .4s cubic-bezier(.22,1,.36,1);backdrop-filter:blur(12px) saturate(170%);-webkit-backdrop-filter:blur(12px) saturate(170%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.14)">😄</button>
+          <button class="mood-btn" data-mood="4" style="font-size:28px;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,0.16);background:rgba(255,255,255,0.06);cursor:pointer;transition:all .4s cubic-bezier(.22,1,.36,1);backdrop-filter:blur(12px) saturate(170%);-webkit-backdrop-filter:blur(12px) saturate(170%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.14)">🙂</button>
+          <button class="mood-btn" data-mood="3" style="font-size:28px;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,0.16);background:rgba(255,255,255,0.06);cursor:pointer;transition:all .4s cubic-bezier(.22,1,.36,1);backdrop-filter:blur(12px) saturate(170%);-webkit-backdrop-filter:blur(12px) saturate(170%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.14)">😐</button>
+          <button class="mood-btn" data-mood="2" style="font-size:28px;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,0.16);background:rgba(255,255,255,0.06);cursor:pointer;transition:all .4s cubic-bezier(.22,1,.36,1);backdrop-filter:blur(12px) saturate(170%);-webkit-backdrop-filter:blur(12px) saturate(170%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.14)">😔</button>
+          <button class="mood-btn" data-mood="1" style="font-size:28px;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,0.16);background:rgba(255,255,255,0.06);cursor:pointer;transition:all .4s cubic-bezier(.22,1,.36,1);backdrop-filter:blur(12px) saturate(170%);-webkit-backdrop-filter:blur(12px) saturate(170%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.14)">😢</button>
         </div>
         <textarea id="moodNote" placeholder="一句话记录今天（可选，比如：\n"今天天气很好，考试也顺利"）" rows="2" style="font-size:14px;margin-bottom:16px"></textarea>
         <div style="display:flex;gap:12px;align-items:center">
@@ -59,11 +59,13 @@
   document.querySelectorAll('.mood-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.mood-btn').forEach(b => {
-        b.style.background = 'rgba(255,255,255,0.02)';
-        b.style.borderColor = 'rgba(255,255,255,0.1)';
+        b.style.background = 'rgba(255,255,255,0.06)';
+        b.style.borderColor = 'rgba(255,255,255,0.16)';
+        b.style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,0.14)';
       });
-      btn.style.background = 'rgba(45,212,191,0.2)';
+      btn.style.background = 'rgba(45,212,191,0.22)';
       btn.style.borderColor = '#2DD4BF';
+      btn.style.boxShadow = 'inset 0 1px 0 rgba(255,255,255,0.2), 0 4px 18px rgba(45,212,191,0.3)';
       selectedMood = parseInt(btn.dataset.mood);
     });
   });
@@ -110,6 +112,6 @@
   </script>
 
   <footer>MindGuard · 神经符号心理健康风险智能筛查系统</footer>
-  <script src="/static/js/app.js"></script>
+  <script src="/static/js/app.js?v=4.6"></script>
 </body>
 </html>

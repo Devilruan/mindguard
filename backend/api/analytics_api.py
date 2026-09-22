@@ -222,14 +222,36 @@ def urgent_queue(db: Session = Depends(get_db)):
         if features and features.get('text_suicide_risk', 0) > 0:
             suicide_flag = True
 
+        # 触发的规则 ID 列表（供后台预警队列展示）
+        triggered = []
+        if s.activated_rules:
+            try:
+                rules = json.loads(s.activated_rules) if isinstance(s.activated_rules, str) else s.activated_rules
+                triggered = [r.get('rule_id', '') for r in rules if isinstance(r, dict) and r.get('rule_id')]
+            except Exception:
+                triggered = []
+        # 干预工单状态
+        iv_status = None
+        if s.intervention_id:
+            try:
+                iv = db.query(Intervention).filter(Intervention.id == s.intervention_id).first()
+                iv_status = iv.status if iv else None
+            except Exception:
+                iv_status = None
+
         out.append({
             'session_id': s.id,
             'anon_id': u.anon_id if u else None,
+            'grade': u.grade if u else None,
             'risk_level': s.overall_risk_level,
             'risk_score': round(s.overall_risk_score, 1),
-            'created_at': s.created_at.isoformat() if s.created_at else None,
+            'suicide_risk': s.suicide_risk_score or 0,
             'suicide_flag': suicide_flag,
+            'created_at': s.created_at.isoformat() if s.created_at else None,
             'duration_sec': s.duration_sec,
+            'triggered_rules': triggered,
+            'has_intervention': s.intervention_id is not None,
+            'intervention_status': iv_status,
         })
 
     return out

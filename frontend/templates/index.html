@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MindGuard · 让每一次心理健康评估都更懂你</title>
   <link rel="icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/static/css/app.css">
+  <link rel="stylesheet" href="/static/css/app.css?v=4.6">
 </head>
 <body>
 
@@ -55,12 +55,14 @@
         <!-- 方式 1：自适应（主推） -->
         <a href="/adaptive" style="text-decoration:none">
           <div style="
-            background:linear-gradient(135deg, rgba(45,212,191,0.08) 0%, rgba(129,140,248,0.08) 100%);
-            border:1.5px solid rgba(45,212,191,0.3);
+            background:linear-gradient(135deg, rgba(45,212,191,0.12) 0%, rgba(129,140,248,0.12) 100%);
+            border:1px solid rgba(255,255,255,0.18);
             border-radius:20px;padding:32px;
-            transition:all .3s;position:relative;overflow:hidden;cursor:block;
-          " onmouseover="this.style.borderColor='rgba(45,212,191,0.6)';this.style.transform='translateY(-3px)';this.style.boxShadow='0 20px 40px rgba(0,0,0,0.4)'" onmouseout="this.style.borderColor='rgba(45,212,191,0.3)';this.style.transform='';this.style.boxShadow=''">
-            <div style="position:absolute;top:16px;right:16px;background:rgba(45,212,191,0.2);color:#2DD4BF;padding:4px 12px;border-radius:100px;font-size:12px;font-weight:600">✨ 推荐</div>
+            transition:all .5s cubic-bezier(.22,1,.36,1);position:relative;overflow:hidden;cursor:pointer;
+            backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
+            box-shadow:inset 0 1px 0 rgba(255,255,255,0.28), inset 0 -1px 0 rgba(0,0,0,0.16), 0 8px 32px rgba(2,8,23,0.4);
+          " onmouseover="this.style.borderColor='rgba(45,212,191,0.6)';this.style.transform='translateY(-3px)';this.style.boxShadow='inset 0 1px 0 rgba(255,255,255,0.32), inset 0 -1px 0 rgba(0,0,0,0.16), 0 20px 48px rgba(2,8,23,0.5)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.18)';this.style.transform='';this.style.boxShadow='inset 0 1px 0 rgba(255,255,255,0.28), inset 0 -1px 0 rgba(0,0,0,0.16), 0 8px 32px rgba(2,8,23,0.4)'">
+            <div style="position:absolute;top:16px;right:16px;background:rgba(45,212,191,0.2);color:#2DD4BF;padding:4px 12px;border-radius:100px;font-size:12px;font-weight:600;border:1px solid rgba(45,212,191,0.35)">✨ 推荐</div>
             <div style="font-size:40px;margin-bottom:12px">🎯</div>
             <div style="font-size:20px;font-weight:700;color:#F8FAFC;margin-bottom:8px;letter-spacing:-0.01em">自适应智能测评</div>
             <div style="color:#CBD5E1;font-size:14px;line-height:1.7;margin-bottom:16px">
@@ -78,11 +80,13 @@
         <!-- 方式 2：经典量表 -->
         <a href="/screening" style="text-decoration:none">
           <div style="
-            background:rgba(255,255,255,0.03);
-            border:1px solid rgba(255,255,255,0.1);
+            background:rgba(255,255,255,0.07);
+            border:1px solid rgba(255,255,255,0.16);
             border-radius:20px;padding:32px;
-            transition:all .3s;cursor:block;height:100%;
-          " onmouseover="this.style.borderColor='rgba(255,255,255,0.2)';this.style.background='rgba(255,255,255,0.05)';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.1)';this.style.background='rgba(255,255,255,0.03)';this.style.transform=''">
+            transition:all .5s cubic-bezier(.22,1,.36,1);cursor:pointer;height:100%;
+            backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);
+            box-shadow:inset 0 1px 0 rgba(255,255,255,0.28), inset 0 -1px 0 rgba(0,0,0,0.16), 0 8px 32px rgba(2,8,23,0.4);
+          " onmouseover="this.style.borderColor='rgba(255,255,255,0.32)';this.style.background='rgba(255,255,255,0.1)';this.style.transform='translateY(-3px)';this.style.boxShadow='inset 0 1px 0 rgba(255,255,255,0.32), inset 0 -1px 0 rgba(0,0,0,0.16), 0 20px 48px rgba(2,8,23,0.5)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.16)';this.style.background='rgba(255,255,255,0.07)';this.style.transform='';this.style.boxShadow='inset 0 1px 0 rgba(255,255,255,0.28), inset 0 -1px 0 rgba(0,0,0,0.16), 0 8px 32px rgba(2,8,23,0.4)'">
             <div style="font-size:40px;margin-bottom:12px">📋</div>
             <div style="font-size:18px;font-weight:700;color:#F8FAFC;margin-bottom:8px">经典 PHQ-9 / GAD-7</div>
             <div style="color:#CBD5E1;font-size:13px;line-height:1.7;margin-bottom:16px">
@@ -109,8 +113,8 @@
         <div style="position:absolute;top:56px;left:12%;right:12%;height:3px;background:linear-gradient(90deg,#2DD4BF 0%,#818CF8 40%,#FBBF24 70%,#EF4444 100%);border-radius:100px;opacity:.35;z-index:0"></div>
 
         <!-- Step 1 -->
-        <a href="/adaptive" style="text-decoration:none;position:relative;z-index:1" onmouseover="this.querySelector('.step-card').style.transform='translateY(-4px)';this.querySelector('.step-card').style.borderColor='rgba(45,212,191,0.4)'" onmouseout="this.querySelector('.step-card').style.transform='';this.querySelector('.step-card').style.borderColor='rgba(45,212,191,0.18)'">
-          <div class="step-card" style="text-align:center;padding:28px 16px;background:rgba(45,212,191,0.05);border:1px solid rgba(45,212,191,0.18);border-radius:16px;transition:all .3s">
+        <a href="/adaptive" style="text-decoration:none;position:relative;z-index:1" onmouseover="this.querySelector('.step-card').style.transform='translateY(-5px)';this.querySelector('.step-card').style.borderColor='rgba(45,212,191,0.4)'" onmouseout="this.querySelector('.step-card').style.transform='';this.querySelector('.step-card').style.borderColor='rgba(45,212,191,0.18)'">
+          <div class="step-card" style="text-align:center;padding:28px 16px;background:rgba(45,212,191,0.09);border:1px solid rgba(45,212,191,0.28);border-radius:16px;transition:all .5s cubic-bezier(.22,1,.36,1);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.24), 0 8px 28px rgba(2,8,23,0.35)">
             <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#2DD4BF,#818CF8);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:20px;font-weight:700;color:#0F172A">1</div>
             <div style="font-size:22px;margin-bottom:8px">🎯</div>
             <div style="font-size:14px;font-weight:600;color:#F8FAFC;margin-bottom:4px">智能测评</div>
@@ -119,8 +123,8 @@
         </a>
 
         <!-- Step 2 -->
-        <a href="#" style="text-decoration:none;position:relative;z-index:1" onmouseover="this.querySelector('.step-card').style.transform='translateY(-4px)';this.querySelector('.step-card').style.borderColor='rgba(129,140,248,0.4)'" onmouseout="this.querySelector('.step-card').style.transform='';this.querySelector('.step-card').style.borderColor='rgba(129,140,248,0.18)'">
-          <div class="step-card" style="text-align:center;padding:28px 16px;background:rgba(129,140,248,0.05);border:1px solid rgba(129,140,248,0.18);border-radius:16px;transition:all .3s;cursor:default">
+        <a href="#" style="text-decoration:none;position:relative;z-index:1" onmouseover="this.querySelector('.step-card').style.transform='translateY(-5px)';this.querySelector('.step-card').style.borderColor='rgba(129,140,248,0.4)'" onmouseout="this.querySelector('.step-card').style.transform='';this.querySelector('.step-card').style.borderColor='rgba(129,140,248,0.18)'">
+          <div class="step-card" style="text-align:center;padding:28px 16px;background:rgba(129,140,248,0.09);border:1px solid rgba(129,140,248,0.28);border-radius:16px;transition:all .5s cubic-bezier(.22,1,.36,1);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.24), 0 8px 28px rgba(2,8,23,0.35)">
             <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#818CF8,#C7D2FE);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:20px;font-weight:700;color:#0F172A">2</div>
             <div style="font-size:22px;margin-bottom:8px">📊</div>
             <div style="font-size:14px;font-weight:600;color:#F8FAFC;margin-bottom:4px">多维洞察</div>
@@ -129,8 +133,8 @@
         </a>
 
         <!-- Step 3 -->
-        <a href="/breathing" style="text-decoration:none;position:relative;z-index:1" onmouseover="this.querySelector('.step-card').style.transform='translateY(-4px)';this.querySelector('.step-card').style.borderColor='rgba(251,191,36,0.4)'" onmouseout="this.querySelector('.step-card').style.transform='';this.querySelector('.step-card').style.borderColor='rgba(251,191,36,0.18)'">
-          <div class="step-card" style="text-align:center;padding:28px 16px;background:rgba(251,191,36,0.05);border:1px solid rgba(251,191,36,0.18);border-radius:16px;transition:all .3s">
+        <a href="/healing" style="text-decoration:none;position:relative;z-index:1" onmouseover="this.querySelector('.step-card').style.transform='translateY(-5px)';this.querySelector('.step-card').style.borderColor='rgba(251,191,36,0.4)'" onmouseout="this.querySelector('.step-card').style.transform='';this.querySelector('.step-card').style.borderColor='rgba(251,191,36,0.18)'">
+          <div class="step-card" style="text-align:center;padding:28px 16px;background:rgba(251,191,36,0.09);border:1px solid rgba(251,191,36,0.28);border-radius:16px;transition:all .5s cubic-bezier(.22,1,.36,1);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.24), 0 8px 28px rgba(2,8,23,0.35)">
             <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#FBBF24,#F97316);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:20px;font-weight:700;color:#0F172A">3</div>
             <div style="font-size:22px;margin-bottom:8px">🌬️</div>
             <div style="font-size:14px;font-weight:600;color:#F8FAFC;margin-bottom:4px">即时疗愈</div>
@@ -139,8 +143,8 @@
         </a>
 
         <!-- Step 4 -->
-        <a href="/cbt" style="text-decoration:none;position:relative;z-index:1" onmouseover="this.querySelector('.step-card').style.transform='translateY(-4px)';this.querySelector('.step-card').style.borderColor='rgba(239,68,68,0.4)'" onmouseout="this.querySelector('.step-card').style.transform='';this.querySelector('.step-card').style.borderColor='rgba(239,68,68,0.18)'">
-          <div class="step-card" style="text-align:center;padding:28px 16px;background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.18);border-radius:16px;transition:all .3s">
+        <a href="/cbt" style="text-decoration:none;position:relative;z-index:1" onmouseover="this.querySelector('.step-card').style.transform='translateY(-5px)';this.querySelector('.step-card').style.borderColor='rgba(239,68,68,0.4)'" onmouseout="this.querySelector('.step-card').style.transform='';this.querySelector('.step-card').style.borderColor='rgba(239,68,68,0.18)'">
+          <div class="step-card" style="text-align:center;padding:28px 16px;background:rgba(239,68,68,0.09);border:1px solid rgba(239,68,68,0.28);border-radius:16px;transition:all .5s cubic-bezier(.22,1,.36,1);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);box-shadow:inset 0 1px 0 rgba(255,255,255,0.24), 0 8px 28px rgba(2,8,23,0.35)">
             <div style="width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#EF4444,#DC2626);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;font-size:20px;font-weight:700;color:#fff">4</div>
             <div style="font-size:22px;margin-bottom:8px">🧠</div>
             <div style="font-size:14px;font-weight:600;color:#F8FAFC;margin-bottom:4px">深度干预</div>
@@ -250,6 +254,6 @@
     MindGuard · 神经符号心理健康风险智能筛查系统 · 让每一次判断都有据可循
   </footer>
 
-  <script src="/static/js/app.js"></script>
+  <script src="/static/js/app.js?v=4.6"></script>
 </body>
 </html>

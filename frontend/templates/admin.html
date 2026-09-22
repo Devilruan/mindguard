@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <title>管理员后台 · 多模态心理健康风险筛查系统</title>
   <link rel="icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/static/css/app.css">
-  <link rel="stylesheet" href="/static/css/vendor/
+  <link rel="stylesheet" href="/static/css/app.css?v=4.6">
+  <link rel="stylesheet" href="/static/css/vendor/bootstrap-icons.min.css?v=3.0"
   <script src="/static/js/echarts.min.js"></script>
 </head>
 <body>
@@ -36,7 +36,7 @@
       <div class="menu-item" :class="{active:tab==='alerts'}" @click="switchTab('alerts')">
         <i class="bi bi-exclamation-triangle"></i>预警队列
         <span v-if="urgentCount>0"
-              style="margin-left:auto;background:#AC4E42;color:#fff;font-size:11px;padding:1px 7px;border-radius:10px;">[[ urgentCount ]]</span>
+              style="margin-left:auto;background:#F87171;color:#fff;font-size:11px;padding:1px 7px;border-radius:10px;">[[ urgentCount ]]</span>
       </div>
       <div class="menu-item" :class="{active:tab==='sessions'}" @click="switchTab('sessions')">
         <i class="bi bi-clipboard-data"></i>筛查会话
@@ -51,7 +51,7 @@
       <div class="menu-item" :class="{active:tab==='interventions'}" @click="switchTab('interventions')">
         <i class="bi bi-bell"></i>干预工单
         <span v-if="interventionCounts.pending>0"
-              style="margin-left:auto;background:#B91C1C;color:#fff;font-size:11px;padding:1px 7px;border-radius:10px;">[[ interventionCounts.pending ]]</span>
+              style="margin-left:auto;background:#F87171;color:#fff;font-size:11px;padding:1px 7px;border-radius:10px;">[[ interventionCounts.pending ]]</span>
       </div>
 
       <div class="menu-title">系统</div>
@@ -69,22 +69,22 @@
           <div class="stat-box"><div class="big">[[ stats.total_sessions ]]</div><div class="lbl">累计筛查会话</div></div>
           <div class="stat-box"><div class="big">[[ stats.total_users ]]</div><div class="lbl">独立匿名用户</div></div>
           <div class="stat-box"><div class="big" style="color:#D97706;">[[ stats.sessions_last_7_days ]]</div><div class="lbl">近 7 天筛查</div></div>
-          <div class="stat-box"><div class="big" style="color:#AC4E42;">[[ stats.urgent_pending ]]</div><div class="lbl">极高风险待预警</div></div>
+          <div class="stat-box"><div class="big" style="color:#F87171;">[[ stats.urgent_pending ]]</div><div class="lbl">极高风险待预警</div></div>
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;">
           <div class="chart-wrap">
-            <div style="font-weight:600;color:#203248;margin-bottom:10px;">风险等级分布</div>
+            <div style="font-weight:600;color:#F5F7FB;margin-bottom:10px;">风险等级分布</div>
             <div id="riskChart" style="height:260px;"></div>
           </div>
           <div class="chart-wrap">
-            <div style="font-weight:600;color:#203248;margin-bottom:10px;">PHQ-9 / GAD-7 得分分布</div>
+            <div style="font-weight:600;color:#F5F7FB;margin-bottom:10px;">PHQ-9 / GAD-7 得分分布</div>
             <div id="scoreChart" style="height:260px;"></div>
           </div>
         </div>
 
-        <div class="chart-wrap" style="margin-top:16px;">
-          <div style="font-weight:600;color:#203248;margin-bottom:10px;">近 14 天筛查趋势</div>
+        <div class="chart-wrap" style="margin-top:24px;">
+          <div style="font-weight:600;color:#F5F7FB;margin-bottom:10px;">近 14 天筛查趋势</div>
           <div id="trendChart" style="height:220px;"></div>
         </div>
       </div>
@@ -98,31 +98,31 @@
           <div class="stat-box"><div class="big">[[ grades.length ]]</div><div class="lbl">覆盖年级</div></div>
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;">
           <div class="chart-wrap">
-            <div style="font-weight:600;color:#203248;margin-bottom:10px;">
-              <i class="bi bi-diagram-3" style="color:#1C7A6E;"></i> 规则命中率 TOP（评估规则有效性）
+            <div style="font-weight:600;color:#F5F7FB;margin-bottom:10px;">
+              <i class="bi bi-diagram-3" style="color:#2DD4BF;"></i> 规则命中率 TOP（评估规则有效性）
             </div>
             <div id="ruleHitsChart" style="height:280px;"></div>
           </div>
           <div class="chart-wrap">
-            <div style="font-weight:600;color:#203248;margin-bottom:10px;">
-              <i class="bi bi-grid-3x3-gap" style="color:#1C7A6E;"></i> 年级 × 风险等级 热力矩阵
+            <div style="font-weight:600;color:#F5F7FB;margin-bottom:10px;">
+              <i class="bi bi-grid-3x3-gap" style="color:#2DD4BF;"></i> 年级 × 风险等级 热力矩阵
             </div>
             <div id="heatmapChart" style="height:280px;"></div>
           </div>
         </div>
 
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:24px;">
           <div class="chart-wrap">
-            <div style="font-weight:600;color:#203248;margin-bottom:10px;">
-              <i class="bi bi-people" style="color:#1C7A6E;"></i> 专业分布
+            <div style="font-weight:600;color:#F5F7FB;margin-bottom:10px;">
+              <i class="bi bi-people" style="color:#2DD4BF;"></i> 专业分布
             </div>
             <div id="majorChart" style="height:260px;"></div>
           </div>
           <div class="chart-wrap">
-            <div style="font-weight:600;color:#203248;margin-bottom:10px;">
-              <i class="bi bi-graph-up-arrow" style="color:#1C7A6E;"></i> 未来 7 天筛查量预测
+            <div style="font-weight:600;color:#F5F7FB;margin-bottom:10px;">
+              <i class="bi bi-graph-up-arrow" style="color:#2DD4BF;"></i> 未来 7 天筛查量预测
             </div>
             <div id="forecastChart" style="height:260px;"></div>
           </div>
@@ -131,96 +131,84 @@
 
       <!-- 预警队列 -->
       <div v-if="tab==='alerts'">
-        <div class="card" style="padding:20px;">
+        <div class="card" style="padding:26px;">
           <div class="card-header">
-            <h3><i class="bi bi-exclamation-triangle" style="color:#AC4E42;"></i> 高危预警队列</h3>
-            <span>
-              <button class="btn ghost small" @click="loadAlerts">刷新</button>
-              <button class="btn small" style="margin-left:8px;" @click="sendAllAlerts">
-                <i class="bi bi-bell" style="margin-right:4px;"></i>批量推送全部预警
+            <h3><i class="bi bi-exclamation-triangle" style="color:#F87171;"></i> 高危预警队列</h3>
+            <span style="display:inline-flex;align-items:center;gap:14px;">
+              <button class="btn btn-ghost btn-sm" @click="loadAlerts">刷新</button>
+              <button class="btn btn-ghost btn-sm" @click="sendAllAlerts">
+                <i class="bi bi-bell" style="margin-right:7px;"></i>批量推送全部预警
               </button>
             </span>
           </div>
           <p class="tagline">聚合所有 <strong>高风险 / 极高风险</strong> 会话，按风险分降序排列。已创建干预工单的标绿，未处理的标红。</p>
 
-          <table>
-            <thead>
-              <tr><th>会话</th><th>匿名ID</th><th>年级</th><th>时间</th><th>风险分</th><th>自杀风险</th><th>触发规则</th><th>等级</th><th>工单</th></tr>
-            </thead>
-            <tbody>
-              <tr v-for="a in alerts.rows" :key="a.session_id">
-                <td>#[[ a.session_id ]]</td>
-                <td><code>[[ a.anon_id ]]</code></td>
-                <td>[[ a.grade || '-' ]]</td>
-                <td>[[ formatTime(a.created_at) ]]</td>
-                <td><strong>[[ a.risk_score ]]</strong></td>
-                <td>
-                  <span v-if="a.suicide_risk>0" style="color:#AC4E42;font-weight:700;">⚠️ [[ a.suicide_risk ]]</span>
-                  <span v-else>-</span>
-                </td>
-                <td><code>[[ (a.triggered_rules||[]).join(', ') ]]</code></td>
-                <td><span class="badge" :class="a.risk_level">[[ levelLabel(a.risk_level) ]]</span></td>
-                <td>
-                  <span v-if="a.has_intervention" style="color:#1C7A6E;">
-                    <i class="bi bi-check-circle-fill"></i> [[ intervLabel(a.intervention_status) ]]
-                  </span>
-                  <button v-else class="btn ghost small" @click="createIntervention(a.session_id)">创建工单</button>
-                </td>
-              </tr>
-              <tr v-if="!alerts.count">
-                <td colspan="9" style="text-align:center;color:#97A3AC;padding:40px;">暂无高危会话，非常棒 🎉</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="glass-head c9a">
+            <div>会话</div><div>匿名ID</div><div>年级</div><div>时间</div><div>风险分</div><div>自杀风险</div><div>触发规则</div><div>等级</div><div>工单</div>
+          </div>
+          <div v-for="a in alerts.rows" :key="a.session_id" class="glass-row c9a lg-glow" :class="'glow-' + a.risk_level">
+            <div><strong>#[[ a.session_id ]]</strong></div>
+            <div><code>[[ a.anon_id ]]</code></div>
+            <div>[[ a.grade || '-' ]]</div>
+            <div>[[ formatTime(a.created_at) ]]</div>
+            <div><strong>[[ a.risk_score ]]</strong></div>
+            <div>
+              <span v-if="a.suicide_risk>0" style="color:#F87171;font-weight:700;">⚠️ [[ a.suicide_risk ]]</span>
+              <span v-else>-</span>
+            </div>
+            <div class="row-note"><div><code>[[ (a.triggered_rules||[]).join(', ') ]]</code></div></div>
+            <div><span class="badge" :class="a.risk_level">[[ levelLabel(a.risk_level) ]]</span></div>
+            <div class="ops">
+              <span v-if="a.has_intervention" style="color:#2DD4BF;">
+                <i class="bi bi-check-circle-fill"></i> [[ intervLabel(a.intervention_status) ]]
+              </span>
+              <button v-else class="btn btn-ghost btn-sm" @click="createIntervention(a.session_id)">创建工单</button>
+            </div>
+          </div>
+          <div v-if="!alerts.count" style="text-align:center;color:#7C88A0;padding:40px;">暂无高危会话，非常棒 🎉</div>
         </div>
       </div>
 
       <!-- 筛查会话 -->
       <div v-if="tab==='sessions'">
-        <div class="card" style="padding:20px;">
+        <div class="card" style="padding:26px;">
           <div class="card-header">
-            <h3><i class="bi bi-clipboard-data" style="color:#1C7A6E;"></i> 筛查会话列表</h3>
-            <span>
-              <select v-model="filterLevel" style="padding:6px 10px;border-radius:4px;border:1px solid #D9E0E5;font-size:13px;">
+            <h3><i class="bi bi-clipboard-data" style="color:#2DD4BF;"></i> 筛查会话列表</h3>
+            <span style="display:inline-flex;align-items:center;gap:14px;">
+              <select v-model="filterLevel" style="padding:9px 16px;border-radius:12px;border:1px solid var(--lg-border);font-size:13px;background:rgba(255,255,255,0.07);color:#E6EBF5;outline:none;backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);cursor:pointer;">
                 <option value="">全部风险</option>
                 <option value="low">低风险</option>
                 <option value="medium">中风险</option>
                 <option value="high">高风险</option>
                 <option value="urgent">极高风险</option>
               </select>
-              <button class="btn ghost small" @click="loadSessions" style="margin-left:8px;">筛选</button>
-              <button class="btn small" @click="sendAlerts" style="margin-left:8px;">
-                <i class="bi bi-bell" style="margin-right:4px;"></i>批量推预警
+              <button class="btn btn-ghost btn-sm" @click="loadSessions">筛选</button>
+              <button class="btn btn-ghost btn-sm" @click="sendAlerts">
+                <i class="bi bi-bell" style="margin-right:7px;"></i>批量推预警
               </button>
             </span>
           </div>
-          <table>
-            <thead>
-              <tr><th>ID</th><th>匿名标识</th><th>时间</th><th>PHQ-9</th><th>GAD-7</th>
-                <th>综合分</th><th>等级</th><th>触发规则</th><th>操作</th></tr>
-            </thead>
-            <tbody>
-              <tr v-for="s in sessions.rows" :key="s.id">
-                <td>[[ s.id ]]</td>
-                <td><code>[[ s.anon_id ]]</code></td>
-                <td>[[ formatTime(s.created_at) ]]</td>
-                <td>[[ s.phq9 ]]</td>
-                <td>[[ s.gad7 ]]</td>
-                <td>[[ s.risk_score ]]</td>
-                <td><span class="badge" :class="s.risk_level">[[ levelLabel(s.risk_level) ]]</span></td>
-                <td>[[ s.activation_count ]] 条</td>
-                <td>
-                  <button class="btn ghost small" @click="showDetail(s.id)">详情</button>
-                  <button class="btn ghost small" style="margin-left:4px;" @click="createIntervention(s.id)">
-                    <i class="bi bi-plus-circle"></i> 工单
-                  </button>
-                </td>
-              </tr>
-              <tr v-if="!sessions.rows || sessions.rows.length===0">
-                <td colspan="9" style="text-align:center;color:#97A3AC;padding:40px;">暂无会话数据，请先到 /screening 做一次筛查</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="glass-head c9b">
+            <div>ID</div><div>匿名标识</div><div>时间</div><div>PHQ-9</div><div>GAD-7</div>
+            <div>综合分</div><div>等级</div><div>触发规则</div><div>操作</div>
+          </div>
+          <div v-for="s in sessions.rows" :key="s.id" class="glass-row c9b lg-glow" :class="'glow-' + s.risk_level">
+            <div><strong>[[ s.id ]]</strong></div>
+            <div><code>[[ s.anon_id ]]</code></div>
+            <div>[[ formatTime(s.created_at) ]]</div>
+            <div>[[ s.phq9 ]]</div>
+            <div>[[ s.gad7 ]]</div>
+            <div>[[ s.risk_score ]]</div>
+            <div><span class="badge" :class="s.risk_level">[[ levelLabel(s.risk_level) ]]</span></div>
+            <div>[[ s.activation_count ]] 条</div>
+            <div class="ops">
+              <button class="btn btn-ghost btn-sm" @click="showDetail(s.id)">详情</button>
+              <button class="btn btn-ghost btn-sm" @click="createIntervention(s.id)">
+                <i class="bi bi-plus-circle"></i> 工单
+              </button>
+            </div>
+          </div>
+          <div v-if="!sessions.rows || sessions.rows.length===0" style="text-align:center;color:#7C88A0;padding:40px;">暂无会话数据，请先到 /screening 做一次筛查</div>
         </div>
       </div>
 
@@ -228,12 +216,12 @@
       <div v-if="tab==='rules'">
         <div class="card">
           <div class="card-header">
-            <h3><i class="bi bi-diagram-3" style="color:#1C7A6E;"></i> 心理学规则库（神经符号引擎核心）</h3>
+            <h3><i class="bi bi-diagram-3" style="color:#2DD4BF;"></i> 心理学规则库（神经符号引擎核心）</h3>
             <span>
-              <button class="btn ghost small" @click="learnRules">
+              <button class="btn btn-ghost btn-sm" @click="learnRules">
                 <i class="bi bi-lightning" style="margin-right:4px;"></i>运行 RIPPER 规则学习（演示）
               </button>
-              <button class="btn ghost small" @click="resetRules" style="margin-left:8px;">
+              <button class="btn btn-ghost btn-sm" @click="resetRules" style="margin-left:8px;">
                 <i class="bi bi-arrow-clockwise" style="margin-right:4px;"></i>恢复默认
               </button>
             </span>
@@ -245,14 +233,14 @@
               <div>
                 <span class="rid">[[ r.id ]]</span>
                 <span class="rpri">优先级 [[ r.priority ]]</span>
-                <strong style="margin-left:10px;color:#203248;">THEN [[ r.consequence ]]</strong>
+                <strong style="margin-left:10px;color:#F5F7FB;">THEN [[ r.consequence ]]</strong>
               </div>
-              <button class="btn ghost small" @click="removeRule(r.id)">
+              <button class="btn btn-ghost btn-sm" @click="removeRule(r.id)">
                 <i class="bi bi-trash"></i>
               </button>
             </div>
             <div class="rcond">
-              <i class="bi bi-code-slash" style="color:#1C7A6E;margin-right:6px;"></i>
+              <i class="bi bi-code-slash" style="color:#2DD4BF;margin-right:6px;"></i>
               IF [[ formatConds(r.conditions) ]]
             </div>
             <div class="rexpl">💡 [[ r.explain ]]</div>
@@ -260,7 +248,7 @@
         </div>
 
         <div class="card">
-          <h3><i class="bi bi-plus-circle" style="color:#1C7A6E;"></i> 手动添加规则</h3>
+          <h3><i class="bi bi-plus-circle" style="color:#2DD4BF;"></i> 手动添加规则</h3>
           <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
             <input v-model="newRule.id" placeholder="规则ID（如 R010）" style="width:160px;">
             <input v-model="newRule.priority" placeholder="优先级（数字越大越优先）" style="width:180px;">
@@ -274,7 +262,7 @@
           <textarea v-model="newRule.conditionsText" rows="3"
                     placeholder="phq9_score >= 10&#10;text_negativity >= 0.6"></textarea>
           <div style="margin-top:12px;">
-            <button class="btn" @click="addRule()"><i class="bi bi-plus" style="margin-right:4px;"></i>添加规则</button>
+            <button class="btn btn-ghost" @click="addRule()"><i class="bi bi-plus" style="margin-right:4px;"></i>添加规则</button>
           </div>
         </div>
       </div>
@@ -283,9 +271,9 @@
       <div v-if="tab==='interventions'">
         <div class="card">
           <div class="card-header">
-            <h3><i class="bi bi-bell" style="color:#1C7A6E;"></i> 干预工单系统</h3>
-            <span>
-              <select v-model="filterIntervStatus" style="padding:6px 10px;border-radius:4px;border:1px solid #D9E0E5;font-size:13px;">
+            <h3><i class="bi bi-bell" style="color:#2DD4BF;"></i> 干预工单系统</h3>
+            <span style="display:inline-flex;align-items:center;gap:14px;">
+              <select v-model="filterIntervStatus" style="padding:9px 16px;border-radius:12px;border:1px solid var(--lg-border);font-size:13px;background:rgba(255,255,255,0.07);color:#E6EBF5;outline:none;backdrop-filter:blur(14px) saturate(160%);-webkit-backdrop-filter:blur(14px) saturate(160%);cursor:pointer;">>
                 <option value="">全部状态</option>
                 <option value="pending">待处理</option>
                 <option value="processing">处理中</option>
@@ -295,35 +283,29 @@
           </div>
           <p class="tagline">当筛查结果为 <strong>高风险 / 极高风险</strong> 时，系统自动创建干预工单，心理老师可跟进、记录处理过程、关闭工单。</p>
 
-          <table>
-            <thead>
-              <tr><th>工单 #</th><th>关联会话</th><th>风险等级</th><th>创建时间</th><th>状态</th>
-                <th>处理人</th><th>备注/跟进</th><th>操作</th></tr>
-            </thead>
-            <tbody>
-              <tr v-for="iv in interventions" :key="iv.id">
-                <td>#[[ iv.id ]]</td>
-                <td>会话 [[ iv.session_id ]]</td>
-                <td><span class="badge" :class="iv.risk_level">[[ levelLabel(iv.risk_level) ]]</span></td>
-                <td>[[ formatTime(iv.created_at) ]]</td>
-                <td><span class="badge" :class="'interv-' + iv.status">[[ intervLabel(iv.status) ]]</span></td>
-                <td>[[ iv.assigned_to || '-' ]]</td>
-                <td style="max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" :title="iv.notes">[[ iv.notes ]]</td>
-                <td>
-                  <button v-if="iv.status==='pending'" class="btn ghost small" @click="updateIntervention(iv.id,'processing')">认领处理</button>
-                  <button v-if="iv.status==='processing'" class="btn ghost small" @click="updateIntervention(iv.id,'closed')">关闭</button>
-                </td>
-              </tr>
-              <tr v-if="!interventions.length">
-                <td colspan="8" style="text-align:center;color:#97A3AC;padding:40px;">暂无干预工单</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="glass-head c8">
+            <div>工单 #</div><div>关联会话</div><div>风险等级</div><div>创建时间</div><div>状态</div>
+            <div>处理人</div><div>备注/跟进</div><div>操作</div>
+          </div>
+          <div v-for="iv in interventions" :key="iv.id" class="glass-row c8 lg-glow" :class="'glow-' + iv.risk_level">
+            <div><strong>#[[ iv.id ]]</strong></div>
+            <div>会话 [[ iv.session_id ]]</div>
+            <div><span class="badge" :class="iv.risk_level">[[ levelLabel(iv.risk_level) ]]</span></div>
+            <div>[[ formatTime(iv.created_at) ]]</div>
+            <div><span class="badge" :class="'interv-' + iv.status">[[ intervLabel(iv.status) ]]</span></div>
+            <div>[[ iv.assigned_to || '-' ]]</div>
+            <div class="row-note"><div :title="iv.notes">[[ iv.notes ]]</div></div>
+            <div class="ops">
+              <button v-if="iv.status==='pending'" class="btn btn-ghost btn-sm" @click="updateIntervention(iv.id,'processing')">认领处理</button>
+              <button v-if="iv.status==='processing'" class="btn btn-ghost btn-sm" @click="updateIntervention(iv.id,'closed')">关闭</button>
+            </div>
+          </div>
+          <div v-if="!interventions.length" style="text-align:center;color:#7C88A0;padding:40px;">暂无干预工单</div>
 
           <style>
-            .interv-pending{background:#FEE2E2;color:#B91C1C;border-radius:10px;padding:2px 10px;font-size:12px;font-weight:600}
-            .interv-processing{background:#FFF7E6;color:#B8760F;border-radius:10px;padding:2px 10px;font-size:12px;font-weight:600}
-            .interv-closed{background:#E6F2EF;color:#1C7A6E;border-radius:10px;padding:2px 10px;font-size:12px;font-weight:600}
+            .interv-pending{background:rgba(239,68,68,0.18);color:#F87171;border-radius:10px;padding:2px 10px;font-size:12px;font-weight:600}
+            .interv-processing{background:rgba(245,158,11,0.16);color:#FCD34D;border-radius:10px;padding:2px 10px;font-size:12px;font-weight:600}
+            .interv-closed{background:rgba(14,165,153,0.18);color:#2DD4BF;border-radius:10px;padding:2px 10px;font-size:12px;font-weight:600}
           </style>
         </div>
       </div>
@@ -331,20 +313,20 @@
       <!-- 数据导出 -->
       <div v-if="tab==='export'">
         <div class="card">
-          <h3><i class="bi bi-download" style="color:#1C7A6E;"></i> 数据导出</h3>
+          <h3><i class="bi bi-download" style="color:#2DD4BF;"></i> 数据导出</h3>
           <p class="tagline">导出所有筛查会话原始数据，供离线分析和科研使用。</p>
 
           <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;">
-            <a href="/api/admin/export/sessions?format=csv" class="btn">
+            <a href="/api/admin/export/sessions?format=csv" class="btn btn-ghost">
               <i class="bi bi-filetype-csv" style="margin-right:6px;"></i>导出会话数据 (CSV)
             </a>
-            <a href="/api/admin/export/sessions?format=json" class="btn ghost">
+            <a href="/api/admin/export/sessions?format=json" class="btn btn-ghost">
               <i class="bi bi-filetype-json" style="margin-right:6px;"></i>导出会话数据 (JSON)
             </a>
           </div>
 
           <div style="margin-top:28px;padding:16px;background:#F7F9FA;border-radius:8px;">
-            <div style="font-weight:600;color:#203248;margin-bottom:8px;">📁 导出字段说明</div>
+            <div style="font-weight:600;color:#F5F7FB;margin-bottom:8px;">📁 导出字段说明</div>
             <table>
               <thead><tr><th>字段</th><th>说明</th></tr></thead>
               <tbody>
@@ -370,7 +352,7 @@
     <div class="modal-box" style="max-width:780px;">
       <div style="display:flex;justify-content:space-between;align-items:center;">
         <h2 style="margin:0;">会话 #[[ detail.session.id ]] 评估详情</h2>
-        <button class="btn ghost small" @click="detail=null">
+        <button class="btn btn-ghost btn-sm" @click="detail=null">
           <i class="bi bi-x-lg"></i>
         </button>
       </div>
@@ -388,32 +370,32 @@
         </tbody>
       </table>
 
-      <h3 style="margin-top:22px;color:#1C7A6E;border-bottom:2px solid #E1E7EC;padding-bottom:6px;">
+      <h3 style="margin-top:22px;color:#2DD4BF;border-bottom:2px solid #E1E7EC;padding-bottom:6px;">
         <i class="bi bi-diagram-3" style="margin-right:6px;"></i>触发的心理学规则
       </h3>
       <div v-if="detail.session.activated_rules.length">
         <div v-for="r in detail.session.activated_rules" :key="r.rule_id" class="rule-card">
           <strong>[[ r.rule_id ]]</strong> · 优先级 [[ r.priority ]]
-          <div style="color:#47535C;margin-top:4px;">💡 [[ r.explain ]]</div>
+          <div style="color:#A9B4C6;margin-top:4px;">💡 [[ r.explain ]]</div>
         </div>
       </div>
       <div v-else class="tagline">本次筛查未触发心理学规则</div>
 
-      <h3 style="margin-top:22px;color:#1C7A6E;border-bottom:2px solid #E1E7EC;padding-bottom:6px;">
+      <h3 style="margin-top:22px;color:#2DD4BF;border-bottom:2px solid #E1E7EC;padding-bottom:6px;">
         <i class="bi bi-list-ol" style="margin-right:6px;"></i>推理链路（神经符号引擎）
       </h3>
       <div style="background:#F7F9FA;border-radius:6px;padding:14px;max-height:240px;overflow:auto;">
         <div v-for="(line,i) in detail.session.explanation_chain" :key="i"
-             style="padding:4px 0;font-family:monospace;font-size:12px;color:#47535C;">
-          <span style="color:#1C7A6E;margin-right:8px;">▸</span> [[ line ]]
+             style="padding:4px 0;font-family:monospace;font-size:12px;color:#A9B4C6;">
+          <span style="color:#2DD4BF;margin-right:8px;">▸</span> [[ line ]]
         </div>
       </div>
 
       <div style="text-align:right;margin-top:20px;display:flex;gap:8px;justify-content:flex-end;">
-        <a :href="'/report/' + detail.session.id" target="_blank" class="btn ghost small">
+        <a :href="'/report/' + detail.session.id" target="_blank" class="btn btn-ghost btn-sm">
           <i class="bi bi-box-arrow-up-right" style="margin-right:4px;"></i>独立报告页
         </a>
-        <button class="btn ghost" @click="detail=null">关闭</button>
+        <button class="btn btn-ghost" @click="detail=null">关闭</button>
       </div>
     </div>
   </div>
@@ -488,8 +470,9 @@
       },
       loadAlerts() {
         axios.get('/api/analytics/urgent-queue').then(r => {
-          this.alerts = r.data;
-          this.urgentCount = (r.data.rows || []).filter(x => !x.has_intervention).length;
+          const rows = Array.isArray(r.data) ? r.data : (r.data && r.data.rows ? r.data.rows : []);
+          this.alerts = { count: rows.length, rows: rows };
+          this.urgentCount = rows.filter(x => !x.has_intervention).length;
         }).catch(err => console.warn('loadAlerts:', err));
       },
       sendAllAlerts() {
@@ -519,7 +502,7 @@
             yAxis: { type: 'category', data: rows.map(r => r.rule_id).reverse() },
             series: [{
               type: 'bar', data: rows.map(r => r.hits).reverse(),
-              itemStyle: { color: '#1C7A6E', borderRadius: [0,4,4,0] },
+              itemStyle: { color: '#2DD4BF', borderRadius: [0,4,4,0] },
               label: { show: true, position: 'right' },
             }],
           });
@@ -548,7 +531,7 @@
             xAxis: { type: 'category', data: levels.map(l => this.levelLabel(l)), splitArea: { show: true } },
             yAxis: { type: 'category', data: grades, splitArea: { show: true } },
             visualMap: { min: 0, max: 15, calculable: false, orient: 'horizontal', left: 'center', bottom: 0,
-                         inRange: { color: ['#F7F9FA', '#B8DDD7', '#1C7A6E'] } },
+                         inRange: { color: ['#F7F9FA', '#B8DDD7', '#2DD4BF'] } },
             series: [{ type: 'heatmap', data, label: { show: true } }],
           });
           this.charts.heatmap = c;
@@ -588,9 +571,9 @@
             yAxis: { type: 'value' },
             series: [
               { name: '实际筛查量', type: 'line', data: realCounts, smooth: true,
-                itemStyle: { color: '#1C7A6E' }, areaStyle: { color: 'rgba(28,122,110,.12)' } },
+                itemStyle: { color: '#2DD4BF' }, areaStyle: { color: 'rgba(28,122,110,.12)' } },
               { name: '预测筛查量', type: 'line', data: predCounts, connectNulls: false,
-                itemStyle: { color: '#AC4E42' }, lineStyle: { type: 'dashed' }, symbol: 'diamond' },
+                itemStyle: { color: '#F87171' }, lineStyle: { type: 'dashed' }, symbol: 'diamond' },
             ],
           });
           this.charts.forecast = c;
@@ -706,7 +689,7 @@
               tooltip:{trigger:'item'},
               series:[{type:'pie', radius:['42%','72%'], data:riskData,
                        label:{formatter:'{b}\n{c} ({d}%)'}}],
-              color:['#287855','#E6A817','#D97706','#AC4E42'],
+              color:['#287855','#E6A817','#D97706','#F87171'],
             });
             this.charts.risk = risk;
           } catch(e) { console.warn('riskChart:', e); }
@@ -724,7 +707,7 @@
               xAxis:{type:'category', data:Object.keys(sd.phq9 || {})},
               yAxis:{type:'value'},
               series:[
-                {name:'PHQ-9',type:'bar',data:Object.values(sd.phq9 || {}),itemStyle:{color:'#1C7A6E'}},
+                {name:'PHQ-9',type:'bar',data:Object.values(sd.phq9 || {}),itemStyle:{color:'#2DD4BF'}},
                 {name:'GAD-7',type:'bar',data:Object.values(sd.gad7 || {}),itemStyle:{color:'#E6A817'}},
               ],
             });
@@ -743,7 +726,7 @@
               xAxis:{type:'category', data:trendData.map(t => t.date)},
               yAxis:{type:'value'},
               series:[{type:'line', data:trendData.map(t => t.count),
-                       smooth:true, itemStyle:{color:'#1C7A6E'},
+                       smooth:true, itemStyle:{color:'#2DD4BF'},
                        areaStyle:{color:'rgba(28,122,110,.15)'}}],
               grid:{bottom:40},
             });
@@ -758,7 +741,7 @@
       },
       forecastColor() {
         const d = this.forecast.trend_dir || '';
-        if (d === '上升') return { color: '#AC4E42' };
+        if (d === '上升') return { color: '#F87171' };
         if (d === '下降') return { color: '#287855' };
         return { color: '#E6A817' };
       },
@@ -772,6 +755,6 @@
   }
   </script>
   </div>
-  <script src="/static/js/app.js"></script>
+  <script src="/static/js/app.js?v=4.6"></script>
 </body>
 </html>

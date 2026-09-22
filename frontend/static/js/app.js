@@ -275,13 +275,19 @@ function createBGMBar() {
     <div class="bgm-icon" id="bgmToggle" title="点击播放/暂停">
       <span id="bgmIcon">🔇</span>
     </div>
-    <select id="bgmSelect" title="选择氛围音">
-      <option value="off">🔇 关闭</option>
-      <option value="brown">🌲 森林（低沉）</option>
-      <option value="pink">🌧️ 细雨（柔和）</option>
-      <option value="white">🌬️ 风声（清爽）</option>
-      <option value="breathing">🌊 呼吸引导</option>
-    </select>
+    <div class="bgm-drop" id="bgmDrop">
+      <div class="bgm-drop-head" id="bgmDropHead" title="选择氛围音">
+        <span id="bgmSelectText">关闭</span>
+        <span class="bgm-arrow">⌄</span>
+      </div>
+      <div class="bgm-menu" id="bgmMenu">
+        <div class="bgm-opt" data-v="off">🔇 关闭</div>
+        <div class="bgm-opt" data-v="brown">🌲 森林（低沉）</div>
+        <div class="bgm-opt" data-v="pink">🌧️ 细雨（柔和）</div>
+        <div class="bgm-opt" data-v="white">🌬️ 风声（清爽）</div>
+        <div class="bgm-opt" data-v="breathing">🌊 呼吸引导</div>
+      </div>
+    </div>
     <div class="bgm-text">
       <span id="bgmStatus">静音</span>
     </div>
@@ -291,25 +297,17 @@ function createBGMBar() {
 
   const toggle = bar.querySelector('#bgmToggle');
   const icon = bar.querySelector('#bgmIcon');
-  const select = bar.querySelector('#bgmSelect');
+  const dropHead = bar.querySelector('#bgmDropHead');
+  const menu = bar.querySelector('#bgmMenu');
+  const selectText = bar.querySelector('#bgmSelectText');
   const status = bar.querySelector('#bgmStatus');
+  const opts = Array.from(bar.querySelectorAll('.bgm-opt'));
 
-  toggle.addEventListener('click', () => {
-    if (AmbientAudio.isPlaying) {
-      AmbientAudio.stop();
-      icon.textContent = '🔇';
-      status.textContent = '静音';
-      select.value = 'off';
-    } else {
-      AmbientAudio.play('brown');
-      icon.textContent = '🔊';
-      status.textContent = AmbientAudio.currentType;
-      select.value = 'brown';
-    }
-  });
-
-  select.addEventListener('change', () => {
-    const v = select.value;
+  const setBgm = (v) => {
+    opts.forEach(o => o.classList.toggle('active', o.dataset.v === v));
+    const label = (opts.find(o => o.dataset.v === v) || opts[0]).textContent;
+    selectText.textContent = label;
+    menu.classList.remove('open');
     if (v === 'off') {
       AmbientAudio.stop();
       icon.textContent = '🔇';
@@ -322,6 +320,24 @@ function createBGMBar() {
       AmbientAudio.play(v);
       icon.textContent = '🔊';
       status.textContent = v === 'brown' ? '森林' : v === 'pink' ? '细雨' : '风声';
+    }
+  };
+
+  dropHead.addEventListener('click', (e) => {
+    e.stopPropagation();
+    menu.classList.toggle('open');
+  });
+  opts.forEach(o => o.addEventListener('click', () => setBgm(o.dataset.v)));
+  document.addEventListener('click', () => menu.classList.remove('open'));
+
+  toggle.addEventListener('click', () => {
+    if (AmbientAudio.isPlaying) {
+      AmbientAudio.stop();
+      icon.textContent = '🔇';
+      status.textContent = '静音';
+      setBgm('off');
+    } else {
+      setBgm('brown');
     }
   });
 
@@ -372,21 +388,77 @@ function loadDailyAffirmation() {
 }
 
 
+
+// ────────────────────────────────────────────────────────────
+// 7. 液体玻璃鼠标光效（iPadOS 27 Pencil 悬浮风格）
+//    光斑随鼠标位置移动，透过玻璃表面；
+//    元素可用 --glow-color 变量定义自己的色光（有色条/色块）
+// ────────────────────────────────────────────────────────────
+function initLiquidGlow() {
+  const sel = '.card,.feature-card,.stat-box,.dim-card,.metric-card,.chart-wrap,' +
+    '.question-block,.opt-btn,.sugg-card,.rule-card,.session-item,.glass-panel,' +
+    '.login-box,.cat-pill,.lg-glow';
+  const els = Array.from(document.querySelectorAll(sel));
+  els.forEach(el => {
+    el.classList.add('lg-glow');
+    if (el.querySelector(':scope > .lg-glow-layer')) return;
+    const layer = document.createElement('div');
+    layer.className = 'lg-glow-layer';
+    el.appendChild(layer);
+  });
+  let raf = null;
+  document.addEventListener('mousemove', e => {
+    if (raf) return;
+    raf = requestAnimationFrame(() => {
+      raf = null;
+      const mx = e.clientX, my = e.clientY;
+      for (const el of els) {
+        const r = el.getBoundingClientRect();
+        if (r.width === 0 || r.height === 0) continue;
+        el.style.setProperty('--mx', (mx - r.left).toFixed(1) + 'px');
+        el.style.setProperty('--my', (my - r.top).toFixed(1) + 'px');
+      }
+    });
+  }, { passive: true });
+}
+
 // ────────────────────────────────────────────────────────────
 // 6. 初始化（DOMContentLoaded 后自动运行）
 // ────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   AmbientBG.init();
   createBGMBar();
+  initLiquidGlow();
+
+  // 入场动画结束后释放动画填充（恢复常态悬浮与 hover 上浮）
+  document.addEventListener('animationend', e => {
+    if (['adFade','adFadeUp','adSlideIn','adRiskPop'].includes(e.animationName)) {
+      e.target.style.animation = 'none';
+    }
+  });
 
   // 首页自动加载
   if (document.getElementById('aff-text')) loadDailyAffirmation();
   if (document.getElementById('stat-total')) loadStats();
 
-  // 导航高亮
+  // 导航高亮（路由组匹配：测评中心覆盖 /screening /adaptive 等子页面）
   const path = location.pathname;
+  const navMap = {
+    '/assessment': ['/assessment', '/screening', '/adaptive', '/breathing', '/cbt'],
+    '/my-records': ['/my-records', '/mood-journal', '/report'],
+    '/resources': ['/resources'],
+    '/': ['/'],
+  };
   document.querySelectorAll('.topbar nav a').forEach(a => {
-    if (a.getAttribute('href') === path) a.classList.add('active');
+    const h = a.getAttribute('href');
+    if (path === '/') {
+      if (h === '/') a.classList.add('active');
+      return;
+    }
+    const targets = navMap[h] || [h];
+    if (targets.some(t => t !== '/' && (path === t || path.startsWith(t.replace(/\/$/, '') + '/')))) {
+      a.classList.add('active');
+    }
   });
 });
 
