@@ -1,283 +1,82 @@
 <!doctype html>
 <html lang="zh">
 <head>
-  <meta charset="utf-8">
-  <title>我的筛查档案 · 多模态心理健康风险筛查系统</title>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="/favicon.ico">
   <link rel="stylesheet" href="/static/css/app.css">
-  <link rel="stylesheet" href="/static/css/vendor/bootstrap-icons.min.css">
-  <script src="/static/js/echarts.min.js">
-// 页面加载时从 localStorage 自动读取 anonId
-const savedAnonId = localStorage.getItem('mg_anon_id');
-if (savedAnonId && typeof fetchHistory === 'function') {
-  setTimeout(() => {
-    if (document.getElementById('anonId')) document.getElementById('anonId').value = savedAnonId;
-    if (typeof fetchHistory === 'function') fetchHistory();
-  }, 500);
-}
-
-// 风险趋势预测按钮
-function showTrend() {
-  const aid = document.getElementById('anonId').value.trim();
-  if (!aid) { alert('请先输入匿名ID或完成一次筛查'); return; }
-  fetch('/api/features/mood-journal/' + aid).then(r=>r.json()).then(data=>{
-    if (data.prediction) {
-      const dir = data.prediction.direction === 'improving' ? '📈 正在好转' : data.prediction.direction === 'worsening' ? '📉 在下滑' : '➡️ 稳定';
-      alert('情绪趋势：' + dir + '\n未来7天预测分数：' + data.prediction.predictions.join(' → '));
-    } else {
-      alert('需要至少3条心情记录才能预测。去"心情打卡"页记录吧！');
-    }
-  });
-}
-
-</script>
+  <script src="/static/js/echarts.min.js"></script>
 </head>
 <body>
   <header class="topbar">
-    <div class="logo"><span style="font-size:18px;">🧠</span>我的心理档案</div>
+    <div class="logo"><span class="logo-mark">🧠</span><span>MindGuard</span></div>
     <nav>
       <a href="/">首页</a>
-      <a href="/screening">开始筛查</a>
-      <a href="/my-records" class="active">我的档案</a>
+      <a href="/assessment">测评中心</a>
+      <a href="/my-records">我的档案</a>
       <a href="/resources">心理资源</a>
-      <a href="/admin">管理后台</a>
     </nav>
   </header>
 
-  <div id="app">
-  <div class="container" style="max-width:860px;">
-    <div class="card" style="padding:24px;">
-      <h3><i class="bi bi-person-badge" style="color:#1C7A6E;"></i> 查询我的筛查档案</h3>
-      <p class="tagline">输入你筛查时使用的<strong>匿名标识</strong>（如 <code>WX001</code>），即可查看历史筛查记录与心理健康趋势。</p>
-
-      <div style="display:flex;gap:10px;margin-top:16px;">
-        <input v-model="anonId" placeholder="例如 WX001" style="flex:1;padding:10px 14px;border:1px solid #D9E0E5;border-radius:6px;font-size:15px;"
-               @keyup.enter="queryHistory">
-        <button class="btn" @click="queryHistory"><i class="bi bi-search" style="margin-right:4px;"></i>查询</button>
+  <div class="container">
+    <section class="hero">
+      <div class="hero-content">
+        <div class="eyebrow">📁 匿名档案 · 本地存储</div>
+        <h1>你的每一次测评，<br>都是在更好地了解自己</h1>
+        <p class="sub">所有数据都存在你的本地浏览器里，不会上传到任何服务器。看看你走过的心理旅程。</p>
       </div>
-      <div v-if="loading" class="tagline" style="margin-top:12px;">查询中...</div>
-      <div v-if="error" style="margin-top:12px;color:#AC4E42;background:#F9F0EC;padding:10px 14px;border-radius:6px;">
-        <i class="bi bi-exclamation-circle"></i> [[ error ]]
-      </div>
-    </div>
+    </section>
 
-    <!-- 查询结果 -->
-    <div v-if="result" style="margin-top:18px;">
-      <!-- 摘要 -->
-      <div class="stat-grid" style="grid-template-columns:repeat(4,1fr);">
-        <div class="stat-box">
-          <div class="big">[[ result.summary.times ]]</div>
-          <div class="lbl">累计筛查次数</div>
-        </div>
-        <div class="stat-box">
-          <div class="big" :style="trendStyle(result.summary.phq9_trend)">[[ trendArrow(result.summary.phq9_trend) ]]</div>
-          <div class="lbl">PHQ-9 变化</div>
-        </div>
-        <div class="stat-box">
-          <div class="big" :style="trendStyle(result.summary.gad7_trend)">[[ trendArrow(result.summary.gad7_trend) ]]</div>
-          <div class="lbl">GAD-7 变化</div>
-        </div>
-        <div class="stat-box">
-          <div class="big" :style="trendStyle(result.summary.risk_trend)">[[ trendArrow(result.summary.risk_trend) ]]</div>
-          <div class="lbl">综合风险变化</div>
+    <section style="margin-top:28px;display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px">
+      <div class="card" style="text-align:center;padding:24px">
+        <div id="recCount" style="font-size:36px;font-weight:700;background:linear-gradient(135deg,#2DD4BF,#818CF8);-webkit-background-clip:text;-webkit-text-fill-color:transparent">0</div>
+        <div style="font-size:12px;color:#94A3B8;margin-top:4px">累计测评次数</div>
+      </div>
+      <div class="card" style="text-align:center;padding:24px">
+        <div id="recLatest" style="font-size:20px;font-weight:700;color:#F8FAFC">--</div>
+        <div style="font-size:12px;color:#94A3B8;margin-top:4px">最近风险等级</div>
+      </div>
+      <div class="card" style="text-align:center;padding:24px">
+        <div id="recDay" style="font-size:20px;font-weight:700;color:#F8FAFC">--</div>
+        <div style="font-size:12px;color:#94A3B8;margin-top:4px">上次测评</div>
+      </div>
+    </section>
+
+    <section style="margin-top:36px">
+      <h3 style="color:#F8FAFC;font-size:16px;font-weight:700;margin-bottom:16px">📋 历史测评记录</h3>
+      <div id="recordsList">
+        <div class="card" style="text-align:center;padding:48px">
+          <div style="font-size:48px;margin-bottom:12px">🔍</div>
+          <div style="color:#F8FAFC;font-size:14px;font-weight:600;margin-bottom:8px">还没有测评记录</div>
+          <div style="color:#94A3B8;font-size:13px;margin-bottom:20px">去做一次测评，开启你的心理旅程</div>
+          <a href="/assessment" class="btn btn-primary">🚀 开始测评</a>
         </div>
       </div>
-
-      <!-- 趋势图 -->
-      <div class="chart-wrap" style="margin-top:16px;">
-        <div style="font-weight:600;color:#203248;margin-bottom:10px;">
-          <i class="bi bi-activity" style="color:#1C7A6E;"></i> 心理健康趋势（历次筛查）
-        </div>
-        <div id="trendChart" style="height:260px;"></div>
-      </div>
-
-      <!-- 历史列表 -->
-      <div class="card" style="margin-top:16px;padding:20px;">
-        <h3><i class="bi bi-clock-history" style="color:#1C7A6E;"></i> 筛查记录</h3>
-        <table>
-          <thead>
-            <tr><th>会话</th><th>时间</th><th>PHQ-9</th><th>GAD-7</th><th>自杀风险</th><th>综合分</th><th>等级</th><th>报告</th></tr>
-          </thead>
-          <tbody>
-            <tr v-for="r in result.records" :key="r.id">
-              <td>#[[ r.id ]]</td>
-              <td>[[ formatTime(r.created_at) ]]</td>
-              <td>[[ r.phq9 ]]</td>
-              <td>[[ r.gad7 ]]</td>
-              <td>[[ r.suicide_risk ]]</td>
-              <td>[[ r.risk_score ]]</td>
-              <td><span class="badge" :class="r.risk_level">[[ levelLabel(r.risk_level) ]]</span></td>
-              <td><a :href="'/report/' + r.id" target="_blank" class="btn ghost small">
-                <i class="bi bi-box-arrow-up-right"></i></a></td>
-            </tr>
-          </tbody>
-        </table>
-        <div v-if="!result.records.length" class="tagline" style="text-align:center;padding:30px;">暂无记录</div>
-
-        <div style="margin-top:16px;background:#F1F7F6;border-radius:8px;padding:14px 18px;font-size:13px;color:#47535C;line-height:1.7;">
-          <strong style="color:#1C7A6E;">📌 解读说明：</strong>
-          分数上升 / 下降表示与首次筛查对比。<span style="color:#287855;">↓ 绿=好转</span>，
-          <span style="color:#AC4E42;">↑ 红=需关注</span>。心理健康是动态过程，单次波动不必过度担心，
-          建议持续观察并结合专业面谈评估。
-        </div>
-      </div>
-    </div>
-  </div>
+    </section>
   </div>
 
-  <footer>多模态心理健康风险筛查系统 · 个人心理档案 · 匿名安全存储</footer>
-
-  <script src="/static/js/vue.global.prod.js">
-// 页面加载时从 localStorage 自动读取 anonId
-const savedAnonId = localStorage.getItem('mg_anon_id');
-if (savedAnonId && typeof fetchHistory === 'function') {
-  setTimeout(() => {
-    if (document.getElementById('anonId')) document.getElementById('anonId').value = savedAnonId;
-    if (typeof fetchHistory === 'function') fetchHistory();
-  }, 500);
-}
-
-// 风险趋势预测按钮
-function showTrend() {
-  const aid = document.getElementById('anonId').value.trim();
-  if (!aid) { alert('请先输入匿名ID或完成一次筛查'); return; }
-  fetch('/api/features/mood-journal/' + aid).then(r=>r.json()).then(data=>{
-    if (data.prediction) {
-      const dir = data.prediction.direction === 'improving' ? '📈 正在好转' : data.prediction.direction === 'worsening' ? '📉 在下滑' : '➡️ 稳定';
-      alert('情绪趋势：' + dir + '\n未来7天预测分数：' + data.prediction.predictions.join(' → '));
-    } else {
-      alert('需要至少3条心情记录才能预测。去"心情打卡"页记录吧！');
-    }
-  });
-}
-
-</script>
-  <script src="/static/js/axios.min.js">
-// 页面加载时从 localStorage 自动读取 anonId
-const savedAnonId = localStorage.getItem('mg_anon_id');
-if (savedAnonId && typeof fetchHistory === 'function') {
-  setTimeout(() => {
-    if (document.getElementById('anonId')) document.getElementById('anonId').value = savedAnonId;
-    if (typeof fetchHistory === 'function') fetchHistory();
-  }, 500);
-}
-
-// 风险趋势预测按钮
-function showTrend() {
-  const aid = document.getElementById('anonId').value.trim();
-  if (!aid) { alert('请先输入匿名ID或完成一次筛查'); return; }
-  fetch('/api/features/mood-journal/' + aid).then(r=>r.json()).then(data=>{
-    if (data.prediction) {
-      const dir = data.prediction.direction === 'improving' ? '📈 正在好转' : data.prediction.direction === 'worsening' ? '📉 在下滑' : '➡️ 稳定';
-      alert('情绪趋势：' + dir + '\n未来7天预测分数：' + data.prediction.predictions.join(' → '));
-    } else {
-      alert('需要至少3条心情记录才能预测。去"心情打卡"页记录吧！');
-    }
-  });
-}
-
-</script>
   <script>
-  const { createApp } = Vue;
-  createApp({
-    delimiters: ['[[', ']]'],
-    data() {
-      return {
-        anonId: 'WX001',
-        result: null,
-        loading: false,
-        error: '',
-        chart: null,
-      };
-    },
-    mounted() { this.queryHistory(); },
-    methods: {
-      queryHistory() {
-        if (!this.anonId.trim()) return;
-        this.loading = true; this.error = ''; this.result = null;
-        axios.get('/api/analytics/history/' + encodeURIComponent(this.anonId.trim()))
-          .then(r => {
-            this.result = r.data;
-            this.$nextTick(() => this.renderChart());
-          })
-          .catch(err => {
-            this.error = err.response?.data?.detail || '查询失败，请检查匿名标识';
-          })
-          .finally(() => this.loading = false);
-      },
-      renderChart() {
-        const el = document.getElementById('trendChart');
-        if (!el || !this.result) return;
-        if (this.chart) this.chart.dispose();
-        this.chart = echarts.init(el);
-        const records = this.result.records;
-        this.chart.setOption({
-          tooltip: { trigger: 'axis' },
-          legend: { data: ['PHQ-9 抑郁', 'GAD-7 焦虑', '综合风险分'] },
-          xAxis: { type: 'category', data: records.map(r => formatTime(r.created_at).slice(5)) },
-          yAxis: { type: 'value', name: '得分' },
-          series: [
-            { name: 'PHQ-9 抑郁', type: 'line', smooth: true, data: records.map(r => r.phq9),
-              itemStyle: { color: '#1C7A6E' }, symbol: 'circle', symbolSize: 7 },
-            { name: 'GAD-7 焦虑', type: 'line', smooth: true, data: records.map(r => r.gad7),
-              itemStyle: { color: '#E6A817' }, symbol: 'circle', symbolSize: 7 },
-            { name: '综合风险分', type: 'line', smooth: true, data: records.map(r => r.risk_score),
-              itemStyle: { color: '#AC4E42' }, symbol: 'diamond', symbolSize: 8 },
-          ],
-          grid: { left: 40, right: 20, bottom: 30 },
-        });
-        function formatTime(s){ return s ? s.replace('T',' ').slice(0,16) : ''; }
-      },
-      trendArrow(v) {
-        if (v === undefined || v === null) return '—';
-        if (v > 0.05) return '↑ ' + Math.abs(Math.round(v));
-        if (v < -0.05) return '↓ ' + Math.abs(Math.round(v));
-        return '→ 0';
-      },
-      trendStyle(v) {
-        if (v === undefined || v === null) return {};
-        if (v > 0.05) return { color: '#AC4E42' };
-        if (v < -0.05) return { color: '#287855' };
-        return { color: '#E6A817' };
-      },
-      levelLabel(l) { return {low:'低风险',medium:'中风险',high:'高风险',urgent:'极高风险'}[l] || l; },
-      formatTime(s) { return s ? s.replace('T',' ').slice(0,16) : ''; },
-    },
-  }).mount('#app');
-  
-// 页面加载时从 localStorage 自动读取 anonId
-const savedAnonId = localStorage.getItem('mg_anon_id');
-if (savedAnonId && typeof fetchHistory === 'function') {
-  setTimeout(() => {
-    if (document.getElementById('anonId')) document.getElementById('anonId').value = savedAnonId;
-    if (typeof fetchHistory === 'function') fetchHistory();
-  }, 500);
-}
+  function loadRecords() {
+    fetch('/api/features/my-records').then(r => r.json()).then(data => {
+      if (!data.records || data.records.length === 0) return;
+      const list = document.getElementById('recordsList');
+      document.getElementById('recCount').textContent = data.records.length;
+      const latest = data.records[0];
+      document.getElementById('recLatest').textContent = latest.risk_level_cn || '--';
+      document.getElementById('recDay').textContent = latest.created_at ? latest.created_at.slice(0,10) : '--';
+      list.innerHTML = data.records.map(r => {
+        const badges = {low:'🟢 低风险', medium:'🟡 中风险', high:'🟠 高风险', very_high:'🔴 极高风险'};
+        return '<div class="card" style="padding:18px;margin-bottom:10px;display:flex;justify-content:space-between;align-items:center">'+
+          '<div><div style="display:flex;gap:10px;align-items:center;margin-bottom:4px">'+
+          '<span style="font-weight:600;color:#F8FAFC;font-size:14px">'+(badges[r.risk_level]||r.risk_level_cn||'测评')+'</span>'+
+          '<span style="font-size:12px;color:#94A3B8">'+(r.created_at||'--')+'</span></div>'+
+          '<div style="font-size:13px;color:#CBD5E1">综合 <strong style="color:#F8FAFC">'+(r.overall_score||'--')+'</strong> 分 · '+(r.total_answered||'--')+' 题</div></div></div>';
+      }).join('');
+    }).catch(() => {});
+  }
+  loadRecords();
+  </script>
 
-// 风险趋势预测按钮
-function showTrend() {
-  const aid = document.getElementById('anonId').value.trim();
-  if (!aid) { alert('请先输入匿名ID或完成一次筛查'); return; }
-  fetch('/api/features/mood-journal/' + aid).then(r=>r.json()).then(data=>{
-    if (data.prediction) {
-      const dir = data.prediction.direction === 'improving' ? '📈 正在好转' : data.prediction.direction === 'worsening' ? '📉 在下滑' : '➡️ 稳定';
-      alert('情绪趋势：' + dir + '\n未来7天预测分数：' + data.prediction.predictions.join(' → '));
-    } else {
-      alert('需要至少3条心情记录才能预测。去"心情打卡"页记录吧！');
-    }
-  });
-}
-
-</script>
-
-</html>
-
-<!-- 快捷跳转 -->
-<div style="max-width:800px; margin:20px auto; padding:0 20px; text-align:center;">
-  <button class="btn btn-sm btn-outline-primary" onclick="showTrend()">📈 风险趋势预测</button>
-  <a href="/mood-journal" class="btn btn-sm btn-outline-secondary">📝 去打卡心情</a>
-  <a href="/cbt" class="btn btn-sm btn-outline-secondary">🧠 CBT 认知自检</a>
-  <a href="/breathing" class="btn btn-sm btn-outline-secondary">🌬️ 呼吸训练</a>
-</div>
+  <footer>MindGuard · 神经符号心理健康风险智能筛查系统</footer>
+  <script src="/static/js/app.js"></script>
 </body>
 </html>

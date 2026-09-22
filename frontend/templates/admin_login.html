@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <title>管理员登录 · MindGuard</title>
   <link rel="stylesheet" href="/static/css/app.css">
-  <link rel="stylesheet" href="/static/css/vendor/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/static/css/vendor/
   <link rel="icon" href="/favicon.ico">
   <style>
     body{display:flex;align-items:center;justify-content:center;min-height:100vh;margin:0;background:linear-gradient(135deg,#1C7A6E 0%,#287855 100%);font-family:system-ui,sans-serif;}
@@ -27,6 +27,19 @@
   </style>
 </head>
 <body>
+  <header class="topbar">
+    <div class="logo">
+      <span class="logo-mark">🧠</span>
+      <span>MindGuard</span>
+    </div>
+    <nav>
+      <a href="/">首页</a>
+      <a href="/assessment">测评中心</a>
+      <a href="/my-records">我的档案</a>
+      <a href="/resources">心理资源</a>
+    </nav>
+  </header>
+
   <div class="login-box">
     <div class="login-logo">
       <div class="emoji">🧠</div>
@@ -84,5 +97,6 @@
       return false;
     }
   </script>
+  <script src="/static/js/app.js"></script>
 </body>
 </html>

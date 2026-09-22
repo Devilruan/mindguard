@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>自适应测评 · MindGuard</title>
+  <link rel="icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/static/css/app.css">
+  <link rel="stylesheet" href="/static/css/vendor/
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="logo">
+      <span class="logo-mark">🧠</span>
+      <span>MindGuard</span>
+    </div>
+    <nav>
+      <a href="/">首页</a>
+      <a href="/assessment">测评中心</a>
+      <a href="/my-records">我的档案</a>
+      <a href="/resources">心理资源</a>
+    </nav>
+  </header>
+
+  <div class="container">
+
+    <!-- ═══════ 阶段 1：开始介绍 ═══════ -->
+    <div id="phase-intro">
+      <div class="hero">
+        <div class="hero-content">
+          <div class="eyebrow">🎯 自适应心理测评 · CAT</div>
+          <h1>20 题以内<br>画出你的 8 维心理画像</h1>
+          <p class="sub">
+            传统量表固定 16 题千篇一律。我们的引擎会<strong>实时计算下一道最有信息量的题</strong>——
+            对你答过的每一题都在更新对你的了解，用更少的题，得到更准的结果。
+          </p>
+          <div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px">
+            <div style="background:rgba(14,165,153,0.12);border:1px solid rgba(14,165,153,0.25);border-radius:10px;padding:12px 16px;font-size:13px;color:#2DD4BF">
+              📊 <strong>50+</strong> 多维题库
+            </div>
+            <div style="background:rgba(99,102,241,0.12);border:1px solid rgba(99,102,241,0.25);border-radius:10px;padding:12px 16px;font-size:13px;color:#A5B4FC">
+              🎲 <strong>贝叶斯</strong> 概率更新
+            </div>
+            <div style="background:rgba(245,158,11,0.12);border:1px solid rgba(245,158,11,0.25);border-radius:10px;padding:12px 16px;font-size:13px;color:#FBBF24">
+              ⚡ <strong>20 题</strong> 上限自动停止
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 8 维介绍 -->
+      <div style="margin-top:32px">
+        <h3 style="color:#F1F5F9;font-size:18px;font-weight:600;margin-bottom:16px">📊 测评覆盖 8 个心理维度</h3>
+        <div class="feature-grid" id="dimPreview" style="grid-template-columns:repeat(4,1fr);gap:12px"></div>
+      </div>
+
+      <div style="margin-top:32px;text-align:center">
+        <button class="btn btn-primary" onclick="startTest()" style="font-size:16px;padding:14px 40px">
+          🚀 开始测评
+        </button>
+        <p style="color:#94A3B8;font-size:12px;margin-top:16px">
+          大约 3-5 分钟 · 全程匿名 · 结果仅供你自己查看
+        </p>
+      </div>
+    </div>
+
+    <!-- ═══════ 阶段 2：答题中 ═══════ -->
+    <div id="phase-test" style="display:none">
+      <div class="progress-info">
+        <span>第 <strong id="qNum">1</strong> 题 / 最多 20 题</span>
+        <span id="uncertaintyInfo" style="color:#94A3B8">不确定性: 100%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-bar" id="progressBar" style="width:5%"></div>
+      </div>
+
+      <div class="question-block">
+        <div class="dim-tag" id="dimTag">加载中...</div>
+        <div class="question-text" id="qText">请稍候...</div>
+        <div class="options" id="options"></div>
+      </div>
+    </div>
+
+    <!-- ═══════ 阶段 3：结果（雷达图 + 8 维画像） ═══════ -->
+    <div id="phase-result" style="display:none">
+      <h3 style="color:#F1F5F9;font-size:22px;font-weight:700;margin-bottom:24px">📊 你的多维心理画像</h3>
+
+      <!-- 雷达图 + 综合分数 -->
+      <div class="radar-container">
+        <div class="radar-chart" id="radarChart"></div>
+        <div class="radar-summary">
+          <div style="font-size:13px;color:#94A3B8;font-weight:500;letter-spacing:.02em">综合风险指数</div>
+          <div class="overall-score" id="overallScore">0</div>
+          <span class="risk-label" id="riskLabel" style="background:rgba(99,102,241,0.15);color:#A5B4FC">🟢 低风险</span>
+          <div class="ai-summary" id="aiSummary">加载中...</div>
+        </div>
+      </div>
+
+      <!-- 8 维卡片网格 -->
+      <h3 style="color:#F1F5F9;font-size:18px;font-weight:600;margin:32px 0 16px">🔬 各维度详情</h3>
+      <div class="dim-grid" id="dimGrid"></div>
+
+      <!-- 触发的神经符号规则 -->
+      <div id="rulesSection" style="margin-top:32px">
+        <h3 style="color:#F1F5F9;font-size:18px;font-weight:600;margin-bottom:16px">🧠 神经符号推理链</h3>
+        <div id="rulesList"></div>
+      </div>
+
+      <!-- 操作按钮 -->
+      <div style="margin-top:40px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="location.href='/adaptive'">🔄 重新测评</button>
+        <button class="btn btn-ghost" onclick="location.href='/my-records'">📁 查看历史</button>
+        <button class="btn btn-ghost" onclick="location.href='/resources'">💡 查看干预方案</button>
+      </div>
+    </div>
+
+  </div>
+
+  <footer>
+    MindGuard · 神经符号心理健康风险智能筛查系统
+  </footer>
+
+  <script src="/static/js/app.js"></script>
+  <script src="/static/js/echarts.min.js"></script>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   自适应测评页面逻辑
+   ═══════════════════════════════════════════════════════════ */
+
+let sessionId = null;
+let currentQ = null;
+
+// 初始化维度预览
+fetch('/api/adaptive/info').then(r => r.json()).then(info => {
+  const grid = document.getElementById('dimPreview');
+  Object.values(info.dimensions).forEach(m => {
+    grid.insertAdjacentHTML('beforeend', `
+      <div class="feature-card">
+        <div class="icon-wrap" style="background:linear-gradient(135deg, ${m.color}22, ${m.color}15)">
+          ${m.icon}
+        </div>
+        <h4>${m.name}</h4>
+        <p>${m.desc}</p>
+      </div>
+    `);
+  });
+});
+
+function startTest() {
+  document.getElementById('phase-intro').style.display = 'none';
+  document.getElementById('phase-test').style.display = 'block';
+  fetch('/api/adaptive/start', { method: 'POST' })
+    .then(r => r.json())
+    .then(data => {
+      sessionId = data.session_id;
+      showQuestion(data.first_question, 1, data.total_questions);
+    });
+}
+
+function showQuestion(q, num, total) {
+  currentQ = q;
+  document.getElementById('qNum').textContent = num;
+  document.getElementById('qText').textContent = q.text;
+  document.getElementById('dimTag').innerHTML = `${q.dimension.icon || '🎯'} 正在测评 · <strong>${q.dim_name}</strong>`;
+
+  const pct = Math.round((num / total) * 100);
+  document.getElementById('progressBar').style.width = pct + '%';
+
+  const opts = document.getElementById('options');
+  opts.innerHTML = '';
+  q.options.forEach(opt => {
+    opts.insertAdjacentHTML('beforeend', `
+      <button class="opt-btn" data-val="${opt.value}">
+        <span class="opt-num">${opt.value + 1}</span>
+        <span>${opt.label}</span>
+      </button>
+    `);
+  });
+  opts.querySelectorAll('.opt-btn').forEach(btn => {
+    btn.addEventListener('click', () => submitAnswer(parseInt(btn.dataset.val)));
+  });
+}
+
+function submitAnswer(val) {
+  fetch('/api/adaptive/answer', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ session_id: sessionId, item_id: currentQ.item_id, response: val })
+  }).then(r => r.json()).then(data => {
+    if (data.finished) {
+      showResult(data.result);
+    } else {
+      document.getElementById('uncertaintyInfo').textContent =
+        `剩余不确定性: ${data.progress.remaining_uncertainty_pct}%`;
+      showQuestion(data.next_question, data.question_num, data.progress.max);
+    }
+  });
+}
+
+function showResult(result) {
+  document.getElementById('phase-test').style.display = 'none';
+  document.getElementById('phase-result').style.display = 'block';
+
+  // 主题自动切换
+  if (typeof applyMoodTheme !== 'undefined') applyMoodTheme(result.risk_level);
+
+  // 综合分数
+  document.getElementById('overallScore').textContent = result.overall_score;
+  const riskLabel = document.getElementById('riskLabel');
+  riskLabel.textContent = result.risk_level_cn;
+  const riskColors = { low: '#2DD4BF', medium: '#FBBF24', high: '#C97B3A', urgent: '#EF4444' };
+  riskLabel.style.background = riskColors[result.risk_level] + '20';
+  riskLabel.style.color = riskColors[result.risk_level];
+
+  document.getElementById('aiSummary').textContent = result.ai_summary;
+
+  // 8 维卡片
+  const grid = document.getElementById('dimGrid');
+  grid.innerHTML = '';
+  Object.entries(result.dimensions).forEach(([k, d]) => {
+    const barColor = riskColors[d.level] || '#94A3B8';
+    grid.insertAdjacentHTML('beforeend', `
+      <div class="dim-card">
+        <div class="dim-header">
+          <div class="dim-name">${d.icon} ${d.name}</div>
+          <div class="dim-score ${d.level}" style="color:${barColor}">${d.score}</div>
+        </div>
+        <div class="dim-bar"><div class="dim-bar-fill" style="width:${d.score}%;background:${barColor}"></div></div>
+        <div class="dim-suggestion">${d.suggestion}</div>
+      </div>
+    `);
+  });
+
+  // 雷达图
+  renderRadar(result);
+
+  // 规则链
+  if (result.activated_rules && result.activated_rules.length) {
+    const list = document.getElementById('rulesList');
+    result.activated_rules.forEach(r => {
+      list.insertAdjacentHTML('beforeend', `
+        <div class="rule-card">
+          <span class="rid">${r.rule_id}</span>${r.explain}
+        </div>
+      `);
+    });
+  } else {
+    document.getElementById('rulesSection').style.display = 'none';
+  }
+}
+
+function renderRadar(result) {
+  const chart = echarts.init(document.getElementById('radarChart'));
+  chart.setOption({
+    backgroundColor: 'transparent',
+    tooltip: {
+      trigger: 'item',
+      backgroundColor: 'rgba(11,17,32,0.9)',
+      borderColor: 'rgba(255,255,255,0.1)',
+      textStyle: { color: '#E2E8F0' }
+    },
+    radar: {
+      indicator: result.radar.indicator,
+      center: ['50%', '50%'],
+      radius: '75%',
+      shape: 'polygon',
+      splitNumber: 4,
+      axisName: {
+        color: '#94A3B8',
+        fontSize: 13
+      },
+      splitLine: {
+        lineStyle: { color: 'rgba(255,255,255,0.08)' }
+      },
+      splitArea: {
+        areaStyle: {
+          color: ['rgba(255,255,255,0.02)', 'rgba(255,255,255,0.04)']
+        }
+      },
+      axisLine: {
+        lineStyle: { color: 'rgba(255,255,255,0.1)' }
+      }
+    },
+    series: [{
+      type: 'radar',
+      data: [{
+        value: result.radar.value,
+        name: '心理画像',
+        areaStyle: {
+          color: {
+            type: 'radial',
+            x: 0.5, y: 0.5,
+            colorStops: [
+              { offset: 0, color: 'rgba(14,165,153,0.5)' },
+              { offset: 1, color: 'rgba(99,102,241,0.3)' }
+            ]
+          }
+        },
+        lineStyle: {
+          color: '#2DD4BF',
+          width: 3
+        },
+        itemStyle: {
+          color: '#2DD4BF',
+          borderColor: '#fff',
+          borderWidth: 2
+        }
+      }]
+    }]
+  });
+  window.addEventListener('resize', () => chart.resize());
+}
+</script>
+</body>
+</html>

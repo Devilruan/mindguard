@@ -28,3 +28,7 @@ Thumbs.db
 
 # Patch scripts (temp)
 _patch*.py
+
+# Local runtime logs
+server.log
+server.log.err

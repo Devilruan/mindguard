@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 main.py — FastAPI 应用入口
 
@@ -38,7 +38,7 @@ from config.logging_config import setup_logging
 from backend.models.database import init_db
 
 # 路由模块
-from backend.api import screening_api, admin_api, rules_api, analytics_api, export_api, features_api
+from backend.api import screening_api, admin_api, rules_api, analytics_api, export_api, features_api, adaptive_api
 
 log = logging.getLogger(__name__)
 
@@ -206,6 +206,21 @@ def cbt_page():
     return _read_html('cbt.html')
 
 
+@app.get('/assessment', response_class=HTMLResponse)
+def assessment_page():
+    from fastapi.responses import RedirectResponse
+    return RedirectResponse(url='/adaptive')
+
+@app.get('/adaptive', response_class=HTMLResponse)
+def adaptive_page():
+    return _read_html('adaptive.html')
+
+
+@app.get('/radar-report', response_class=HTMLResponse)
+def radar_report_page():
+    return _read_html('radar_report.html')
+
+
 @app.get('/resources', response_class=HTMLResponse)
 def resources():
     return _read_html('resources.html')
@@ -294,6 +309,7 @@ app.include_router(admin_api.router,    prefix='/api/admin',      tags=['管理'
 app.include_router(rules_api.router,    prefix='/api/rules',      tags=['规则管理'])
 app.include_router(analytics_api.router,prefix='/api/analytics',  tags=['智能分析'])
 app.include_router(features_api.router, prefix='/api/features',  tags=['新功能'])
+app.include_router(adaptive_api.router, prefix='/api/adaptive', tags=['自适应测评'])
 
 
 # ──────────────────────────────────────────────

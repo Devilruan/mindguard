@@ -2,95 +2,151 @@
 <html lang="zh">
 <head>
   <meta charset="utf-8">
-  <title>心理自助资源 · 多模态心理健康风险筛查系统</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MindGuard · 心理资源</title>
   <link rel="icon" href="/favicon.ico">
   <link rel="stylesheet" href="/static/css/app.css">
-  <link rel="stylesheet" href="/static/css/vendor/bootstrap-icons.min.css">
 </head>
 <body>
+
   <header class="topbar">
-    <div class="logo"><span style="font-size:18px;">🧠</span>心理自助资源</div>
+    <div class="logo">
+      <span class="logo-mark">🧠</span>
+      <span>MindGuard</span>
+    </div>
     <nav>
       <a href="/">首页</a>
-      <a href="/screening">开始筛查</a>
+      <a href="/assessment">测评中心</a>
       <a href="/my-records">我的档案</a>
-      <a href="/resources" class="active">心理资源</a>
-      <a href="/admin">管理后台</a>
+      <a href="/resources">心理资源</a>
     </nav>
   </header>
 
-  <div id="app">
-  <div class="container" style="max-width:900px;">
-    <!-- 求助热线 -->
-    <div class="hero" style="background:linear-gradient(135deg,#1C3A5C 0%,#2A5D82 100%);">
-      <div class="badge">紧急求助 · 24小时</div>
-      <h1 style="font-size:26px;">感到痛苦时，你不是一个人</h1>
-      <p class="sub" style="max-width:640px;">
-        以下求助渠道全部<strong>免费、保密</strong>。若你正在经历强烈情绪困扰，
-        或身边有人需要帮助，请立即拨打热线寻求专业支持。
-      </p>
-    </div>
+  <div class="container">
+    <section class="hero">
+      <div class="hero-content">
+        <div class="eyebrow">🆘 紧急求助 · 24 小时</div>
+        <h1>感到痛苦时，你不是一个人</h1>
+        <p class="sub">
+          如果你正在经历心理困扰，或者身边有人需要帮助，请拨打下方的求助热线。<br>
+          专业的心理援助团队随时准备倾听你。
+        </p>
+      </div>
+    </section>
 
-    <!-- 热线卡片 -->
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:18px;">
-      <div v-for="h in hotlines" :key="h.number" class="card" style="padding:20px;border-left:4px solid #AC4E42;">
-        <div style="font-weight:700;color:#203248;">[[ h.name ]]</div>
-        <div style="font-size:28px;font-weight:bold;color:#1C7A6E;margin-top:8px;letter-spacing:1px;">
-          [[ h.number ]]
+    <!-- 全国热线 -->
+    <section style="margin-top:36px">
+      <h3 style="color:#F8FAFC;font-size:18px;font-weight:700;margin-bottom:20px">📞 全国心理援助热线</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px">
+        <div class="card" style="padding:24px;border-left:3px solid #EF4444">
+          <div style="display:flex;justify-content:space-between;align-items:start">
+            <div>
+              <div style="font-size:13px;color:#94A3B8;margin-bottom:4px">全国心理援助热线</div>
+              <div style="font-size:22px;font-weight:700;color:#F8FAFC;letter-spacing:0.5px">400-161-9995</div>
+            </div>
+            <span class="badge urgent">24h</span>
+          </div>
+          <div style="font-size:12px;color:#64748B;margin-top:10px">北京心理危机研究与干预中心</div>
         </div>
-        <div class="tagline" style="margin-top:6px;">[[ h.scope ]]</div>
-      </div>
-    </div>
-
-    <!-- 调适技巧 -->
-    <div style="margin-top:28px;">
-      <h3 style="color:#203248;"><i class="bi bi-lightbulb" style="color:#E6A817;"></i> 日常情绪调节技巧</h3>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:12px;">
-        <div v-for="t in tips" :key="t.title" class="feature-card">
-          <h4 style="color:#1C7A6E;">[[ t.title ]]</h4>
-          <p>[[ t.content ]]</p>
+        <div class="card" style="padding:24px;border-left:3px solid #2DD4BF">
+          <div style="display:flex;justify-content:space-between;align-items:start">
+            <div>
+              <div style="font-size:13px;color:#94A3B8;margin-bottom:4px">生命热线</div>
+              <div style="font-size:22px;font-weight:700;color:#F8FAFC">400-821-1215</div>
+            </div>
+            <span class="badge urgent">24h</span>
+          </div>
+          <div style="font-size:12px;color:#64748B;margin-top:10px">上海市心理援助热线</div>
+        </div>
+        <div class="card" style="padding:24px;border-left:3px solid #818CF8">
+          <div style="display:flex;justify-content:space-between;align-items:start">
+            <div>
+              <div style="font-size:13px;color:#94A3B8;margin-bottom:4px">希望 24 热线</div>
+              <div style="font-size:22px;font-weight:700;color:#F8FAFC">400-161-9995</div>
+            </div>
+            <span class="badge urgent">24h</span>
+          </div>
+          <div style="font-size:12px;color:#64748B;margin-top:10px">全国公益心理援助</div>
+        </div>
+        <div class="card" style="padding:24px;border-left:3px solid #FBBF24">
+          <div style="display:flex;justify-content:space-between;align-items:start">
+            <div>
+              <div style="font-size:13px;color:#94A3B8;margin-bottom:4px">心理危机干预热线</div>
+              <div style="font-size:22px;font-weight:700;color:#F8FAFC">010-82951332</div>
+            </div>
+            <span class="badge urgent">24h</span>
+          </div>
+          <div style="font-size:12px;color:#64748B;margin-top:10px">清华大学心理系</div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- 常见疑问 -->
-    <div style="margin-top:28px;">
-      <h3 style="color:#203248;"><i class="bi bi-question-circle" style="color:#1C7A6E;"></i> 关于筛查与心理求助的常见疑问</h3>
-      <div v-for="(g, i) in guidance" :key="i" class="card" style="margin-top:12px;padding:18px 22px;">
-        <div style="font-weight:600;color:#203248;">[[ g.title ]]</div>
-        <p class="tagline" style="margin-top:6px;color:#47535C;line-height:1.7;">[[ g.content ]]</p>
+    <!-- 干预方案（自动从 API 加载） -->
+    <section style="margin-top:40px">
+      <h3 style="color:#F8FAFC;font-size:18px;font-weight:700;margin-bottom:6px">🎯 干预方案（基于风险级别自动匹配）</h3>
+      <p style="color:#94A3B8;font-size:13px;margin-bottom:20px">做完测评后，系统会根据你的风险等级推荐以下方案</p>
+      <div id="resourceCards" class="feature-grid">
+        <div class="feature-card">
+          <div class="icon-wrap">🟢</div>
+          <h4>低风险 · 自我觉察</h4>
+          <p>每日一句 + 呼吸训练 + 心情打卡。保持规律作息，适度运动，和信任的人聊聊天。</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon-wrap">🟡</div>
+          <h4>中风险 · CBT 自助</h4>
+          <p>认知扭曲检测 + CBT 重构练习 + 规律呼吸。识别让你情绪变坏的思维模式。</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon-wrap">🟠</div>
+          <h4>高风险 · 专业支持</h4>
+          <p>强烈建议联系学校心理老师或预约心理咨询。你也可以拨打上方的援助热线。</p>
+        </div>
+        <div class="feature-card">
+          <div class="icon-wrap">🔴</div>
+          <h4>极高风险 · 立即行动</h4>
+          <p>请立即拨打 400-161-9995 或 120。不要一个人扛，求助本身就是勇敢。</p>
+        </div>
       </div>
-    </div>
+    </section>
 
-    <!-- 免责声明 -->
-    <div class="card" style="margin-top:28px;background:#F7F9FA;padding:18px 22px;">
-      <div style="color:#97A3AC;font-size:12px;line-height:1.8;">
-        免责声明：本站资源为心理自助科普信息，不构成医疗建议。如涉及紧急人身安全，
-        请立即拨打当地急救电话（110/120）或心理援助热线。心理健康问题请优先寻求专业机构诊断与治疗。
+    <!-- 温馨提示 -->
+    <section style="margin-top:40px">
+      <div style="background:rgba(251,191,36,0.06);border:1px solid rgba(251,191,36,0.2);border-radius:16px;padding:28px">
+        <div style="display:flex;gap:14px;align-items:flex-start">
+          <div style="font-size:24px;flex-shrink:0">💛</div>
+          <div>
+            <h4 style="color:#F8FAFC;margin:0 0 8px;font-size:15px">MindGuard 是什么，不是什么</h4>
+            <p style="color:#CBD5E1;font-size:13px;line-height:1.8;margin:0">
+              MindGuard 是一套 <strong>智能心理风险初筛工具</strong>，可以帮你快速了解自己的心理状态倾向，
+              也可以帮助学校/机构进行早期识别。<br>
+              但它 <strong>不是诊断工具</strong>，也不能替代专业心理咨询或医生。
+              如果你持续感到困扰，请寻求专业帮助——这很正常，也很重要。
+            </p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
+    </section>
   </div>
 
-  <footer>多模态心理健康风险筛查系统 · 心理自助资源 · 守护每一份情绪</footer>
-
-  <script src="/static/js/vue.global.prod.js"></script>
-  <script src="/static/js/axios.min.js"></script>
   <script>
-  const { createApp } = Vue;
-  createApp({
-    delimiters: ['[[', ']]'],
-    data() {
-      return { hotlines: [], tips: [], guidance: [] };
-    },
-    mounted() {
-      axios.get('/api/analytics/resources').then(r => {
-        this.hotlines = r.data.hotlines || [];
-        this.tips = r.data.tips || [];
-        this.guidance = r.data.guidance || [];
-      }).catch(() => {});
-    },
-  }).mount('#app');
+    // 尝试加载动态资源
+    fetch('/api/features/intervention-resources').then(r => r.json()).then(data => {
+      const grid = document.getElementById('resourceCards');
+      if (data && data.resources && grid) {
+        grid.innerHTML = data.resources.map(r => 
+          <div class="feature-card">
+            <div class="icon-wrap"></div>
+            <h4></h4>
+            <p></p>
+          </div>
+        ).join('');
+      }
+    }).catch(() => {});
   </script>
+
+  <footer>
+    MindGuard · 神经符号心理健康风险智能筛查系统 · 让每一次判断都有据可循
+  </footer>
+  <script src="/static/js/app.js"></script>
 </body>
 </html>

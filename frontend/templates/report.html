@@ -5,7 +5,7 @@
   <title>评估报告 · 多模态心理健康风险筛查系统</title>
   <link rel="icon" href="/favicon.ico">
   <link rel="stylesheet" href="/static/css/app.css">
-  <link rel="stylesheet" href="/static/css/vendor/bootstrap-icons.min.css">
+  <link rel="stylesheet" href="/static/css/vendor/
   <script src="/static/js/echarts.min.js"></script>
   <style>
     @media print {
@@ -20,11 +20,15 @@
 </head>
 <body>
   <header class="topbar">
-    <div class="logo"><span style="font-size:18px;">🧠</span>多模态心理健康风险筛查系统</div>
+    <div class="logo">
+      <span class="logo-mark">🧠</span>
+      <span>MindGuard</span>
+    </div>
     <nav>
       <a href="/">首页</a>
-      <a href="/screening">筛查入口</a>
-      <a href="/admin">管理员后台</a>
+      <a href="/assessment">测评中心</a>
+      <a href="/my-records">我的档案</a>
+      <a href="/resources">心理资源</a>
     </nav>
   </header>
 
@@ -492,5 +496,6 @@ fetch('/api/features/intervention-plan/' + riskLevel).then(r=>r.json()).then(dat
     '</div>';
 });
 </script>
+  <script src="/static/js/app.js"></script>
 </body>
 </html>
