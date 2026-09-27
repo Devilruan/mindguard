@@ -33,11 +33,18 @@ import random
 import logging
 from typing import List, Optional, Dict, Any
 from datetime import datetime
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Request, Response
 from pydantic import BaseModel
+
+from backend.models.database import (
+    SessionLocal, User, ScreeningSession, Intervention,
+)
 
 log = logging.getLogger(__name__)
 router = APIRouter()
+
+# 匿名标识 cookie 名称（与 features_api.my_records 共用）
+ANON_ID_COOKIE = 'anon_id'
 
 
 # ════════════════════════════════════════════════════════════
@@ -172,6 +179,7 @@ class BayesianCATEngine:
         self.answered_ids: List[str] = []
         self.responses: List[Dict] = []
         self.total_entropy_reduction = 0.0
+        self.anon_id: Optional[str] = None   # 本次会话归属的匿名用户标识
 
     def _prob_correct(self, item: Dict, theta: float) -> float:
         """
@@ -252,7 +260,7 @@ class BayesianCATEngine:
         )
 
         best_item = None
-        best_gain = -1.0
+        best_gain = -float('inf')   # 微分熵可为负，固定 -1.0 阈值会选不出题（导致测评中断）
 
         for item in remaining:
             dim = item['dim']
@@ -316,18 +324,36 @@ def get_adaptive_info():
 
 
 @router.post('/start')
-def adaptive_start(payload: AdaptiveStart = None):
+def adaptive_start(payload: AdaptiveStart = None, request: Request = None, response: Response = None):
     """
     开始一次自适应测评。
     返回 session_id + 第一道题。
+
+    匿名身份解析顺序：请求体 anon_id → 浏览器 cookie → 新生成并写入 cookie，
+    测评完成后以该身份写入数据库，供"我的档案"查询。
     """
     engine = BayesianCATEngine()
+
+    # 解析 / 生成匿名标识
+    anon_id = (payload.anon_id or '').strip() if payload else ''
+    if not anon_id and request:
+        anon_id = (request.cookies.get(ANON_ID_COOKIE) or '').strip()
+    if not anon_id:
+        anon_id = 'MG-T' + datetime.utcnow().strftime('%Y%m%d%H%M%S') + str(random.randint(100, 999))
+    engine.anon_id = anon_id
+
     session_id = datetime.utcnow().strftime('%Y%m%d%H%M%S') + str(random.randint(100, 999))
     _sessions[session_id] = engine
 
+    if response:
+        response.set_cookie(
+            ANON_ID_COOKIE, anon_id,
+            max_age=365 * 24 * 3600, httponly=False, samesite='lax',
+        )
+
     first_item = engine.select_next()
 
-    log.info('自适应测评开始 session=%s', session_id)
+    log.info('自适应测评开始 session=%s anon=%s', session_id, anon_id)
 
     return {
         'session_id': session_id,
@@ -358,18 +384,30 @@ def adaptive_answer(payload: AdaptiveAnswer):
     engine.update(payload.item_id, payload.response)
     q_num = len(engine.answered_ids)
 
-    # 判断是否结束
+    # 判断是否结束（无可选题也视为结束，防御引擎边界情况）
     uncertainty = engine.total_uncertainty()
+    next_item = engine.select_next()
     should_stop = (
         q_num >= MAX_QUESTIONS
         or (q_num >= MIN_QUESTIONS and uncertainty < UNCERTAINTY_THRESHOLD)
+        or next_item is None
     )
 
     if should_stop:
         # 计算最终结果
         result = _compute_result(engine)
-        # 清理会话
-        del _sessions[payload.session_id]
+        # 将结果持久化到数据库（"我的档案"的数据来源）
+        try:
+            db_session_id, db_anon_id = _persist_result(engine, result)
+            result['session_id'] = db_session_id
+            result['anon_id'] = db_anon_id
+            log.info('自适应测评完成并落库 session=%s db_id=%d anon=%s level=%s score=%.1f',
+                     payload.session_id, db_session_id, db_anon_id,
+                     result['risk_level'], result['overall_score'])
+        except Exception:
+            log.exception('自适应测评结果落库失败 session=%s', payload.session_id)
+        # 清理内存会话
+        _sessions.pop(payload.session_id, None)
         return {
             'finished': True,
             'total_answered': q_num,
@@ -377,7 +415,6 @@ def adaptive_answer(payload: AdaptiveAnswer):
         }
 
     # 返回下一题
-    next_item = engine.select_next()
     return {
         'finished': False,
         'question_num': q_num + 1,
@@ -396,6 +433,64 @@ def adaptive_answer(payload: AdaptiveAnswer):
             'remaining_uncertainty_pct': round(min(100, uncertainty * 100), 1),
         },
     }
+
+
+def _persist_result(engine: BayesianCATEngine, result: Dict[str, Any]):
+    """
+    把自适应测评最终结果写入数据库（users + screening_sessions），
+    并返回 (session_id, anon_id)。
+    高风险/极高风险自动创建干预工单（与经典筛查行为保持一致）。
+    """
+    db = SessionLocal()
+    try:
+        anon_id = engine.anon_id or ('MG-T' + datetime.utcnow().strftime('%Y%m%d%H%M%S') + str(random.randint(100, 999)))
+
+        user = db.query(User).filter(User.anon_id == anon_id).first()
+        if not user:
+            user = User(anon_id=anon_id)
+            db.add(user)
+            db.commit()
+            db.refresh(user)
+
+        dims = result.get('dimensions') or {}
+        dep_score = (dims.get('depression') or {}).get('score', 0.0)
+        anx_score = (dims.get('anxiety') or {}).get('score', 0.0)
+
+        session = ScreeningSession(
+            user_id=user.id,
+            phq9_score=dep_score,
+            gad7_score=anx_score,
+            overall_risk_level=result.get('risk_level', 'low'),
+            overall_risk_score=result.get('overall_score', 0.0),
+            depression_score=dep_score,
+            anxiety_score=anx_score,
+            suicide_risk_score=0.0,
+            activated_rules=json.dumps(result.get('activated_rules', []), ensure_ascii=False),
+            explanation_chain=json.dumps({'ai_summary': result.get('ai_summary', '')}, ensure_ascii=False),
+            features_json=json.dumps({
+                'dims': dims,
+                'answered_count': result.get('answered_count', len(engine.answered_ids)),
+                'radar': result.get('radar'),
+            }, ensure_ascii=False),
+        )
+        db.add(session)
+        db.commit()
+        db.refresh(session)
+
+        if result.get('risk_level') in ('high', 'urgent'):
+            db.add(Intervention(
+                session_id=session.id,
+                risk_level=result.get('risk_level'),
+                status='pending',
+                notes='系统自动创建 - 自适应测评高风险预警',
+            ))
+            db.commit()
+            log.warning('自适应测评高风险自动创建工单 db_id=%d level=%s',
+                        session.id, result.get('risk_level'))
+
+        return session.id, anon_id
+    finally:
+        db.close()
 
 
 def _compute_result(engine: BayesianCATEngine) -> Dict[str, Any]:

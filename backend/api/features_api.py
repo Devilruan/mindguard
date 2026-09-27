@@ -12,7 +12,7 @@ import logging
 from datetime import datetime, timedelta
 from typing import List, Optional
 
-from fastapi import APIRouter, HTTPException, Depends
+from fastapi import APIRouter, HTTPException, Depends, Request
 from fastapi.responses import StreamingResponse, JSONResponse
 from pydantic import BaseModel
 from sqlalchemy import func
@@ -482,6 +482,60 @@ def get_contact(anon_id: str, db: Session = Depends(get_db)):
         'relation': c.relation,
         'notify_threshold': c.notify_threshold,
     }
+
+
+# ══════════════════════════════════════════════
+# 我的档案：查询当前匿名用户的测评历史
+# ══════════════════════════════════════════════
+
+RISK_LEVEL_CN = {
+    'low': '🟢 低风险',
+    'medium': '🟡 中风险',
+    'high': '🟠 高风险',
+    'urgent': '🔴 极高风险',
+}
+
+
+@router.get('/my-records')
+def my_records(request: Request, anon_id: Optional[str] = None,
+               db: Session = Depends(get_db)):
+    """
+    返回当前匿名用户的测评历史（按时间倒序）。
+    身份来源：query 参数 anon_id → 浏览器 cookie anon_id（自适应测评开始时写入）。
+    """
+    aid = (anon_id or '').strip()
+    if not aid:
+        aid = (request.cookies.get('anon_id') or '').strip()
+    if not aid:
+        return {'records': [], 'identity': None}
+
+    sessions = (
+        db.query(ScreeningSession)
+        .join(User, ScreeningSession.user_id == User.id)
+        .filter(User.anon_id == aid)
+        .order_by(ScreeningSession.created_at.desc())
+        .all()
+    )
+
+    records = []
+    for s in sessions:
+        answered = None
+        if s.features_json:
+            try:
+                answered = json.loads(s.features_json).get('answered_count')
+            except Exception:
+                answered = None
+        records.append({
+            'session_id': s.id,
+            'risk_level': s.overall_risk_level,
+            'risk_level_cn': RISK_LEVEL_CN.get(s.overall_risk_level, s.overall_risk_level),
+            'created_at': (s.created_at + timedelta(hours=8)).isoformat() if s.created_at else None,
+            'overall_score': round(s.overall_risk_score or 0, 1),
+            'total_answered': answered,
+            'phq9_score': round(s.phq9_score or 0, 1),
+            'gad7_score': round(s.gad7_score or 0, 1),
+        })
+    return {'records': records, 'identity': aid}
 
 
 # ══════════════════════════════════════════════
